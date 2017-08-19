@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java语言基础 | Java</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="运算符的使用和if条件语句">
+<meta name="keywords" content="Java语言基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java语言基础">
+<meta property="og:url" content="http://yoursite.com/2017/07/19/day03笔记/index.html">
+<meta property="og:site_name" content="Java">
+<meta property="og:description" content="运算符的使用和if条件语句">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2017-08-19T02:38:22.621Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java语言基础">
+<meta name="twitter:description" content="运算符的使用和if条件语句">
+  
+    <link rel="alternative" href="/atom.xml" title="Java" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Dai Wei</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="//daiwei.biz">博客首页</a></li>
+                        
+                            <li><a href="//github.com/TimesSilence">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                            <li><a href="/tags">静心阅读</a></li>
+                        
+                            <li><a href="/instagram">光影之路</a></li>
+                        
+                            <li><a href="/tags/随笔">随笔</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/815762187" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/TimesSlience" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="//www.zhihu.com/people/dai-wei-24-86" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="/weibo.com/3702195485" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="/daiwei20071203@qq.com" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="//twitter.com/david815762187 " title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Java语言基础/" style="font-size: 15px;">Java语言基础</a> <a href="/tags/循环/" style="font-size: 10px;">循环</a> <a href="/tags/数组/" style="font-size: 20px;">数组</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://123.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Talk is cheap, show me your code!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Dai Wei</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Dai Wei</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="//daiwei.biz">博客首页</a></li>
+                
+                    <li><a href="//github.com/TimesSilence">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                    <li><a href="/tags">静心阅读</a></li>
+                
+                    <li><a href="/instagram">光影之路</a></li>
+                
+                    <li><a href="/tags/随笔">随笔</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/815762187" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/TimesSlience" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="//www.zhihu.com/people/dai-wei-24-86" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="/weibo.com/3702195485" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="/daiwei20071203@qq.com" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="//twitter.com/david815762187 " title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-day03笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/07/19/day03笔记/" class="article-date">
+      <time datetime="2017-07-18T16:00:00.000Z" itemprop="datePublished">2017-07-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java语言基础
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java语言基础/">Java语言基础</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>运算符的使用和if条件语句<br><a id="more"></a></p>
+<h3 id="03-01-Java语言基础-逻辑运算符的基本用法-掌握"><a href="#03-01-Java语言基础-逻辑运算符的基本用法-掌握" class="headerlink" title="03.01_Java语言基础(逻辑运算符的基本用法)(掌握)"></a>03.01_Java语言基础(逻辑运算符的基本用法)(掌握)</h3><ul>
+<li>A:逻辑运算符有哪些<ul>
+<li>&amp;,|,^,!</li>
+<li>&amp;&amp;,|| </li>
+</ul>
+</li>
+<li>B:案例演示</li>
+<li><p>逻辑运算符的基本用法</p>
+</li>
+<li><p>注意事项：</p>
+<ul>
+<li>a:逻辑运算符一般用于连接boolean类型的表达式或者值。</li>
+<li>b:表达式：就是用运算符把常量或者变量连接起来的符合java语法的式子。<ul>
+<li>算术表达式：a + b</li>
+<li>比较表达式：a == b(条件表达式)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>C:结论：</li>
+<li>&amp;逻辑与:有false则false。</li>
+<li>|逻辑或:有true则true。</li>
+<li>^逻辑异或:相同为 false，不同为true。</li>
+<li>!逻辑非:非false则true，非true则false。<ul>
+<li>特点：偶数个不改变本身。</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-02-Java语言基础-逻辑运算符-amp-amp-和-amp-的区别-掌握"><a href="#03-02-Java语言基础-逻辑运算符-amp-amp-和-amp-的区别-掌握" class="headerlink" title="03.02_Java语言基础(逻辑运算符&amp;&amp;和&amp;的区别)(掌握)"></a>03.02_Java语言基础(逻辑运算符&amp;&amp;和&amp;的区别)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>&amp;&amp;和&amp;的区别?<ul>
+<li>a:最终结果一样。</li>
+<li>b:&amp;&amp;具有短路效果。左边是false，右边不执行。</li>
+<li>&amp;是无论左边是false还是true,右边都会执行</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>B:同理||和|的区别?(学生自学)<ul>
+<li>||左边为ture右边不执行</li>
+</ul>
+</li>
+<li>C:开发中常用谁?<ul>
+<li>&amp;&amp;,||,!</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-03-Java语言基础-位运算符的基本用法1-了解"><a href="#03-03-Java语言基础-位运算符的基本用法1-了解" class="headerlink" title="03.03_Java语言基础(位运算符的基本用法1)(了解)"></a>03.03_Java语言基础(位运算符的基本用法1)(了解)</h3><ul>
+<li>A:位运算符有哪些<ul>
+<li>&amp;,|,^,~ ,&gt;&gt;,&gt;&gt;&gt;,&lt;&lt;</li>
+</ul>
+</li>
+<li><p>B:案例演示</p>
+<ul>
+<li><p>位运算符的基本用法1</p>
+</li>
+<li><p>&amp;,|,^,~ 的用法</p>
+</li>
+<li>&amp;:有0则0</li>
+<li>|:有1则1</li>
+<li>^:相同则0，不同则1</li>
+<li>~:按位取反</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-04-Java语言基础-位异或运算符的特点及面试题-掌握"><a href="#03-04-Java语言基础-位异或运算符的特点及面试题-掌握" class="headerlink" title="03.04_Java语言基础(位异或运算符的特点及面试题)(掌握)"></a>03.04_Java语言基础(位异或运算符的特点及面试题)(掌握)</h3><ul>
+<li><p>A:案例演示</p>
+<ul>
+<li><p>位异或运算符的特点</p>
+</li>
+<li><p>^的特点：一个数据对另一个数据位异或两次，该数本身不变。<br>x = x ^ y y= x ^ y x = x ^ y    </p>
+</li>
+</ul>
+</li>
+<li>B:面试题：<ul>
+<li>请自己实现两个整数变量的交换</li>
+<li>注意：以后讲课的过程中，我没有明确指定数据的类型，默认int类型。</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-05-Java语言基础-位运算符的基本用法2及面试题-了解"><a href="#03-05-Java语言基础-位运算符的基本用法2及面试题-了解" class="headerlink" title="03.05_Java语言基础(位运算符的基本用法2及面试题)(了解)"></a>03.05_Java语言基础(位运算符的基本用法2及面试题)(了解)</h3><ul>
+<li>A:案例演示 &gt;&gt;,&gt;&gt;&gt;,&lt;&lt;的用法:<ul>
+<li>&lt;&lt;:左移    左边最高位丢弃，右边补齐0</li>
+<li><blockquote>
+<blockquote>
+<p>:右移    最高位是0，左边补齐0;最高为是1，左边补齐1</p>
+</blockquote>
+</blockquote>
+</li>
+<li><blockquote>
+<blockquote>
+<blockquote>
+<p>:无符号右移 无论最高位是0还是1，左边补齐0</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li>最有效率的算出2 * 8的结果</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-06-Java语言基础-三元运算符的基本用法-掌握"><a href="#03-06-Java语言基础-三元运算符的基本用法-掌握" class="headerlink" title="03.06_Java语言基础(三元运算符的基本用法)(掌握)"></a>03.06_Java语言基础(三元运算符的基本用法)(掌握)</h3><ul>
+<li>A:三元运算符的格式</li>
+<li>(关系表达式) ? 表达式1 : 表达式2;</li>
+<li>B:三元运算符的执行流程 </li>
+<li>C:案例演示<ul>
+<li>获取两个数中的最大值</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-07-Java语言基础-三元运算符的练习-掌握"><a href="#03-07-Java语言基础-三元运算符的练习-掌握" class="headerlink" title="03.07_Java语言基础(三元运算符的练习)(掌握)"></a>03.07_Java语言基础(三元运算符的练习)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>比较两个整数是否相同</li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>获取三个整数中的最大值</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-08-Java语言基础-键盘录入的基本格式讲解-掌握"><a href="#03-08-Java语言基础-键盘录入的基本格式讲解-掌握" class="headerlink" title="03.08_Java语言基础(键盘录入的基本格式讲解)(掌握)"></a>03.08_Java语言基础(键盘录入的基本格式讲解)(掌握)</h3><ul>
+<li>A:为什么要使用键盘录入数据<ul>
+<li>a:为了让程序的数据更符合开发的数据</li>
+<li>b:让程序更灵活一下</li>
+</ul>
+</li>
+<li>B:如何实现键盘录入呢?<ul>
+<li>先照格式来。</li>
+<li>a:导包<ul>
+<li>格式：<ul>
+<li>import java.util.Scanner; </li>
+</ul>
+</li>
+<li>位置：<ul>
+<li>在class上面。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>b:创建键盘录入对象<ul>
+<li>格式：<ul>
+<li>Scanner sc = new Scanner(System.in);</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>c:通过对象获取数据    <ul>
+<li>格式：<ul>
+<li>int x = sc.nextInt();</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>C:案例演示<ul>
+<li>键盘录入1个整数，并输出到控制台。</li>
+<li>键盘录入2个整数，并输出到控制台。</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-09-Java语言基础-键盘录入的练习1-掌握"><a href="#03-09-Java语言基础-键盘录入的练习1-掌握" class="headerlink" title="03.09_Java语言基础(键盘录入的练习1)(掌握)"></a>03.09_Java语言基础(键盘录入的练习1)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>键盘录入练习：键盘录入两个数据，并对这两个数据求和，输出其结果</li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>键盘录入练习：键盘录入两个数据，获取这两个数据中的最大值</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-10-Java语言基础-键盘录入的练习2-掌握"><a href="#03-10-Java语言基础-键盘录入的练习2-掌握" class="headerlink" title="03.10_Java语言基础(键盘录入的练习2)(掌握)"></a>03.10_Java语言基础(键盘录入的练习2)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>键盘录入练习：键盘录入两个数据，比较这两个数据是否相等</li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>键盘录入练习：键盘录入三个数据，获取这三个数据中的最大值</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-11-Java语言基础-顺序结构语句-了解"><a href="#03-11-Java语言基础-顺序结构语句-了解" class="headerlink" title="03.11_Java语言基础(顺序结构语句)(了解)"></a>03.11_Java语言基础(顺序结构语句)(了解)</h3><ul>
+<li>A:什么是流程控制语句<ul>
+<li>流程控制语句：可以控制程序的执行流程。</li>
+</ul>
+</li>
+<li>B:流程控制语句的分类<ul>
+<li>顺序结构</li>
+<li>选择结构</li>
+<li>循环结构</li>
+</ul>
+</li>
+<li>C:执行流程：<ul>
+<li>从上往下，依次执行。</li>
+</ul>
+</li>
+<li>D:案例演示<ul>
+<li>输出几句话看效果即可</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-12-Java语言基础-选择结构if语句格式1及其使用-掌握"><a href="#03-12-Java语言基础-选择结构if语句格式1及其使用-掌握" class="headerlink" title="03.12_Java语言基础(选择结构if语句格式1及其使用)(掌握)"></a>03.12_Java语言基础(选择结构if语句格式1及其使用)(掌握)</h3><ul>
+<li>A:选择结构的分类<ul>
+<li>if语句</li>
+<li>switch语句</li>
+</ul>
+</li>
+<li>B:if语句有几种格式<ul>
+<li>格式1</li>
+<li>格式2</li>
+<li>格式3</li>
+</ul>
+</li>
+<li>C:if语句的格式1</li>
+<li><pre><code>if(比较表达式) {
+    语句体;
+}
+</code></pre></li>
+<li>D:执行流程：<ul>
+<li>先计算比较表达式的值，看其返回值是true还是false。</li>
+<li>如果是true，就执行语句体；</li>
+<li>如果是false，就不执行语句体；</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-13-Java语言基础-选择结构if语句注意事项-掌握"><a href="#03-13-Java语言基础-选择结构if语句注意事项-掌握" class="headerlink" title="03.13_Java语言基础(选择结构if语句注意事项)(掌握)"></a>03.13_Java语言基础(选择结构if语句注意事项)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>a:比较表达式无论简单还是复杂，结果必须是boolean类型</li>
+<li>b:if语句控制的语句体如果是一条语句，大括号可以省略；<ul>
+<li>如果是多条语句，就不能省略。建议永远不要省略。</li>
+</ul>
+</li>
+<li>c:一般来说：有左大括号就没有分号，有分号就没有左大括号</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-14-Java语言基础-选择结构if语句格式2及其使用-掌握"><a href="#03-14-Java语言基础-选择结构if语句格式2及其使用-掌握" class="headerlink" title="03.14_Java语言基础(选择结构if语句格式2及其使用)(掌握)"></a>03.14_Java语言基础(选择结构if语句格式2及其使用)(掌握)</h3><ul>
+<li>A:if语句的格式2</li>
+<li><pre><code>if(比较表达式) {
+    语句体1;
+}else {
+    语句体2;
+}
+</code></pre></li>
+<li>B:执行流程：<ul>
+<li>首先计算比较表达式的值，看其返回值是true还是false。</li>
+<li>如果是true，就执行语句体1；</li>
+<li>如果是false，就执行语句体2；</li>
+</ul>
+</li>
+<li><p>C:案例演示</p>
+<ul>
+<li>a:获取两个数据中较大的值</li>
+<li><p>b:判断一个数据是奇数还是偶数,并输出是奇数还是偶数</p>
+</li>
+<li><p>注意事项：else后面是没有比较表达式的，只有if后面有。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-15-Java语言基础-if语句的格式2和三元的相互转换问题-掌握"><a href="#03-15-Java语言基础-if语句的格式2和三元的相互转换问题-掌握" class="headerlink" title="03.15_Java语言基础(if语句的格式2和三元的相互转换问题)(掌握)"></a>03.15_Java语言基础(if语句的格式2和三元的相互转换问题)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>if语句和三元运算符完成同一个效果</li>
+</ul>
+</li>
+<li><p>B:案例演示</p>
+<ul>
+<li><p>if语句和三元运算符的区别</p>
+</li>
+<li><p>三元运算符实现的，都可以采用if语句实现。反之不成立。</p>
+</li>
+<li><p>什么时候if语句实现不能用三元改进呢?</p>
+<ul>
+<li>当if语句控制的操作是一个输出语句的时候就不能。</li>
+<li>为什么呢?因为三元运算符是一个运算符，运算符操作完毕就应该有y一个结果，而不是一个输出。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-16-Java语言基础-选择结构if语句格式3及其使用-掌握"><a href="#03-16-Java语言基础-选择结构if语句格式3及其使用-掌握" class="headerlink" title="03.16_Java语言基础(选择结构if语句格式3及其使用)(掌握)"></a>03.16_Java语言基础(选择结构if语句格式3及其使用)(掌握)</h3><ul>
+<li>A:if语句的格式3：</li>
+<li><pre><code>if(比较表达式1) {
+    语句体1;
+}else if(比较表达式2) {
+    语句体2;
+}else if(比较表达式3) {
+    语句体3;
+}
+...
+else {
+    语句体n+1;
+}
+</code></pre></li>
+<li><p>B:执行流程：</p>
+<ul>
+<li>首先计算比较表达式1看其返回值是true还是false，</li>
+<li>如果是true，就执行语句体1，if语句结束。</li>
+<li><p>如果是false，接着计算比较表达式2看其返回值是true还是false，</p>
+</li>
+<li><p>如果是true，就执行语句体2，if语句结束。</p>
+</li>
+<li><p>如果是false，接着计算比较表达式3看其返回值是true还是false，</p>
+</li>
+<li><p>如果都是false，就执行语句体n+1。</p>
+</li>
+</ul>
+</li>
+<li>C:注意事项:最后一个else可以省略,但是建议不要省略,可以对范围外的错误值提示 </li>
+</ul>
+<h3 id="03-17-Java语言基础-选择结构if语句格式3练习-掌握"><a href="#03-17-Java语言基础-选择结构if语句格式3练习-掌握" class="headerlink" title="03.17_Java语言基础(选择结构if语句格式3练习)(掌握)"></a>03.17_Java语言基础(选择结构if语句格式3练习)(掌握)</h3><ul>
+<li>A:练习1</li>
+<li><pre><code>需求：键盘录入一个成绩，判断并输出成绩的等级。
+90-100 优
+80-89  良
+70-79  中
+60-69  及
+0-59   差
+</code></pre></li>
+<li><p>B:练习2</p>
+<ul>
+<li><p>需求：</p>
+<ul>
+<li><p>键盘录入x的值，计算出y的并输出。</p>
+</li>
+<li><p>x&gt;=3    y = 2 * x + 1;</p>
+</li>
+<li>-1&lt;x&lt;3    y = 2 * x;</li>
+<li>x&lt;=-1    y = 2 * x - 1;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-18-Java语言基础-选择结构if语句的嵌套使用-掌握"><a href="#03-18-Java语言基础-选择结构if语句的嵌套使用-掌握" class="headerlink" title="03.18_Java语言基础(选择结构if语句的嵌套使用)(掌握)"></a>03.18_Java语言基础(选择结构if语句的嵌套使用)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>需求：获取三个数据中的最大值</li>
+<li>if语句的嵌套使用。</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-19-Java语言基础-选择结构switch语句的格式及其解释-掌握"><a href="#03-19-Java语言基础-选择结构switch语句的格式及其解释-掌握" class="headerlink" title="03.19_Java语言基础(选择结构switch语句的格式及其解释)(掌握)"></a>03.19_Java语言基础(选择结构switch语句的格式及其解释)(掌握)</h3><ul>
+<li>A:switch语句的格式</li>
+<li><pre><code>switch(表达式) {
+      case 值1：
+        语句体1;
+        break;
+        case 值2：
+        语句体2;
+        break;
+        …
+        default：    
+        语句体n+1;
+        break;
+}
+</code></pre></li>
+<li><p>B:switch语句的格式解释</p>
+</li>
+<li>C:面试题<ul>
+<li>byte可以作为switch的表达式吗?<strong> 可以</strong></li>
+<li>long可以作为switch的表达式吗?<strong>不可以</strong></li>
+<li>String可以作为switch的表达式吗?<strong>可以</strong></li>
+</ul>
+</li>
+<li>C:执行流程<ul>
+<li>先计算表达式的值</li>
+<li>然后和case后面的匹配，如果有就执行对应的语句，否则执行default控制的语句</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-20-Java语言基础-选择结构switch语句的练习-掌握"><a href="#03-20-Java语言基础-选择结构switch语句的练习-掌握" class="headerlink" title="03.20_Java语言基础(选择结构switch语句的练习)(掌握)"></a>03.20_Java语言基础(选择结构switch语句的练习)(掌握)</h3><ul>
+<li>A:整数(给定一个值,输出对应星期几)</li>
+</ul>
+<h3 id="03-21-Java语言基础-选择结构switch语句的注意事项-掌握"><a href="#03-21-Java语言基础-选择结构switch语句的注意事项-掌握" class="headerlink" title="03.21_Java语言基础(选择结构switch语句的注意事项)(掌握)"></a>03.21_Java语言基础(选择结构switch语句的注意事项)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>a:case后面只能是常量，不能是变量，而且，多个case后面的值不能出现相同的</li>
+<li>b:default可以省略吗?<ul>
+<li>可以省略，但是不建议，因为它的作用是对不正确的情况给出提示。<ul>
+<li>特殊情况：<ul>
+<li>case就可以把值固定。</li>
+<li>A,B,C,D</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>c:break可以省略吗?<ul>
+<li>最后一个可以省略,其他最好不要省略</li>
+<li>会出现一个现象：case穿透。</li>
+<li>最终我们建议不要省略</li>
+</ul>
+</li>
+<li>d:default一定要在最后吗?<ul>
+<li>不是，可以在任意位置。但是建议在最后。</li>
+</ul>
+</li>
+<li>e:switch语句的结束条件<ul>
+<li>a:遇到break就结束了</li>
+<li>b:执行到switch的右大括号就结束了</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-22-Java语言基础-选择结构switch语句练习-掌握"><a href="#03-22-Java语言基础-选择结构switch语句练习-掌握" class="headerlink" title="03.22_Java语言基础(选择结构switch语句练习)(掌握)"></a>03.22_Java语言基础(选择结构switch语句练习)(掌握)</h3><ul>
+<li>A:看程序写结果：</li>
+<li><pre><code>int x = 2;
+int y = 3;
+switch(x){
+    default:
+        y++;
+        break;
+    case 3:
+        y++;
+    case 4:
+        y++;
+}
+System.out.println(&quot;y=&quot;+y);
+</code></pre></li>
+<li><p>B:看程序写结果：</p>
+</li>
+<li><pre><code>int x = 2;
+int y = 3;
+switch(x){
+    default:
+        y++;
+    case 3:
+        y++;
+    case 4:
+        y++;
+}
+System.out.println(&quot;y=&quot;+y);
+</code></pre></li>
+</ul>
+<h3 id="03-23-Java语言基础-选择结构if语句和switch语句的区别-掌握"><a href="#03-23-Java语言基础-选择结构if语句和switch语句的区别-掌握" class="headerlink" title="03.23_Java语言基础(选择结构if语句和switch语句的区别)(掌握)"></a>03.23_Java语言基础(选择结构if语句和switch语句的区别)(掌握)</h3><ul>
+<li>A:总结switch语句和if语句的各自使用场景</li>
+<li>switch建议判断固定值的时候用</li>
+<li>if建议判断区间或范围的时候用</li>
+<li>B:案例演示<ul>
+<li>分别用switch语句和if语句实现下列需求：<ul>
+<li>键盘录入月份，输出对应的季节</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-24-day03总结"><a href="#03-24-day03总结" class="headerlink" title="03.24_day03总结"></a>03.24_day03总结</h3><p>把今天的知识点总结一遍。<br>–&gt;</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/07/19/day03笔记/">Java语言基础</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Dai Wei 的个人博客">Dai Wei</a></p>
+        <p><span>发布时间:</span>2017年07月19日 - 00时00分</p>
+        <p><span>最后更新:</span>2017年08月19日 - 10时38分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/07/19/day03笔记/" title="Java语言基础">http://yoursite.com/2017/07/19/day03笔记/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/07/19/day03笔记/　　作者: Dai Wei" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2017/07/21/day04笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Java语言基础
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/18/day02笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java语言基础</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#03-01-Java语言基础-逻辑运算符的基本用法-掌握"><span class="toc-number">1.</span> <span class="toc-text">03.01_Java语言基础(逻辑运算符的基本用法)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-02-Java语言基础-逻辑运算符-amp-amp-和-amp-的区别-掌握"><span class="toc-number">2.</span> <span class="toc-text">03.02_Java语言基础(逻辑运算符&&和&的区别)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-03-Java语言基础-位运算符的基本用法1-了解"><span class="toc-number">3.</span> <span class="toc-text">03.03_Java语言基础(位运算符的基本用法1)(了解)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-04-Java语言基础-位异或运算符的特点及面试题-掌握"><span class="toc-number">4.</span> <span class="toc-text">03.04_Java语言基础(位异或运算符的特点及面试题)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-05-Java语言基础-位运算符的基本用法2及面试题-了解"><span class="toc-number">5.</span> <span class="toc-text">03.05_Java语言基础(位运算符的基本用法2及面试题)(了解)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-06-Java语言基础-三元运算符的基本用法-掌握"><span class="toc-number">6.</span> <span class="toc-text">03.06_Java语言基础(三元运算符的基本用法)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-07-Java语言基础-三元运算符的练习-掌握"><span class="toc-number">7.</span> <span class="toc-text">03.07_Java语言基础(三元运算符的练习)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-08-Java语言基础-键盘录入的基本格式讲解-掌握"><span class="toc-number">8.</span> <span class="toc-text">03.08_Java语言基础(键盘录入的基本格式讲解)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-09-Java语言基础-键盘录入的练习1-掌握"><span class="toc-number">9.</span> <span class="toc-text">03.09_Java语言基础(键盘录入的练习1)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-10-Java语言基础-键盘录入的练习2-掌握"><span class="toc-number">10.</span> <span class="toc-text">03.10_Java语言基础(键盘录入的练习2)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-11-Java语言基础-顺序结构语句-了解"><span class="toc-number">11.</span> <span class="toc-text">03.11_Java语言基础(顺序结构语句)(了解)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-12-Java语言基础-选择结构if语句格式1及其使用-掌握"><span class="toc-number">12.</span> <span class="toc-text">03.12_Java语言基础(选择结构if语句格式1及其使用)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-13-Java语言基础-选择结构if语句注意事项-掌握"><span class="toc-number">13.</span> <span class="toc-text">03.13_Java语言基础(选择结构if语句注意事项)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-14-Java语言基础-选择结构if语句格式2及其使用-掌握"><span class="toc-number">14.</span> <span class="toc-text">03.14_Java语言基础(选择结构if语句格式2及其使用)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-15-Java语言基础-if语句的格式2和三元的相互转换问题-掌握"><span class="toc-number">15.</span> <span class="toc-text">03.15_Java语言基础(if语句的格式2和三元的相互转换问题)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-16-Java语言基础-选择结构if语句格式3及其使用-掌握"><span class="toc-number">16.</span> <span class="toc-text">03.16_Java语言基础(选择结构if语句格式3及其使用)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-17-Java语言基础-选择结构if语句格式3练习-掌握"><span class="toc-number">17.</span> <span class="toc-text">03.17_Java语言基础(选择结构if语句格式3练习)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-18-Java语言基础-选择结构if语句的嵌套使用-掌握"><span class="toc-number">18.</span> <span class="toc-text">03.18_Java语言基础(选择结构if语句的嵌套使用)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-19-Java语言基础-选择结构switch语句的格式及其解释-掌握"><span class="toc-number">19.</span> <span class="toc-text">03.19_Java语言基础(选择结构switch语句的格式及其解释)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-20-Java语言基础-选择结构switch语句的练习-掌握"><span class="toc-number">20.</span> <span class="toc-text">03.20_Java语言基础(选择结构switch语句的练习)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-21-Java语言基础-选择结构switch语句的注意事项-掌握"><span class="toc-number">21.</span> <span class="toc-text">03.21_Java语言基础(选择结构switch语句的注意事项)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-22-Java语言基础-选择结构switch语句练习-掌握"><span class="toc-number">22.</span> <span class="toc-text">03.22_Java语言基础(选择结构switch语句练习)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-23-Java语言基础-选择结构if语句和switch语句的区别-掌握"><span class="toc-number">23.</span> <span class="toc-text">03.23_Java语言基础(选择结构if语句和switch语句的区别)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#03-24-day03总结"><span class="toc-number">24.</span> <span class="toc-text">03.24_day03总结</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'daiwei',
+      repo: 'TimesSlience.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/07/21/day04笔记/" title="上一篇: Java语言基础">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/07/18/day02笔记/" title="下一篇: Java语言基础">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/07/22/day06笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/day05笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/day04笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/day03笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/18/day02笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/day01笔记/">Java语言基础</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Dai Wei
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
