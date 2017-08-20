@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java语言基础 | Java</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="面向对象">
+<meta name="keywords" content="代码块,继承,final关键字">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java语言基础">
+<meta property="og:url" content="http://yoursite.com/2017/07/24/day08笔记/index.html">
+<meta property="og:site_name" content="Java">
+<meta property="og:description" content="面向对象">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2017-08-20T06:25:10.459Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java语言基础">
+<meta name="twitter:description" content="面向对象">
+  
+    <link rel="alternative" href="/atom.xml" title="Java" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Dai Wei</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="//daiwei.biz">博客首页</a></li>
+                        
+                            <li><a href="//github.com/TimesSilence">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                            <li><a href="/tags">静心阅读</a></li>
+                        
+                            <li><a href="/instagram">光影之路</a></li>
+                        
+                            <li><a href="/tags/随笔">随笔</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/815762187" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/TimesSlience" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="//www.zhihu.com/people/dai-wei-24-86" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="/weibo.com/3702195485" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="/daiwei20071203@qq.com" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="//twitter.com/david815762187 " title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Java环境配置/" style="font-size: 10px;">Java环境配置</a> <a href="/tags/Java语言基础/" style="font-size: 10px;">Java语言基础</a> <a href="/tags/Java语言概述/" style="font-size: 10px;">Java语言概述</a> <a href="/tags/Static关键词/" style="font-size: 10px;">Static关键词</a> <a href="/tags/final关键字/" style="font-size: 10px;">final关键字</a> <a href="/tags/二进制/" style="font-size: 10px;">二进制</a> <a href="/tags/代码块/" style="font-size: 10px;">代码块</a> <a href="/tags/修饰权限/" style="font-size: 10px;">修饰权限</a> <a href="/tags/内部类/" style="font-size: 10px;">内部类</a> <a href="/tags/包/" style="font-size: 10px;">包</a> <a href="/tags/变量/" style="font-size: 10px;">变量</a> <a href="/tags/多态/" style="font-size: 10px;">多态</a> <a href="/tags/常量/" style="font-size: 10px;">常量</a> <a href="/tags/循环/" style="font-size: 10px;">循环</a> <a href="/tags/成员方法与成员变量/" style="font-size: 10px;">成员方法与成员变量</a> <a href="/tags/数组/" style="font-size: 20px;">数组</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/计算机概述/" style="font-size: 10px;">计算机概述</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://123.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Talk is cheap, show me your code!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Dai Wei</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Dai Wei</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="//daiwei.biz">博客首页</a></li>
+                
+                    <li><a href="//github.com/TimesSilence">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                    <li><a href="/tags">静心阅读</a></li>
+                
+                    <li><a href="/instagram">光影之路</a></li>
+                
+                    <li><a href="/tags/随笔">随笔</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/815762187" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/TimesSlience" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="//www.zhihu.com/people/dai-wei-24-86" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="/weibo.com/3702195485" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="/daiwei20071203@qq.com" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="//twitter.com/david815762187 " title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-day08笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/07/24/day08笔记/" class="article-date">
+      <time datetime="2017-07-23T16:00:00.000Z" itemprop="datePublished">2017-07-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java语言基础
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/final关键字/">final关键字</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码块/">代码块</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/继承/">继承</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>面向对象<br><a id="more"></a></p>
+<h3 id="08-01-面向对象-代码块的概述和分类-了解-面试的时候会问-开发不用或者很少用"><a href="#08-01-面向对象-代码块的概述和分类-了解-面试的时候会问-开发不用或者很少用" class="headerlink" title="08.01_面向对象(代码块的概述和分类)(了解)(面试的时候会问,开发不用或者很少用)"></a>08.01_面向对象(代码块的概述和分类)(了解)(面试的时候会问,开发不用或者很少用)</h3><ul>
+<li>A:代码块概述<ul>
+<li>在Java中，使用{}括起来的代码被称为代码块。</li>
+</ul>
+</li>
+<li>B:代码块分类<ul>
+<li>根据其位置和声明的不同，可以分为局部代码块，构造代码块，静态代码块，同步代码块(多线程讲解)。</li>
+</ul>
+</li>
+<li>C:常见代码块的应用<ul>
+<li>a:局部代码块 <ul>
+<li>在方法中出现；限定变量生命周期，及早释放，提高内存利用率</li>
+</ul>
+</li>
+<li>b:构造代码块 (初始化块)<ul>
+<li>在类中方法外出现；多个构造方法方法中相同的代码存放到一起，每次调用构造都执行，并且在构造方法前执行</li>
+</ul>
+</li>
+<li>c:静态代码块 <ul>
+<li>在类中方法外出现，并加上static修饰；用于给类进行初始化，在加载的时候就执行，并且只执行一次。</li>
+<li>一般用于加载驱动</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-02-面向对象-代码块的面试题-掌握"><a href="#08-02-面向对象-代码块的面试题-掌握" class="headerlink" title="08.02_面向对象(代码块的面试题)(掌握)"></a>08.02_面向对象(代码块的面试题)(掌握)</h3><ul>
+<li>A:看程序写结果<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">class Student &#123;</div><div class="line">	static &#123;</div><div class="line">		System.out.println(&quot;Student 静态代码块&quot;);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	&#123;</div><div class="line">		System.out.println(&quot;Student 构造代码块&quot;);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public Student() &#123;</div><div class="line">		System.out.println(&quot;Student 构造方法&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">	</div><div class="line">class Demo2_Student &#123;</div><div class="line">	static &#123;</div><div class="line">		System.out.println(&quot;Demo2_Student静态代码块&quot;);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		System.out.println(&quot;我是main方法&quot;);</div><div class="line">		</div><div class="line">		Student s1 = new Student();</div><div class="line">		Student s2 = new Student();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="08-03-面向对象-继承案例演示-掌握"><a href="#08-03-面向对象-继承案例演示-掌握" class="headerlink" title="08.03_面向对象(继承案例演示)(掌握)"></a>08.03_面向对象(继承案例演示)(掌握)</h3><ul>
+<li>A:继承(extends)<ul>
+<li>让类与类之间产生关系,子父类关系 </li>
+</ul>
+</li>
+<li>B:继承案例演示：<ul>
+<li>动物类,猫类,狗类</li>
+<li>定义两个属性(颜色,腿的个数)两个功能(吃饭，睡觉)</li>
+</ul>
+</li>
+<li>C:案例演示<ul>
+<li>使用继承前</li>
+</ul>
+</li>
+<li>D:案例演示<ul>
+<li>使用继承后</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-04-面向对象-继承的好处和弊端-掌握"><a href="#08-04-面向对象-继承的好处和弊端-掌握" class="headerlink" title="08.04_面向对象(继承的好处和弊端)(掌握)"></a>08.04_面向对象(继承的好处和弊端)(掌握)</h3><ul>
+<li>A:继承的好处<ul>
+<li>a:提高了代码的复用性</li>
+<li>b:提高了代码的维护性</li>
+<li>c:让类与类之间产生了关系，是多态的前提</li>
+</ul>
+</li>
+<li><p>B:继承的弊端</p>
+<ul>
+<li><p>类的耦合性增强了。</p>
+</li>
+<li><p>开发的原则：高内聚，低耦合。</p>
+</li>
+<li>耦合：类与类的关系</li>
+<li>内聚：就是自己完成某件事情的能力</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-05-面向对象-Java中类的继承特点-掌握"><a href="#08-05-面向对象-Java中类的继承特点-掌握" class="headerlink" title="08.05_面向对象(Java中类的继承特点)(掌握)"></a>08.05_面向对象(Java中类的继承特点)(掌握)</h3><ul>
+<li>A:Java中类的继承特点<ul>
+<li>a:Java只支持单继承，不支持多继承。(一个儿子只能有一个爹)<ul>
+<li>有些语言是支持多继承，格式：extends 类1,类2,…</li>
+</ul>
+</li>
+<li>b:Java支持多层继承(继承体系)</li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>Java中类的继承特点<ul>
+<li>如果想用这个体系的所有功能用最底层的类创建对象</li>
+<li>如果想看这个体系的共性功能,看最顶层的类 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-06-面向对象-继承的注意事项和什么时候使用继承-掌握"><a href="#08-06-面向对象-继承的注意事项和什么时候使用继承-掌握" class="headerlink" title="08.06_面向对象(继承的注意事项和什么时候使用继承)(掌握)"></a>08.06_面向对象(继承的注意事项和什么时候使用继承)(掌握)</h3><ul>
+<li>A:继承的注意事项<ul>
+<li>a:子类只能继承父类所有非私有的成员(成员方法和成员变量)[可以public set和get]</li>
+<li>b:子类不能继承父类的构造方法，但是可以通过super(马上讲)关键字去访问父类构造方法。</li>
+<li>c:不要为了部分功能而去继承</li>
+<li>项目经理 姓名 工号 工资 奖金</li>
+<li>程序员    姓名 工号 工资</li>
+</ul>
+</li>
+<li><p>B:什么时候使用继承</p>
+<ul>
+<li><p>继承其实体现的是一种关系：”is a”。<br>  Person</p>
+<pre><code>Student
+Teacher
+</code></pre><p>  水果</p>
+<pre><code>苹果
+香蕉
+橘子
+</code></pre><p>采用假设法。<br>  如果有两个类A,B。只有他们符合A是B的一种，或者B是A的一种，就可以考虑使用继承。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-07-面向对象-继承中成员变量的关系-掌握"><a href="#08-07-面向对象-继承中成员变量的关系-掌握" class="headerlink" title="08.07_面向对象(继承中成员变量的关系)(掌握)"></a>08.07_面向对象(继承中成员变量的关系)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>a:不同名的变量</li>
+<li>b:同名的变量<h3 id="08-08-面向对象-this和super的区别和应用-掌握"><a href="#08-08-面向对象-this和super的区别和应用-掌握" class="headerlink" title="08.08_面向对象(this和super的区别和应用)(掌握)"></a>08.08_面向对象(this和super的区别和应用)(掌握)</h3></li>
+</ul>
+</li>
+<li>A:this和super都代表什么<ul>
+<li>this:代表当前对象的引用,谁来调用我,我就代表谁</li>
+<li>super:代表当前对象父类的引用</li>
+</ul>
+</li>
+<li>B:this和super的使用区别<ul>
+<li>a:调用成员变量<ul>
+<li>this.成员变量 调用本类的成员变量,也可以调用父类的成员变量(本类没有)</li>
+<li>super.成员变量 调用父类的成员变量</li>
+</ul>
+</li>
+<li>b:调用构造方法<ul>
+<li>this(…)    调用本类的构造方法</li>
+<li>super(…)    调用父类的构造方法</li>
+</ul>
+</li>
+<li>c:调用成员方法<ul>
+<li>this.成员方法 调用本类的成员方法,也可以调用父类的方法(本类没有)</li>
+<li>super.成员方法 调用父类的成员方法</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-09-面向对象-继承中构造方法的关系-掌握"><a href="#08-09-面向对象-继承中构造方法的关系-掌握" class="headerlink" title="08.09_面向对象(继承中构造方法的关系)(掌握)"></a>08.09_面向对象(继承中构造方法的关系)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>子类中所有的构造方法默认都会访问父类中空参数的构造方法</li>
+</ul>
+</li>
+<li><p>B:为什么呢?</p>
+<ul>
+<li>因为子类会继承父类中的数据，可能还会使用父类的数据。</li>
+<li><p>所以，子类初始化之前，一定要先完成父类数据的初始化。</p>
+</li>
+<li><p>其实：</p>
+<ul>
+<li>每一个构造方法的第一条语句默认都是：super(), Object类最顶层的父类。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-10-面向对象-继承中构造方法的注意事项-掌握"><a href="#08-10-面向对象-继承中构造方法的注意事项-掌握" class="headerlink" title="08.10_面向对象(继承中构造方法的注意事项)(掌握)"></a>08.10_面向对象(继承中构造方法的注意事项)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>父类没有无参构造方法,子类怎么办?</li>
+<li>super解决</li>
+<li>this解决</li>
+</ul>
+</li>
+<li>B:注意事项<ul>
+<li>super(…)或者this(….)必须出现在构造方法的第一条语句上</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-11-面向对象-继承中的面试题-掌握"><a href="#08-11-面向对象-继承中的面试题-掌握" class="headerlink" title="08.11_面向对象(继承中的面试题)(掌握)"></a>08.11_面向对象(继承中的面试题)(掌握)</h3><ul>
+<li>A:案例演示</li>
+<li><p>看程序写结果1<br>class Fu{<br>  public int num = 10;<br>  public Fu(){</p>
+<pre><code>System.out.println(&quot;fu&quot;);
+</code></pre><p>  }<br>}<br>class Zi extends Fu{<br>  public int num = 20;<br>  public Zi(){</p>
+<pre><code>System.out.println(&quot;zi&quot;);
+</code></pre><p>  }<br>  public void show(){</p>
+<pre><code>int num = 30;
+System.out.println(num);
+System.out.println(this.num);
+System.out.println(super.num);
+</code></pre><p>  }<br>}<br>class Test1_Extends {<br>  public static void main(String[] args) {</p>
+<pre><code>Zi z = new Zi();
+z.show();
+</code></pre><p>  }<br>}</p>
+<p>看程序写结果2<br>class Fu {<br>  static {</p>
+<pre><code>System.out.println(&quot;静态代码块Fu&quot;);
+</code></pre><p>  }</p>
+<p>  {</p>
+<pre><code>System.out.println(&quot;构造代码块Fu&quot;);
+</code></pre><p>  }</p>
+<p>  public Fu() {</p>
+<pre><code>System.out.println(&quot;构造方法Fu&quot;);
+</code></pre><p>  }<br>}</p>
+<p>class Zi extends Fu {<br>  static {</p>
+<pre><code>System.out.println(&quot;静态代码块Zi&quot;);
+</code></pre><p>  }</p>
+<p>  {</p>
+<pre><code>System.out.println(&quot;构造代码块Zi&quot;);
+</code></pre><p>  }</p>
+<p>  public Zi() {</p>
+<pre><code>System.out.println(&quot;构造方法Zi&quot;);
+</code></pre><p>  }<br>}</p>
+<p>Zi z = new Zi(); 请执行结果。</p>
+</li>
+</ul>
+<h3 id="08-12-面向对象-继承中成员方法关系-掌握"><a href="#08-12-面向对象-继承中成员方法关系-掌握" class="headerlink" title="08.12_面向对象(继承中成员方法关系)(掌握)"></a>08.12_面向对象(继承中成员方法关系)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>a:不同名的方法</li>
+<li>b:同名的方法</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-13-面向对象-方法重写概述及其应用-掌握"><a href="#08-13-面向对象-方法重写概述及其应用-掌握" class="headerlink" title="08.13_面向对象(方法重写概述及其应用)(掌握)"></a>08.13_面向对象(方法重写概述及其应用)(掌握)</h3><ul>
+<li>A:什么是方法重写<ul>
+<li>重写:子父类出现了一模一样的方法(注意:返回值类型可以是子父类,这个我们学完面向对象讲) </li>
+</ul>
+</li>
+<li>B:方法重写的应用：<ul>
+<li>当子类需要父类的功能，而功能主体子类有自己特有内容时，可以重写父类中的方法。这样，即沿袭了父类的功能，又定义了子类特有的内容。</li>
+</ul>
+</li>
+<li>C:案例演示<ul>
+<li>a:定义一个手机类。</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-14-面向对象-方法重写的注意事项-掌握"><a href="#08-14-面向对象-方法重写的注意事项-掌握" class="headerlink" title="08.14_面向对象(方法重写的注意事项)(掌握)"></a>08.14_面向对象(方法重写的注意事项)(掌握)</h3><ul>
+<li><p>A:方法重写注意事项</p>
+<ul>
+<li>a:父类中私有方法不能被重写<ul>
+<li>因为父类私有方法子类根本就无法继承</li>
+</ul>
+</li>
+<li>b:子类重写父类方法时，访问权限不能更低<ul>
+<li>最好就一致</li>
+</ul>
+</li>
+<li><p>c:父类静态方法，子类也必须通过静态方法进行重写</p>
+<ul>
+<li>其实这个算不上方法重写，但是现象确实如此，至于为什么算不上方法重写，多态中我会讲解(静态只能覆盖静态)</li>
+</ul>
+</li>
+<li><p>子类重写父类方法的时候，最好声明一模一样。</p>
+</li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>方法重写注意事项</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-15-面向对象-方法重写的面试题-掌握"><a href="#08-15-面向对象-方法重写的面试题-掌握" class="headerlink" title="08.15_面向对象(方法重写的面试题)(掌握)"></a>08.15_面向对象(方法重写的面试题)(掌握)</h3><ul>
+<li><p>A:方法重写的面试题</p>
+<ul>
+<li>Override和Overload的区别?Overload能改变返回值类型吗?</li>
+<li>overload可以改变返回值类型,只看参数列表</li>
+<li><p>方法重写：子类中出现了和父类中方法声明一模一样的方法。与返回值类型有关,返回值是一致(或者是子父类)的</p>
+</li>
+<li><p>方法重载：本类中出现的方法名一样，参数列表不同的方法。与返回值类型无关。</p>
+</li>
+<li><p>子类对象调用方法的时候：</p>
+<ul>
+<li>先找子类本身，再找父类。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-16-面向对象-使用继承前的学生和老师案例-掌握"><a href="#08-16-面向对象-使用继承前的学生和老师案例-掌握" class="headerlink" title="08.16_面向对象(使用继承前的学生和老师案例)(掌握)"></a>08.16_面向对象(使用继承前的学生和老师案例)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>使用继承前的学生和老师案例</li>
+<li>属性:姓名,年龄</li>
+<li>行为:吃饭</li>
+<li>老师有特有的方法:讲课</li>
+<li>学生有特有的方法:学习</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-17-面向对象-使用继承后的学生和老师案例-掌握"><a href="#08-17-面向对象-使用继承后的学生和老师案例-掌握" class="headerlink" title="08.17_面向对象(使用继承后的学生和老师案例)(掌握)"></a>08.17_面向对象(使用继承后的学生和老师案例)(掌握)</h3><ul>
+<li>A:案例演示<ul>
+<li>使用继承后的学生和老师案例</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-18-面向对象-猫狗案例分析-实现及测试-掌握"><a href="#08-18-面向对象-猫狗案例分析-实现及测试-掌握" class="headerlink" title="08.18_面向对象(猫狗案例分析,实现及测试)(掌握)"></a>08.18_面向对象(猫狗案例分析,实现及测试)(掌握)</h3><ul>
+<li>A:猫狗案例分析</li>
+<li>B:案例演示<ul>
+<li>猫狗案例继承版</li>
+<li>属性:毛的颜色,腿的个数</li>
+<li>行为:吃饭</li>
+<li>猫特有行为:抓老鼠catchMouse</li>
+<li>狗特有行为:看家lookHome</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-19-面向对象-final关键字修饰类-方法以及变量的特点-掌握"><a href="#08-19-面向对象-final关键字修饰类-方法以及变量的特点-掌握" class="headerlink" title="08.19_面向对象(final关键字修饰类,方法以及变量的特点)(掌握)"></a>08.19_面向对象(final关键字修饰类,方法以及变量的特点)(掌握)</h3><ul>
+<li>A:final概述</li>
+<li>B:final修饰特点<ul>
+<li>修饰类，类不能被继承</li>
+<li>修饰变量，变量就变成了常量，只能被赋值一次</li>
+<li>修饰方法，方法不能被重写</li>
+</ul>
+</li>
+<li>C:案例演示<ul>
+<li>final修饰特点</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-20-面向对象-final关键字修饰局部变量-掌握"><a href="#08-20-面向对象-final关键字修饰局部变量-掌握" class="headerlink" title="08.20_面向对象(final关键字修饰局部变量)(掌握)"></a>08.20_面向对象(final关键字修饰局部变量)(掌握)</h3><ul>
+<li><p>A:案例演示</p>
+<ul>
+<li><p>方法内部或者方法声明上都演示一下(了解)</p>
+</li>
+<li><p>基本类型，是值不能被改变</p>
+</li>
+<li>引用类型，是地址值不能被改变,对象中的属性可以改变</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-21-面向对象-final修饰变量的初始化时机-掌握"><a href="#08-21-面向对象-final修饰变量的初始化时机-掌握" class="headerlink" title="08.21_面向对象(final修饰变量的初始化时机)(掌握)"></a>08.21_面向对象(final修饰变量的初始化时机)(掌握)</h3><ul>
+<li>A:final修饰变量的初始化时机<ul>
+<li>显示初始化 </li>
+<li>在对象构造完毕前即可</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-22-day08总结"><a href="#08-22-day08总结" class="headerlink" title="08.22_day08总结"></a>08.22_day08总结</h3><ul>
+<li>把今天的知识点总结一遍。</li>
+</ul>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/07/24/day08笔记/">Java语言基础</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Dai Wei 的个人博客">Dai Wei</a></p>
+        <p><span>发布时间:</span>2017年07月24日 - 00时00分</p>
+        <p><span>最后更新:</span>2017年08月20日 - 14时25分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/07/24/day08笔记/" title="Java语言基础">http://yoursite.com/2017/07/24/day08笔记/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/07/24/day08笔记/　　作者: Dai Wei" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2017/07/25/day09笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Java语言基础
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/23/day07笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java语言基础</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#08-01-面向对象-代码块的概述和分类-了解-面试的时候会问-开发不用或者很少用"><span class="toc-number">1.</span> <span class="toc-text">08.01_面向对象(代码块的概述和分类)(了解)(面试的时候会问,开发不用或者很少用)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-02-面向对象-代码块的面试题-掌握"><span class="toc-number">2.</span> <span class="toc-text">08.02_面向对象(代码块的面试题)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-03-面向对象-继承案例演示-掌握"><span class="toc-number">3.</span> <span class="toc-text">08.03_面向对象(继承案例演示)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-04-面向对象-继承的好处和弊端-掌握"><span class="toc-number">4.</span> <span class="toc-text">08.04_面向对象(继承的好处和弊端)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-05-面向对象-Java中类的继承特点-掌握"><span class="toc-number">5.</span> <span class="toc-text">08.05_面向对象(Java中类的继承特点)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-06-面向对象-继承的注意事项和什么时候使用继承-掌握"><span class="toc-number">6.</span> <span class="toc-text">08.06_面向对象(继承的注意事项和什么时候使用继承)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-07-面向对象-继承中成员变量的关系-掌握"><span class="toc-number">7.</span> <span class="toc-text">08.07_面向对象(继承中成员变量的关系)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-08-面向对象-this和super的区别和应用-掌握"><span class="toc-number">8.</span> <span class="toc-text">08.08_面向对象(this和super的区别和应用)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-09-面向对象-继承中构造方法的关系-掌握"><span class="toc-number">9.</span> <span class="toc-text">08.09_面向对象(继承中构造方法的关系)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-10-面向对象-继承中构造方法的注意事项-掌握"><span class="toc-number">10.</span> <span class="toc-text">08.10_面向对象(继承中构造方法的注意事项)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-11-面向对象-继承中的面试题-掌握"><span class="toc-number">11.</span> <span class="toc-text">08.11_面向对象(继承中的面试题)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-12-面向对象-继承中成员方法关系-掌握"><span class="toc-number">12.</span> <span class="toc-text">08.12_面向对象(继承中成员方法关系)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-13-面向对象-方法重写概述及其应用-掌握"><span class="toc-number">13.</span> <span class="toc-text">08.13_面向对象(方法重写概述及其应用)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-14-面向对象-方法重写的注意事项-掌握"><span class="toc-number">14.</span> <span class="toc-text">08.14_面向对象(方法重写的注意事项)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-15-面向对象-方法重写的面试题-掌握"><span class="toc-number">15.</span> <span class="toc-text">08.15_面向对象(方法重写的面试题)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-16-面向对象-使用继承前的学生和老师案例-掌握"><span class="toc-number">16.</span> <span class="toc-text">08.16_面向对象(使用继承前的学生和老师案例)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-17-面向对象-使用继承后的学生和老师案例-掌握"><span class="toc-number">17.</span> <span class="toc-text">08.17_面向对象(使用继承后的学生和老师案例)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-18-面向对象-猫狗案例分析-实现及测试-掌握"><span class="toc-number">18.</span> <span class="toc-text">08.18_面向对象(猫狗案例分析,实现及测试)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-19-面向对象-final关键字修饰类-方法以及变量的特点-掌握"><span class="toc-number">19.</span> <span class="toc-text">08.19_面向对象(final关键字修饰类,方法以及变量的特点)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-20-面向对象-final关键字修饰局部变量-掌握"><span class="toc-number">20.</span> <span class="toc-text">08.20_面向对象(final关键字修饰局部变量)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-21-面向对象-final修饰变量的初始化时机-掌握"><span class="toc-number">21.</span> <span class="toc-text">08.21_面向对象(final修饰变量的初始化时机)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#08-22-day08总结"><span class="toc-number">22.</span> <span class="toc-text">08.22_day08总结</span></a></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'daiwei',
+      repo: 'TimesSlience.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/07/25/day09笔记/" title="上一篇: Java语言基础">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/07/23/day07笔记/" title="下一篇: Java语言基础">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/07/26/day10笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/25/day09笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/24/day08笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/23/day07笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/22/day06笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/day04笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/day05笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/day03笔记/">Day03_运算符的使用和if条件语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/18/day02笔记/">Day03_二进制的概述,常量与变量的介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/day01笔记/">Day01_计算机基础与Java语言概述</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Dai Wei
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

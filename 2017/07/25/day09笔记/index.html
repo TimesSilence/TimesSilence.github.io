@@ -5,18 +5,18 @@
   
   <title>Java语言基础 | Java</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="面向对象">
-<meta name="keywords" content="数组">
+  <meta name="description" content="面向对象(4)">
+<meta name="keywords" content="多态">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java语言基础">
-<meta property="og:url" content="http://yoursite.com/2017/07/22/day06笔记/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/07/25/day09笔记/index.html">
 <meta property="og:site_name" content="Java">
-<meta property="og:description" content="面向对象">
+<meta property="og:description" content="面向对象(4)">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2017-08-19T06:53:23.900Z">
+<meta property="og:updated_time" content="2017-08-20T06:31:34.348Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java语言基础">
-<meta name="twitter:description" content="面向对象">
+<meta name="twitter:description" content="面向对象(4)">
   
     <link rel="alternative" href="/atom.xml" title="Java" type="application/atom+xml">
   
@@ -242,11 +242,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-day06笔记" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-day09笔记" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/07/22/day06笔记/" class="article-date">
-      <time datetime="2017-07-21T16:00:00.000Z" itemprop="datePublished">2017-07-22</time>
+      <a href="/2017/07/25/day09笔记/" class="article-date">
+      <time datetime="2017-07-24T16:00:00.000Z" itemprop="datePublished">2017-07-25</time>
 </a>
     </div>
   
@@ -274,7 +274,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数组/">数组</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多态/">多态</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -284,302 +284,340 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>面向对象<br><a id="more"></a></p>
-<h3 id="06-01-面向对象-面向对象思想概述-了解"><a href="#06-01-面向对象-面向对象思想概述-了解" class="headerlink" title="06.01_面向对象(面向对象思想概述)(了解)"></a>06.01_面向对象(面向对象思想概述)(了解)</h3><ul>
-<li>A:面向过程思想概述<ul>
-<li>第一步</li>
-<li>第二步 </li>
+        <p>面向对象(4)<br><a id="more"></a></p>
+<h3 id="09-01-面向对象-多态的概述及其代码体现"><a href="#09-01-面向对象-多态的概述及其代码体现" class="headerlink" title="09.01_面向对象(多态的概述及其代码体现)"></a>09.01_面向对象(多态的概述及其代码体现)</h3><ul>
+<li>A:多态(polymorphic)概述<ul>
+<li>事物存在的多种形态 </li>
 </ul>
 </li>
-<li>B:面向对象思想概述<ul>
-<li>找对象(第一步,第二步) </li>
-</ul>
-</li>
-<li>C:举例<ul>
-<li>买煎饼果子</li>
-<li>洗衣服 </li>
-</ul>
-</li>
-<li>D:面向对象思想特点<ul>
-<li>a:是一种更符合我们思想习惯的思想</li>
-<li>b:可以将复杂的事情简单化</li>
-<li>c:将我们从执行者变成了指挥者<ul>
-<li>角色发生了转换</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>E:面向对象开发<ul>
-<li>就是不断的创建对象，使用对象，指挥对象做事情。</li>
-</ul>
-</li>
-<li>F:面向对象设计<ul>
-<li>其实就是在管理和维护对象之间的关系。</li>
-</ul>
-</li>
-<li>G:面向对象特征<ul>
-<li>封装(encapsulation)</li>
-<li>继承(inheritance)</li>
-<li>多态(polymorphism)</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-02-面向对象-类与对象概述-掌握"><a href="#06-02-面向对象-类与对象概述-掌握" class="headerlink" title="06.02_面向对象(类与对象概述)(掌握)"></a>06.02_面向对象(类与对象概述)(掌握)</h3><ul>
-<li>A:我们学习编程是为了什么<ul>
-<li>为了把我们日常生活中实物用学习语言描述出来</li>
-</ul>
-</li>
-<li>B:我们如何描述现实世界事物<ul>
-<li>属性    就是该事物的描述信息(事物身上的名词)</li>
-<li>行为    就是该事物能够做什么(事物身上的动词)</li>
-</ul>
-</li>
-<li>C:Java中最基本的单位是类,Java中用class描述事物也是如此<ul>
-<li>成员变量    就是事物的属性</li>
-<li>成员方法    就是事物的行为</li>
-</ul>
-</li>
-<li>D:定义类其实就是定义类的成员(成员变量和成员方法)<ul>
-<li>a:成员变量    和以前定义变量是一样的，只不过位置发生了改变。在类中，方法外。</li>
-<li>b:成员方法    和以前定义方法是一样的，只不过把static去掉，后面在详细讲解static的作用。</li>
-</ul>
-</li>
-<li>E:类和对象的概念<ul>
-<li>a:类：是一组相关的属性和行为的集合</li>
-<li>b:对象：是该类事物的具体体现</li>
-<li>c:举例：<ul>
-<li>类     学生</li>
-<li>对象    具体的某个学生就是一个对象</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-03-面向对象-学生类的定义-掌握"><a href="#06-03-面向对象-学生类的定义-掌握" class="headerlink" title="06.03_面向对象(学生类的定义)(掌握)"></a>06.03_面向对象(学生类的定义)(掌握)</h3><ul>
-<li>A:学生事物</li>
-<li>B:学生类</li>
-<li>C:案例演示<ul>
-<li>属性:姓名,年龄,性别</li>
-<li>行为:学习,睡觉</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-04-面向对象-手机类的定义-掌握"><a href="#06-04-面向对象-手机类的定义-掌握" class="headerlink" title="06.04_面向对象(手机类的定义)(掌握)"></a>06.04_面向对象(手机类的定义)(掌握)</h3><ul>
-<li>模仿学生类，让学生自己完成<ul>
-<li>属性:品牌(brand)价格(price)</li>
-<li>行为:打电话(call),发信息(sendMessage)玩游戏(playGame)</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-05-面向对象-学生类的使用-掌握"><a href="#06-05-面向对象-学生类的使用-掌握" class="headerlink" title="06.05_面向对象(学生类的使用)(掌握)"></a>06.05_面向对象(学生类的使用)(掌握)</h3><ul>
-<li>A:文件名问题<ul>
-<li>在一个java文件中写两个类：一个基本的类，一个测试类。</li>
-<li>建议：文件名称和测试类名称一致。</li>
-</ul>
-</li>
-<li>B:如何使用对象?<ul>
-<li>创建对象并使用</li>
-<li>格式：类名 对象名 = new 类名();</li>
-<li>对象名：就是合法标识符，若一个单词，处首字母全部小写；两个以上，第二个开始首字母大学</li>
-</ul>
-</li>
-<li>D:如何使用成员变量呢?<ul>
-<li>对象名.变量名</li>
-</ul>
-</li>
-<li>E:如何使用成员方法呢?<ul>
-<li>对象名.方法名(…)</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-06-面向对象-手机类的使用-掌握"><a href="#06-06-面向对象-手机类的使用-掌握" class="headerlink" title="06.06_面向对象(手机类的使用)(掌握)"></a>06.06_面向对象(手机类的使用)(掌握)</h3><ul>
-<li>A:学生自己完成<ul>
-<li>模仿学生类，让学生自己完成</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-07-面向对象-一个对象的内存图-掌握"><a href="#06-07-面向对象-一个对象的内存图-掌握" class="headerlink" title="06.07_面向对象(一个对象的内存图)(掌握)"></a>06.07_面向对象(一个对象的内存图)(掌握)</h3><ul>
-<li>A:画图演示<ul>
-<li>一个对象</li>
-<li>源文件→字节码文件→内存→方法区</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-08-面向对象-二个对象的内存图-了解"><a href="#06-08-面向对象-二个对象的内存图-了解" class="headerlink" title="06.08_面向对象(二个对象的内存图)(了解)"></a>06.08_面向对象(二个对象的内存图)(了解)</h3><ul>
-<li>A:画图演示<ul>
-<li>二个不同的对象</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-09-面向对象-三个引用两个对象的内存图-了解"><a href="#06-09-面向对象-三个引用两个对象的内存图-了解" class="headerlink" title="06.09_面向对象(三个引用两个对象的内存图)(了解)"></a>06.09_面向对象(三个引用两个对象的内存图)(了解)</h3><ul>
-<li>A:画图演示<ul>
-<li>三个引用，有两个对象的引用指向同一个地址</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-10-面向对象-成员变量和局部变量的区别-掌握"><a href="#06-10-面向对象-成员变量和局部变量的区别-掌握" class="headerlink" title="06.10_面向对象(成员变量和局部变量的区别)(掌握)"></a>06.10_面向对象(成员变量和局部变量的区别)(掌握)</h3><ul>
-<li>A:在类中的位置不同<ul>
-<li>成员变量：在类中方法外</li>
-<li>局部变量：在方法定义中或者方法声明上</li>
-</ul>
-</li>
-<li>B:在内存中的位置不同<ul>
-<li>成员变量：在堆内存(成员变量属于对象,对象进堆内存)</li>
-<li>局部变量：在栈内存(局部变量属于方法,方法进栈内存)</li>
-</ul>
-</li>
-<li>C:生命周期不同<ul>
-<li>成员变量：随着对象的创建而存在，随着对象的消失而消失</li>
-<li>局部变量：随着方法的调用而存在，随着方法的调用完毕而消失</li>
-</ul>
-</li>
-<li><p>D:初始化值不同</p>
-<ul>
-<li>成员变量：有默认初始化值</li>
-<li>局部变量：没有默认初始化值，必须定义，赋值，然后才能使用。</li>
-</ul>
-</li>
-<li><p>注意事项：</p>
-<ul>
-<li>局部变量名称可以和成员变量名称一样，在方法中使用的时候，采用的是就近原则。</li>
-<li>基本数据类型变量包括哪些:byte,short,int,long,float,double,boolean,char</li>
-<li>引用数据类型变量包括哪些:数组,类,接口,枚举</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-11-面向对象-方法的形式参数是类名的时候如何调用-掌握"><a href="#06-11-面向对象-方法的形式参数是类名的时候如何调用-掌握" class="headerlink" title="06.11_面向对象(方法的形式参数是类名的时候如何调用)(掌握)"></a>06.11_面向对象(方法的形式参数是类名的时候如何调用)(掌握)</h3><ul>
-<li>A:方法的参数是类名public void print(Student s){}//print(new Student());<ul>
-<li>如果你看到了一个方法的形式参数是一个类类型(引用类型)，这里其实需要的是该类的对象。</li>
-<li>两个方法中局部变量不能互相访问;</li>
-</ul>
-</li>
-</ul>
-<h3 id="06-12-面向对象-匿名对象的概述和应用-掌握"><a href="#06-12-面向对象-匿名对象的概述和应用-掌握" class="headerlink" title="06.12_面向对象(匿名对象的概述和应用)(掌握)"></a>06.12_面向对象(匿名对象的概述和应用)(掌握)</h3><ul>
-<li>A:什么是匿名对象<ul>
-<li>没有名字的对象 </li>
-</ul>
-</li>
-<li>B:匿名对象应用场景<ul>
-<li>a:调用方法，仅仅只调用一次的时候。<ul>
-<li>那么，这种匿名调用有什么好处吗?<ul>
-<li>节省代码 </li>
-</ul>
-</li>
-<li>注意：调用多次的时候，不适合。匿名对象调用完毕就是垃圾。可以被垃圾回收器回收。</li>
-</ul>
-</li>
-<li>b:匿名对象可以作为实际参数传递</li>
+<li>B:多态前提<ul>
+<li>a:要有继承关系。</li>
+<li>b:要有方法重写。</li>
+<li>c:要有父类引用指向子类对象。</li>
 </ul>
 </li>
 <li>C:案例演示<ul>
-<li>匿名对象应用场景</li>
+<li>代码体现多态</li>
 </ul>
 </li>
 </ul>
-<h3 id="06-13-面向对象-封装的概述-掌握"><a href="#06-13-面向对象-封装的概述-掌握" class="headerlink" title="06.13_面向对象(封装的概述)(掌握)"></a>06.13_面向对象(封装的概述)(掌握)</h3><ul>
-<li><p>A:封装概述</p>
-<ul>
-<li>是指隐藏对象的属性和实现细节，仅对外提供公共访问方式。</li>
-</ul>
-</li>
-<li><p>B:封装好处</p>
-<ul>
-<li>隐藏实现细节，提供公共的访问方式</li>
-<li>提高了代码的复用性</li>
-<li>提高安全性。</li>
-</ul>
-</li>
-<li>C:封装原则<ul>
-<li>将不需要对外提供的内容都隐藏起来。</li>
-<li>把属性隐藏，提供公共方法对其访问。</li>
+<h3 id="09-02-面向对象-多态中的成员访问特点之成员变量"><a href="#09-02-面向对象-多态中的成员访问特点之成员变量" class="headerlink" title="09.02_面向对象(多态中的成员访问特点之成员变量)"></a>09.02_面向对象(多态中的成员访问特点之成员变量)</h3><ul>
+<li>成员变量<ul>
+<li>编译看左边(父类)，运行看左边(父类)。</li>
 </ul>
 </li>
 </ul>
-<h3 id="06-14-面向对象-private关键字的概述和特点-掌握"><a href="#06-14-面向对象-private关键字的概述和特点-掌握" class="headerlink" title="06.14_面向对象(private关键字的概述和特点)(掌握)"></a>06.14_面向对象(private关键字的概述和特点)(掌握)</h3><ul>
-<li>A:人类赋值年龄的问题</li>
-<li>B:private关键字特点<ul>
-<li>a:是一个权限修饰符</li>
-<li>b:可以修饰成员变量和成员方法</li>
-<li>c:被其修饰的成员只能在本类中被访问</li>
-</ul>
-</li>
-<li>C:案例演示<ul>
-<li>封装和private的应用：</li>
-<li>A:把成员变量用private修饰</li>
-<li>B:提供对应的getXxx()和setXxx()方法</li>
-<li>private仅仅是封装的一种体现形式,不能说封装就是私有</li>
-<li>要具体理解要需要学到”包”</li>
+<h3 id="09-03-面向对象-多态中的成员访问特点之成员方法"><a href="#09-03-面向对象-多态中的成员访问特点之成员方法" class="headerlink" title="09.03_面向对象(多态中的成员访问特点之成员方法)"></a>09.03_面向对象(多态中的成员访问特点之成员方法)</h3><ul>
+<li>成员方法<ul>
+<li>编译看左边(父类)，运行看右边(子类)。</li>
 </ul>
 </li>
 </ul>
-<h3 id="06-15-面向对象-this关键字的概述和应用-掌握"><a href="#06-15-面向对象-this关键字的概述和应用-掌握" class="headerlink" title="06.15_面向对象(this关键字的概述和应用)(掌握)"></a>06.15_面向对象(this关键字的概述和应用)(掌握)</h3><ul>
-<li>A:this关键字特点<ul>
-<li>代表当前对象的引用 </li>
+<h3 id="09-04-面向对象-多态中的成员访问特点之静态成员方法"><a href="#09-04-面向对象-多态中的成员访问特点之静态成员方法" class="headerlink" title="09.04_面向对象(多态中的成员访问特点之静态成员方法)"></a>09.04_面向对象(多态中的成员访问特点之静态成员方法)</h3><ul>
+<li>静态方法<ul>
+<li>编译看左边(父类)，运行看左边(父类)。</li>
+<li>(静态和类相关，算不上重写，所以，访问还是左边的)</li>
+<li>只有非静态的成员方法,编译看左边,运行看右边 </li>
+</ul>
+</li>
+</ul>
+<h3 id="09-05-面向对象-超人的故事"><a href="#09-05-面向对象-超人的故事" class="headerlink" title="09.05_面向对象(超人的故事)"></a>09.05_面向对象(超人的故事)</h3><ul>
+<li>A:案例分析<ul>
+<li>通过该案例帮助学生理解多态的现象</li>
+</ul>
+</li>
+</ul>
+<h3 id="09-06-面向对象-多态中向上转型和向下转型"><a href="#09-06-面向对象-多态中向上转型和向下转型" class="headerlink" title="09.06_面向对象(多态中向上转型和向下转型)"></a>09.06_面向对象(多态中向上转型和向下转型)</h3><ul>
+<li>A:案例演示<ul>
+<li>详细讲解多态中向上转型和向下转型<br>Person p = new SuperMan();向上转型<br>SuperMan sm = (SuperMan)p;向下转型<h3 id="09-07-面向对象-多态的好处和弊端"><a href="#09-07-面向对象-多态的好处和弊端" class="headerlink" title="09.07_面向对象(多态的好处和弊端)"></a>09.07_面向对象(多态的好处和弊端)</h3></li>
+</ul>
+</li>
+<li>A:多态的好处<ul>
+<li>a:提高了代码的维护性(继承保证)</li>
+<li>b:提高了代码的扩展性(由多态保证)</li>
 </ul>
 </li>
 <li>B:案例演示<ul>
-<li>this的应用场景</li>
-<li>用来区分成员变量和局部变量重名</li>
-<li>(谁调用方法,this代表谁)</li>
+<li>多态的好处</li>
+<li>可以当作形式参数,可以接收任意子类对象</li>
 </ul>
 </li>
+<li>C:多态的弊端<ul>
+<li>不能使用子类的特有属性和行为。</li>
 </ul>
-<h3 id="06-16-面向对象-手机类代码及其测试-掌握"><a href="#06-16-面向对象-手机类代码及其测试-掌握" class="headerlink" title="06.16_面向对象(手机类代码及其测试)(掌握)"></a>06.16_面向对象(手机类代码及其测试)(掌握)</h3><ul>
-<li><p>A:学生练习</p>
-<ul>
-<li><p>请把手机类写成一个标准类，然后创建对象测试功能。</p>
-<pre><code>class Demo2_Phone {
+</li>
+<li>D:案例演示<br>  method(Animal a)<br>  method(Cat c)</li>
+</ul>
+<h3 id="09-08-面向对象-多态中的题目分析题"><a href="#09-08-面向对象-多态中的题目分析题" class="headerlink" title="09.08_面向对象(多态中的题目分析题)"></a>09.08_面向对象(多态中的题目分析题)</h3><ul>
+<li>A:看下面程序是否有问题，如果没有，说出结果</li>
+<li><pre><code>class Fu {
+    public void show() {
+        System.out.println(&quot;fu show&quot;);
+    }
+}
+
+class Zi extends Fu {
+    public void show() {
+        System.out.println(&quot;zi show&quot;);
+    }
+
+    public void method() {
+        System.out.println(&quot;zi method&quot;);
+    }
+}
+
+class Test1Demo {
     public static void main(String[] args) {
-        Phone p1 = new Phone();
-        p1.setBrand(&quot;三星&quot;);
-        p1.setPrice(5288);
-
-        System.out.println(p1.getBrand() + &quot;...&quot; + p1.getPrice());
-        p1.call();
-        p1.sendMessage();
-        p1.playGame();
+        Fu f = new Zi();
+        f.method();
+        f.show();
     }
 }
-/*
-手机类
-    属性:品牌brand,价格price
-    行为:打电话call,发短信sendMessage,玩游戏,playGame
-*/
-class Phone {                                //java bean
-    private String brand;                    //品牌
-    private int price;                        //价格
-
-    public void setBrand(String brand) {    //设置品牌
-        this.brand = brand;
+</code></pre></li>
+<li>B:看下面程序是否有问题，如果没有，说出结果</li>
+<li><pre><code>class A {
+    public void show() {
+        show2();
     }
-
-    public String getBrand() {                //获取品牌
-        return this.brand;                    //this.可以省略,你不加系统会默认给你加
-    }
-
-    public void setPrice(int price) {        //设置价格
-        this.price = price;
-    }
-
-    public int getPrice() {                    //获取价格
-        return price;
-    }
-
-    public void call() {                    //打电话
-        System.out.println(&quot;打电话&quot;);
-    }
-
-    public void sendMessage() {                //发短信
-        System.out.println(&quot;发短信&quot;);
-    }
-
-    public void playGame() {                //玩游戏
-        System.out.println(&quot;玩游戏&quot;);
+    public void show2() {
+        System.out.println(&quot;我&quot;);
     }
 }
-</code></pre><h3 id="06-17-day06总结"><a href="#06-17-day06总结" class="headerlink" title="06.17_day06总结"></a>06.17_day06总结</h3></li>
+class B extends A {
+    public void show() {
+        show2();
+    }
+    public void show2() {
+        System.out.println(&quot;爱&quot;);
+    }
+}
+class C extends B {
+    public void show() {
+        super.show();
+    }
+    public void show2() {
+        System.out.println(&quot;你&quot;);
+    }
+}
+public class Test2DuoTai {
+    public static void main(String[] args) {
+        A a = new B();
+        a.show();
+
+        B b = new C();
+        b.show();
+    }
+}
+</code></pre></li>
+</ul>
+<h3 id="09-09-面向对象-抽象类的概述及其特点"><a href="#09-09-面向对象-抽象类的概述及其特点" class="headerlink" title="09.09_面向对象(抽象类的概述及其特点)"></a>09.09_面向对象(抽象类的概述及其特点)</h3><ul>
+<li>A:抽象类概述<ul>
+<li>抽象就是看不懂的 </li>
 </ul>
 </li>
+<li>B:抽象类特点<ul>
+<li>a:抽象类和抽象方法必须用abstract关键字修饰<ul>
+<li>abstract class 类名 {}</li>
+<li>public abstract void eat();</li>
+</ul>
+</li>
+<li>b:抽象类不一定有抽象方法，有抽象方法的类一定是抽象类或者是接口</li>
+<li>c:抽象类不能实例化那么，抽象类如何实例化呢?<ul>
+<li>按照多态的方式，由具体的子类实例化。其实这也是多态的一种，抽象类多态。</li>
+</ul>
+</li>
+<li>d:抽象类的子类<ul>
+<li>要么是抽象类</li>
+<li>要么重写抽象类中的所有抽象方法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>C:案例演示<ul>
+<li>抽象类特点</li>
+</ul>
+</li>
+</ul>
+<h3 id="09-10-面向对象-抽象类的成员特点"><a href="#09-10-面向对象-抽象类的成员特点" class="headerlink" title="09.10_面向对象(抽象类的成员特点)"></a>09.10_面向对象(抽象类的成员特点)</h3><ul>
+<li>A:抽象类的成员特点<ul>
+<li>a:成员变量：既可以是变量，也可以是常量。abstract是否可以修饰成员变量?不能修饰成员变量</li>
+<li>b:构造方法：有。<ul>
+<li>用于子类访问父类数据的初始化。</li>
+</ul>
+</li>
+<li>c:成员方法：既可以是抽象的，也可以是非抽象的。</li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>抽象类的成员特点</li>
+</ul>
+</li>
+<li>C:抽象类的成员方法特性：<ul>
+<li>a:抽象方法 强制要求子类做的事情。</li>
+<li>b:非抽象方法 子类继承的事情，提高代码复用性。</li>
+</ul>
+</li>
+</ul>
+<h3 id="09-11-面向对象-葵花宝典"><a href="#09-11-面向对象-葵花宝典" class="headerlink" title="09.11_面向对象(葵花宝典)"></a>09.11_面向对象(葵花宝典)</h3><ul>
+<li>案例演示<ul>
+<li>抽象类的作用 <h3 id="09-12-面向对象-抽象类练习猫狗案例"><a href="#09-12-面向对象-抽象类练习猫狗案例" class="headerlink" title="09.12_面向对象(抽象类练习猫狗案例)"></a>09.12_面向对象(抽象类练习猫狗案例)</h3></li>
+</ul>
+</li>
+<li>A:案例演示<ul>
+<li>具体事物：猫，狗</li>
+<li>共性：姓名，年龄，吃饭</li>
+<li>猫的特性:抓老鼠</li>
+<li>狗的特性:看家</li>
+</ul>
+</li>
+</ul>
+<h3 id="09-13-面向对象-抽象类练习老师案例"><a href="#09-13-面向对象-抽象类练习老师案例" class="headerlink" title="09.13_面向对象(抽象类练习老师案例)"></a>09.13_面向对象(抽象类练习老师案例)</h3><ul>
+<li>A:案例演示<ul>
+<li>具体事物：基础班老师，就业班老师</li>
+<li>共性：姓名，年龄，讲课。</li>
+<li>具体事物:基础班学生,就业班学生</li>
+<li>共性:姓名,年龄,学习</li>
+</ul>
+</li>
+</ul>
+<h3 id="09-14-面向对象-抽象类练习员工案例"><a href="#09-14-面向对象-抽象类练习员工案例" class="headerlink" title="09.14_面向对象(抽象类练习员工案例)"></a>09.14_面向对象(抽象类练习员工案例)</h3><ul>
+<li>A:案例演示<ul>
+<li>假如我们在开发一个系统时需要对程序员类进行设计，程序员包含3个属性：姓名、工号以及工资。</li>
+<li>经理，除了含有程序员的属性外，另为还有一个奖金属性。</li>
+<li>请使用继承的思想设计出程序员类和经理类。要求类中提供必要的方法进行属性访问。</li>
+</ul>
+</li>
+</ul>
+<h3 id="09-15-面向对象-抽象类中的面试题"><a href="#09-15-面向对象-抽象类中的面试题" class="headerlink" title="09.15_面向对象(抽象类中的面试题)"></a>09.15_面向对象(抽象类中的面试题)</h3><ul>
+<li>A:面试题1<ul>
+<li>一个抽象类如果没有抽象方法，可不可以定义为抽象类?如果可以，有什么意义?</li>
+<li>可以</li>
+<li>这么做目的只有一个,就是不让其他类创建本类对象,交给子类完成</li>
+</ul>
+</li>
+<li>B:面试题2<ul>
+<li>abstract不能和哪些关键字共存</li>
+</ul>
+</li>
+</ul>
+<h3 id="09-16-面向对象-接口的概述及其特点"><a href="#09-16-面向对象-接口的概述及其特点" class="headerlink" title="09.16_面向对象(接口的概述及其特点)"></a>09.16_面向对象(接口的概述及其特点)</h3><ul>
+<li>A:接口概述<ul>
+<li>从狭义的角度讲就是指java中的interface</li>
+<li>从广义的角度讲对外提供规则的都是接口 </li>
+</ul>
+</li>
+<li>B:接口特点<ul>
+<li>a:接口用关键字interface表示    <ul>
+<li>interface 接口名 {}</li>
+</ul>
+</li>
+<li>b:类实现接口用implements表示<ul>
+<li>class 类名 implements 接口名 {}</li>
+</ul>
+</li>
+<li>c:接口不能实例化<ul>
+<li>那么，接口如何实例化呢?</li>
+<li>按照多态的方式来实例化。</li>
+</ul>
+</li>
+<li>d:接口的子类<ul>
+<li>a:可以是抽象类。但是意义不大。</li>
+<li>b:可以是具体类。要重写接口中的所有抽象方法。(推荐方案)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>C:案例演示<ul>
+<li>接口特点</li>
+</ul>
+</li>
+</ul>
+<h3 id="09-17-面向对象-接口的成员特点"><a href="#09-17-面向对象-接口的成员特点" class="headerlink" title="09.17_面向对象(接口的成员特点)"></a>09.17_面向对象(接口的成员特点)</h3><ul>
+<li>A:接口成员特点<ul>
+<li>成员变量；只能是常量，并且是静态的并公共的。<pre><code>* 默认修饰符：public static final
+* 建议：自己手动给出。
+</code></pre></li>
+<li>构造方法：接口没有构造方法。</li>
+<li>成员方法：只能是抽象方法。<pre><code>* 默认修饰符：public abstract
+* 建议：自己手动给出。
+</code></pre></li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>接口成员特点</li>
+</ul>
+</li>
+</ul>
+<h3 id="09-18-面向对象-类与类-类与接口-接口与接口的关系"><a href="#09-18-面向对象-类与类-类与接口-接口与接口的关系" class="headerlink" title="09.18_面向对象(类与类,类与接口,接口与接口的关系)"></a>09.18_面向对象(类与类,类与接口,接口与接口的关系)</h3><ul>
+<li>A:类与类,类与接口,接口与接口的关系<ul>
+<li>a:类与类：<ul>
+<li>继承关系,只能单继承,可以多层继承。</li>
+</ul>
+</li>
+<li>b:类与接口：<ul>
+<li>实现关系,可以单实现,也可以多实现。</li>
+<li>并且还可以在继承一个类的同时实现多个接口。</li>
+</ul>
+</li>
+<li>c:接口与接口：<ul>
+<li>继承关系,可以单继承,也可以多继承。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>类与类,类与接口,接口与接口的关系</li>
+</ul>
+</li>
+</ul>
+<h3 id="09-19-面向对象-抽象类和接口的区别"><a href="#09-19-面向对象-抽象类和接口的区别" class="headerlink" title="09.19_面向对象(抽象类和接口的区别)"></a>09.19_面向对象(抽象类和接口的区别)</h3><ul>
+<li><p>A:成员区别</p>
+<ul>
+<li>抽象类：<ul>
+<li>成员变量：可以变量，也可以常量</li>
+<li>构造方法：有</li>
+<li>成员方法：可以抽象，也可以非抽象</li>
+</ul>
+</li>
+<li>接口：<ul>
+<li>成员变量：只可以常量</li>
+<li>成员方法：只可以抽象</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>B:关系区别</p>
+<ul>
+<li>类与类<ul>
+<li>继承，单继承</li>
+</ul>
+</li>
+<li>类与接口<ul>
+<li>实现，单实现，多实现</li>
+</ul>
+</li>
+<li>接口与接口<ul>
+<li>继承，单继承，多继承</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>C:设计理念区别</p>
+<ul>
+<li>抽象类 被继承体现的是：”is a”的关系。抽象类中定义的是该继承体系的共性功能。</li>
+<li>接口 被实现体现的是：”like a”的关系。接口中定义的是该继承体系的扩展功能。</li>
+</ul>
+</li>
+</ul>
+<h3 id="09-20-面向对象-猫狗案例加入跳高功能分析及其代码实现"><a href="#09-20-面向对象-猫狗案例加入跳高功能分析及其代码实现" class="headerlink" title="09.20_面向对象(猫狗案例加入跳高功能分析及其代码实现)"></a>09.20_面向对象(猫狗案例加入跳高功能分析及其代码实现)</h3><ul>
+<li>A:案例演示<ul>
+<li>动物类：姓名，年龄，吃饭，睡觉。</li>
+<li>猫和狗</li>
+<li>动物培训接口：跳高</li>
+</ul>
+</li>
+</ul>
+<h3 id="09-21-day09总结"><a href="#09-21-day09总结" class="headerlink" title="09.21_day09总结"></a>09.21_day09总结</h3><ul>
 <li>把今天的知识点总结一遍。</li>
 </ul>
 
@@ -637,13 +675,13 @@ class Phone {                                //java bean
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/07/22/day06笔记/">Java语言基础</a></p>
+        <p><span>本文标题:</span><a href="/2017/07/25/day09笔记/">Java语言基础</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Dai Wei 的个人博客">Dai Wei</a></p>
-        <p><span>发布时间:</span>2017年07月22日 - 00时00分</p>
-        <p><span>最后更新:</span>2017年08月19日 - 14时53分</p>
+        <p><span>发布时间:</span>2017年07月25日 - 00时00分</p>
+        <p><span>最后更新:</span>2017年08月20日 - 14时31分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/07/22/day06笔记/" title="Java语言基础">http://yoursite.com/2017/07/22/day06笔记/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/07/22/day06笔记/　　作者: Dai Wei" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/07/25/day09笔记/" title="Java语言基础">http://yoursite.com/2017/07/25/day09笔记/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/07/25/day09笔记/　　作者: Dai Wei" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -656,7 +694,7 @@ class Phone {                                //java bean
 
 <nav id="article-nav">
   
-    <a href="/2017/07/23/day07笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/07/26/day10笔记/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
@@ -666,7 +704,7 @@ class Phone {                                //java bean
     </a>
   
   
-    <a href="/2017/07/21/day04笔记/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/07/24/day08笔记/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Java语言基础</div>
       <strong class="article-nav-caption">></strong>
     </a>
@@ -678,7 +716,7 @@ class Phone {                                //java bean
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#06-01-面向对象-面向对象思想概述-了解"><span class="toc-number">1.</span> <span class="toc-text">06.01_面向对象(面向对象思想概述)(了解)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-02-面向对象-类与对象概述-掌握"><span class="toc-number">2.</span> <span class="toc-text">06.02_面向对象(类与对象概述)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-03-面向对象-学生类的定义-掌握"><span class="toc-number">3.</span> <span class="toc-text">06.03_面向对象(学生类的定义)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-04-面向对象-手机类的定义-掌握"><span class="toc-number">4.</span> <span class="toc-text">06.04_面向对象(手机类的定义)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-05-面向对象-学生类的使用-掌握"><span class="toc-number">5.</span> <span class="toc-text">06.05_面向对象(学生类的使用)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-06-面向对象-手机类的使用-掌握"><span class="toc-number">6.</span> <span class="toc-text">06.06_面向对象(手机类的使用)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-07-面向对象-一个对象的内存图-掌握"><span class="toc-number">7.</span> <span class="toc-text">06.07_面向对象(一个对象的内存图)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-08-面向对象-二个对象的内存图-了解"><span class="toc-number">8.</span> <span class="toc-text">06.08_面向对象(二个对象的内存图)(了解)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-09-面向对象-三个引用两个对象的内存图-了解"><span class="toc-number">9.</span> <span class="toc-text">06.09_面向对象(三个引用两个对象的内存图)(了解)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-10-面向对象-成员变量和局部变量的区别-掌握"><span class="toc-number">10.</span> <span class="toc-text">06.10_面向对象(成员变量和局部变量的区别)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-11-面向对象-方法的形式参数是类名的时候如何调用-掌握"><span class="toc-number">11.</span> <span class="toc-text">06.11_面向对象(方法的形式参数是类名的时候如何调用)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-12-面向对象-匿名对象的概述和应用-掌握"><span class="toc-number">12.</span> <span class="toc-text">06.12_面向对象(匿名对象的概述和应用)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-13-面向对象-封装的概述-掌握"><span class="toc-number">13.</span> <span class="toc-text">06.13_面向对象(封装的概述)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-14-面向对象-private关键字的概述和特点-掌握"><span class="toc-number">14.</span> <span class="toc-text">06.14_面向对象(private关键字的概述和特点)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-15-面向对象-this关键字的概述和应用-掌握"><span class="toc-number">15.</span> <span class="toc-text">06.15_面向对象(this关键字的概述和应用)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-16-面向对象-手机类代码及其测试-掌握"><span class="toc-number">16.</span> <span class="toc-text">06.16_面向对象(手机类代码及其测试)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#06-17-day06总结"><span class="toc-number">17.</span> <span class="toc-text">06.17_day06总结</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#09-01-面向对象-多态的概述及其代码体现"><span class="toc-number">1.</span> <span class="toc-text">09.01_面向对象(多态的概述及其代码体现)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-02-面向对象-多态中的成员访问特点之成员变量"><span class="toc-number">2.</span> <span class="toc-text">09.02_面向对象(多态中的成员访问特点之成员变量)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-03-面向对象-多态中的成员访问特点之成员方法"><span class="toc-number">3.</span> <span class="toc-text">09.03_面向对象(多态中的成员访问特点之成员方法)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-04-面向对象-多态中的成员访问特点之静态成员方法"><span class="toc-number">4.</span> <span class="toc-text">09.04_面向对象(多态中的成员访问特点之静态成员方法)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-05-面向对象-超人的故事"><span class="toc-number">5.</span> <span class="toc-text">09.05_面向对象(超人的故事)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-06-面向对象-多态中向上转型和向下转型"><span class="toc-number">6.</span> <span class="toc-text">09.06_面向对象(多态中向上转型和向下转型)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-07-面向对象-多态的好处和弊端"><span class="toc-number">7.</span> <span class="toc-text">09.07_面向对象(多态的好处和弊端)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-08-面向对象-多态中的题目分析题"><span class="toc-number">8.</span> <span class="toc-text">09.08_面向对象(多态中的题目分析题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-09-面向对象-抽象类的概述及其特点"><span class="toc-number">9.</span> <span class="toc-text">09.09_面向对象(抽象类的概述及其特点)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-10-面向对象-抽象类的成员特点"><span class="toc-number">10.</span> <span class="toc-text">09.10_面向对象(抽象类的成员特点)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-11-面向对象-葵花宝典"><span class="toc-number">11.</span> <span class="toc-text">09.11_面向对象(葵花宝典)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-12-面向对象-抽象类练习猫狗案例"><span class="toc-number">12.</span> <span class="toc-text">09.12_面向对象(抽象类练习猫狗案例)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-13-面向对象-抽象类练习老师案例"><span class="toc-number">13.</span> <span class="toc-text">09.13_面向对象(抽象类练习老师案例)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-14-面向对象-抽象类练习员工案例"><span class="toc-number">14.</span> <span class="toc-text">09.14_面向对象(抽象类练习员工案例)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-15-面向对象-抽象类中的面试题"><span class="toc-number">15.</span> <span class="toc-text">09.15_面向对象(抽象类中的面试题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-16-面向对象-接口的概述及其特点"><span class="toc-number">16.</span> <span class="toc-text">09.16_面向对象(接口的概述及其特点)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-17-面向对象-接口的成员特点"><span class="toc-number">17.</span> <span class="toc-text">09.17_面向对象(接口的成员特点)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-18-面向对象-类与类-类与接口-接口与接口的关系"><span class="toc-number">18.</span> <span class="toc-text">09.18_面向对象(类与类,类与接口,接口与接口的关系)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-19-面向对象-抽象类和接口的区别"><span class="toc-number">19.</span> <span class="toc-text">09.19_面向对象(抽象类和接口的区别)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-20-面向对象-猫狗案例加入跳高功能分析及其代码实现"><span class="toc-number">20.</span> <span class="toc-text">09.20_面向对象(猫狗案例加入跳高功能分析及其代码实现)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#09-21-day09总结"><span class="toc-number">21.</span> <span class="toc-text">09.21_day09总结</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -744,13 +782,13 @@ class Phone {                                //java bean
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/07/23/day07笔记/" title="上一篇: Java语言基础">
+            <a href="/2017/07/26/day10笔记/" title="上一篇: Java语言基础">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/07/21/day04笔记/" title="下一篇: Java语言基础">
+            <a href="/2017/07/24/day08笔记/" title="下一篇: Java语言基础">
                 <i class="fa fa-angle-right"></i>
             </a>
         
