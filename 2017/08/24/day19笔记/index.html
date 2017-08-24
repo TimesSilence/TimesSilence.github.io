@@ -3,20 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Java语言基础 | Java</title>
+  <title>Java</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="面向对象(5)">
-<meta name="keywords" content="包,修饰权限,内部类">
+  <meta name="description" content="19.01_异常(异常的概述和分类) A:异常的概述 异常就是Java程序在运行过程中出现的错误。   B:异常的分类 通过API查看Throwable Error 服务器宕机,数据库崩溃等   ExceptionC:异常的继承体系 Throwable Error     Exception RuntimeException        19.02_异常(JVM默认是如何处理异常的) A:JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java语言基础">
-<meta property="og:url" content="http://yoursite.com/2017/07/26/day10笔记/index.html">
+<meta property="og:title" content="Java">
+<meta property="og:url" content="http://yoursite.com/2017/08/24/day19笔记/index.html">
 <meta property="og:site_name" content="Java">
-<meta property="og:description" content="面向对象(5)">
+<meta property="og:description" content="19.01_异常(异常的概述和分类) A:异常的概述 异常就是Java程序在运行过程中出现的错误。   B:异常的分类 通过API查看Throwable Error 服务器宕机,数据库崩溃等   ExceptionC:异常的继承体系 Throwable Error     Exception RuntimeException        19.02_异常(JVM默认是如何处理异常的) A:JVM">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2017-08-20T06:41:20.108Z">
+<meta property="og:updated_time" content="2017-08-24T08:05:42.015Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java语言基础">
-<meta name="twitter:description" content="面向对象(5)">
+<meta name="twitter:title" content="Java">
+<meta name="twitter:description" content="19.01_异常(异常的概述和分类) A:异常的概述 异常就是Java程序在运行过程中出现的错误。   B:异常的分类 通过API查看Throwable Error 服务器宕机,数据库崩溃等   ExceptionC:异常的继承体系 Throwable Error     Exception RuntimeException        19.02_异常(JVM默认是如何处理异常的) A:JVM">
   
     <link rel="alternative" href="/atom.xml" title="Java" type="application/atom+xml">
   
@@ -242,11 +241,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-day10笔记" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-day19笔记" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/07/26/day10笔记/" class="article-date">
-      <time datetime="2017-07-25T16:00:00.000Z" itemprop="datePublished">2017-07-26</time>
+      <a href="/2017/08/24/day19笔记/" class="article-date">
+      <time datetime="2017-08-24T08:06:13.877Z" itemprop="datePublished">2017-08-24</time>
 </a>
     </div>
   
@@ -255,262 +254,337 @@
       <input type="hidden" class="isFancy" />
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Java语言基础
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Java/">Java</a>
-    </div>
-
-
-        
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/修饰权限/">修饰权限</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内部类/">内部类</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/包/">包</a></li></ul>
-    </div>
-
-        <div class="clearfix"></div>
-      </div>
-      
-    
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>面向对象(5)<br><a id="more"></a></p>
-<h3 id="10-01-面向对象-package关键字的概述及作用-了解"><a href="#10-01-面向对象-package关键字的概述及作用-了解" class="headerlink" title="10.01_面向对象(package关键字的概述及作用)(了解)"></a>10.01_面向对象(package关键字的概述及作用)(了解)</h3><ul>
-<li>A:为什么要有包<ul>
-<li>将字节码(.class)进行分类存放 </li>
-<li>包其实就是文件夹</li>
+        <h3 id="19-01-异常-异常的概述和分类"><a href="#19-01-异常-异常的概述和分类" class="headerlink" title="19.01_异常(异常的概述和分类)"></a>19.01_异常(异常的概述和分类)</h3><ul>
+<li>A:异常的概述<ul>
+<li>异常就是Java程序在运行过程中出现的错误。</li>
 </ul>
 </li>
-<li>B:包的概述</li>
-<li><p>  举例：</p>
-<pre><code>学生：增加，删除，修改，查询
-老师：增加，删除，修改，查询
-...
-</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">方案1：按照功能分</div><div class="line">	com.heima.add</div><div class="line">		AddStudent</div><div class="line">		AddTeacher</div><div class="line">	com.heima.delete</div><div class="line">		DeleteStudent</div><div class="line">		DeleteTeacher</div><div class="line">	com.heima.update</div><div class="line">		UpdateStudent</div><div class="line">		UpdateTeacher</div><div class="line">	com.heima.find</div><div class="line">		FindStudent</div><div class="line">		FindTeacher</div></pre></td></tr></table></figure>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">方案2：按照模块分</div><div class="line">	com.heima.teacher</div><div class="line">		AddTeacher</div><div class="line">		DeleteTeacher</div><div class="line">		UpdateTeacher</div><div class="line">		FindTeacher</div><div class="line">	com.heima.student</div><div class="line">		AddStudent</div><div class="line">		DeleteStudent</div><div class="line">		UpdateStudent</div><div class="line">		FindStudent</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="10-02-面向对象-包的定义及注意事项-掌握"><a href="#10-02-面向对象-包的定义及注意事项-掌握" class="headerlink" title="10.02_面向对象(包的定义及注意事项)(掌握)"></a>10.02_面向对象(包的定义及注意事项)(掌握)</h3><ul>
-<li>A:定义包的格式<h1 id="package-包名"><a href="#package-包名" class="headerlink" title="#    * package 包名;"></a>#    * package 包名;</h1><ul>
-<li>多级包用.分开即可</li>
+<li>B:异常的分类<ul>
+<li>通过API查看Throwable</li>
+<li>Error<ul>
+<li>服务器宕机,数据库崩溃等</li>
 </ul>
 </li>
-<li>B:定义包的注意事项<ul>
-<li>A:package语句必须是程序的第一条可执行的代码</li>
-<li>B:package语句在一个java文件中只能有一个</li>
-<li>C:如果没有package，默认表示无包名</li>
-</ul>
-</li>
-<li>C:案例演示<ul>
-<li>包的定义及注意事项</li>
-</ul>
-</li>
-</ul>
-<h3 id="10-03-面向对象-带包的类编译和运行-掌握"><a href="#10-03-面向对象-带包的类编译和运行-掌握" class="headerlink" title="10.03_面向对象(带包的类编译和运行)(掌握)"></a>10.03_面向对象(带包的类编译和运行)(掌握)</h3><ul>
-<li>A:如何编译运行带包的类<ul>
-<li>a:javac编译的时候带上-d即可<ul>
-<li>javac -d . HelloWorld.java</li>
-</ul>
-</li>
-<li>b:通过java命令执行。<ul>
-<li>java 包名.HellWord<h3 id="10-04-面向对象-不同包下类之间的访问-掌握"><a href="#10-04-面向对象-不同包下类之间的访问-掌握" class="headerlink" title="10.04_面向对象(不同包下类之间的访问)(掌握)"></a>10.04_面向对象(不同包下类之间的访问)(掌握)</h3></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>A:案例演示<ul>
-<li>不同包下类之间的访问</li>
-</ul>
-</li>
-</ul>
-<h3 id="10-05-面向对象-import关键字的概述和使用-掌握"><a href="#10-05-面向对象-import关键字的概述和使用-掌握" class="headerlink" title="10.05_面向对象(import关键字的概述和使用)(掌握)"></a>10.05_面向对象(import关键字的概述和使用)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>为什么要有import<ul>
-<li>其实就是让有包的类对调用者可见,不用写全类名了 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>B:导包格式<ul>
-<li>import 包名;</li>
-<li>注意：</li>
-<li>这种方式导入是到类的名称。</li>
-<li>虽然可以最后写*，但是不建议。</li>
-</ul>
-</li>
-<li>C:package,import,class有没有顺序关系(面试题)<br>package 必须放在第一行,只能有一个<br>import可以有多个,放在package和class之间</li>
-</ul>
-<h3 id="10-06-面向对象-四种权限修饰符的测试-掌握"><a href="#10-06-面向对象-四种权限修饰符的测试-掌握" class="headerlink" title="10.06_面向对象(四种权限修饰符的测试)(掌握)"></a>10.06_面向对象(四种权限修饰符的测试)(掌握)</h3><ul>
-<li>A:案例演示<ul>
-<li>四种权限修饰符</li>
-</ul>
-</li>
-<li>B:结论</li>
-<li><pre><code>            本类     同一个包下(子类和无关类)    不同包下(子类)    不同包下(无关类)
-private     Y        
-默认            Y        Y
-protected    Y        Y                            Y
-public        Y        Y                            Y                Y
-</code></pre></li>
-</ul>
-<h3 id="10-07-面向对象-类及其组成所使用的常见修饰符-掌握"><a href="#10-07-面向对象-类及其组成所使用的常见修饰符-掌握" class="headerlink" title="10.07_面向对象(类及其组成所使用的常见修饰符)(掌握)"></a>10.07_面向对象(类及其组成所使用的常见修饰符)(掌握)</h3><ul>
-<li>A:修饰符：<ul>
-<li>权限修饰符：private，默认的，protected，public</li>
-<li>状态修饰符：static，final</li>
-<li>抽象修饰符：abstract</li>
-</ul>
-</li>
-<li><p>B:类：</p>
-<ul>
-<li>权限修饰符：默认修饰符，public</li>
-<li>状态修饰符：final</li>
-<li><p>抽象修饰符：abstract</p>
-</li>
-<li><p>用的最多的就是：public</p>
-</li>
-</ul>
-</li>
-<li><p>C:成员变量：</p>
-<ul>
-<li>权限修饰符：private，默认的，protected，public</li>
-<li><p>状态修饰符：static，final</p>
-</li>
-<li><p>用的最多的就是：private</p>
-</li>
-</ul>
-</li>
-<li><p>D:构造方法：</p>
-<ul>
-<li><p>权限修饰符：private，默认的，protected，public</p>
-</li>
-<li><p>用的最多的就是：public</p>
-</li>
-</ul>
-</li>
-<li><p>E:成员方法：</p>
-<ul>
-<li>权限修饰符：private，默认的，protected，public</li>
-<li>状态修饰符：static，final</li>
-<li><p>抽象修饰符：abstract</p>
-</li>
-<li><p>用的最多的就是：public</p>
-</li>
-</ul>
-</li>
-<li><p>F:除此以外的组合规则：</p>
-<ul>
-<li>成员变量：public static final</li>
-<li>成员方法：<ul>
-<li>public static </li>
-<li>public abstract</li>
-<li>public final</li>
+<li>Exception<br>C:异常的继承体系</li>
+<li>Throwable<ul>
+<li>Error    </li>
+<li>Exception<ul>
+<li>RuntimeException</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="10-08-面向对象-内部类概述和访问特点-了解"><a href="#10-08-面向对象-内部类概述和访问特点-了解" class="headerlink" title="10.08_面向对象(内部类概述和访问特点)(了解)"></a>10.08_面向对象(内部类概述和访问特点)(了解)</h3><ul>
-<li>A:内部类概述</li>
-<li>B:内部类访问特点<ul>
-<li>a:内部类可以直接访问外部类的成员，包括私有。</li>
-<li>b:外部类要访问内部类的成员，必须创建对象。</li>
-<li>外部类名.内部类名 对象名 = 外部类对象.内部类对象;</li>
+</li>
+</ul>
+<h3 id="19-02-异常-JVM默认是如何处理异常的"><a href="#19-02-异常-JVM默认是如何处理异常的" class="headerlink" title="19.02_异常(JVM默认是如何处理异常的)"></a>19.02_异常(JVM默认是如何处理异常的)</h3><ul>
+<li>A:JVM默认是如何处理异常的<ul>
+<li>main函数收到这个问题时,有两种处理方式:</li>
+<li>a:自己将该问题处理,然后继续运行</li>
+<li>b:自己没有针对的处理方式,只有交给调用main的jvm来处理</li>
+<li>jvm有一个默认的异常处理机制,就将该异常进行处理.</li>
+<li>并将该异常的名称,异常的信息.异常出现的位置打印在了控制台上,同时将程序停止运行</li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>JVM默认如何处理异常</li>
+</ul>
+</li>
+</ul>
+<h3 id="19-03-异常-try…catch的方式处理异常1"><a href="#19-03-异常-try…catch的方式处理异常1" class="headerlink" title="19.03_异常(try…catch的方式处理异常1)"></a>19.03_异常(try…catch的方式处理异常1)</h3><ul>
+<li>A:异常处理的两种方式<ul>
+<li>a:try…catch…finally<ul>
+<li>try catch</li>
+<li>try catch finally</li>
+<li>try finally </li>
+</ul>
+</li>
+<li>b:throws</li>
+</ul>
+</li>
+<li>B:try…catch处理异常的基本格式<ul>
+<li>try…catch…finally</li>
 </ul>
 </li>
 <li>C:案例演示<ul>
-<li>内部类极其访问特点</li>
+<li>try…catch的方式处理1个异常</li>
 </ul>
 </li>
 </ul>
-<h3 id="10-09-面向对象-成员内部类私有使用-了解"><a href="#10-09-面向对象-成员内部类私有使用-了解" class="headerlink" title="10.09_面向对象(成员内部类私有使用)(了解)"></a>10.09_面向对象(成员内部类私有使用)(了解)</h3><ul>
-<li>private</li>
-</ul>
-<h3 id="10-10-面向对象-静态成员内部类-了解"><a href="#10-10-面向对象-静态成员内部类-了解" class="headerlink" title="10.10_面向对象(静态成员内部类)(了解)"></a>10.10_面向对象(静态成员内部类)(了解)</h3><ul>
-<li>static</li>
-<li>B:成员内部类被静态修饰后的访问方式是:<ul>
-<li>外部类名.内部类名 对象名 = 外部类名.内部类对象;</li>
-</ul>
-</li>
-</ul>
-<h3 id="10-11-面向对象-成员内部类的面试题-掌握"><a href="#10-11-面向对象-成员内部类的面试题-掌握" class="headerlink" title="10.11_面向对象(成员内部类的面试题)(掌握)"></a>10.11_面向对象(成员内部类的面试题)(掌握)</h3><ul>
-<li>A:面试题</li>
-<li><pre><code>要求：使用已知的变量，在控制台输出30，20，10。
-</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">class Outer &#123;</div><div class="line">	public int num = 10;</div><div class="line">	class Inner &#123;</div><div class="line">		public int num = 20;</div><div class="line">		public void show() &#123;</div><div class="line">			int num = 30;</div><div class="line">			System.out.println(?);</div><div class="line">			System.out.println(??);</div><div class="line">			System.out.println(???);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">class InnerClassTest &#123;</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		Outer.Inner oi = new Outer().new Inner();</div><div class="line">		oi.show();</div><div class="line">	&#125;	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="10-12-面向对象-局部内部类访问局部变量的问题-掌握"><a href="#10-12-面向对象-局部内部类访问局部变量的问题-掌握" class="headerlink" title="10.12_面向对象(局部内部类访问局部变量的问题)(掌握)"></a>10.12_面向对象(局部内部类访问局部变量的问题)(掌握)</h3><ul>
-<li><p>A:案例演示</p>
-<ul>
-<li>局部内部类访问局部变量必须用final修饰</li>
-<li><p>局部内部类在访问他所在方法中的局部变量必须用final修饰,为什么?<br>  因为当调用这个方法时,局部变量如果没有用final修饰,他的生命周期和方法的生命周期是一样的,当方法弹栈,这个局部变量也会消失,那么如果局部内部类对象还没有马上消失想用这个局部变量,就没有了,如果用final修饰会在类加载的时候进入常量池,即使方法弹栈,常量池的常量还在,也可以继续使用</p>
-<p>  但是jdk1.8取消了这个事情,所以我认为这是个bug</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="10-13-面向对象-匿名内部类的格式和理解"><a href="#10-13-面向对象-匿名内部类的格式和理解" class="headerlink" title="10.13_面向对象(匿名内部类的格式和理解)"></a>10.13_面向对象(匿名内部类的格式和理解)</h3><ul>
-<li>A:匿名内部类<ul>
-<li>就是内部类的简化写法。</li>
-</ul>
-</li>
-<li>B:前提：存在一个类或者接口<ul>
-<li>这里的类可以是具体类也可以是抽象类。</li>
-</ul>
-</li>
-<li>C:格式：</li>
-<li><pre><code>new 类名或者接口名(){
-    重写方法;
-}
-</code></pre></li>
-<li>D:本质是什么呢?<ul>
-<li>是一个继承了该类或者实现了该接口的子类匿名对象。</li>
-</ul>
-</li>
-<li>E:案例演示<ul>
-<li>按照要求来一个匿名内部类</li>
-</ul>
-</li>
-</ul>
-<h3 id="10-14-面向对象-匿名内部类重写多个方法调用"><a href="#10-14-面向对象-匿名内部类重写多个方法调用" class="headerlink" title="10.14_面向对象(匿名内部类重写多个方法调用)"></a>10.14_面向对象(匿名内部类重写多个方法调用)</h3><ul>
+<h3 id="19-04-异常-try…catch的方式处理异常2"><a href="#19-04-异常-try…catch的方式处理异常2" class="headerlink" title="19.04_异常(try…catch的方式处理异常2)"></a>19.04_异常(try…catch的方式处理异常2)</h3><ul>
 <li>A:案例演示<ul>
-<li>匿名内部类的方法调用</li>
+<li>try…catch的方式处理多个异常</li>
+<li>JDK7以后处理多个异常的方式及注意事项</li>
 </ul>
 </li>
 </ul>
-<h3 id="10-15-面向对象-匿名内部类在开发中的应用"><a href="#10-15-面向对象-匿名内部类在开发中的应用" class="headerlink" title="10.15_面向对象(匿名内部类在开发中的应用)"></a>10.15_面向对象(匿名内部类在开发中的应用)</h3><ul>
-<li>A:代码如下</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">//这里写抽象类，接口都行</div><div class="line">abstract class Person &#123;</div><div class="line">	public abstract void show();</div><div class="line">&#125;</div><div class="line">	</div><div class="line">class PersonDemo &#123;</div><div class="line">	public void method(Person p) &#123;</div><div class="line">		p.show();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">	</div><div class="line">class PersonTest &#123;</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		//如何调用PersonDemo中的method方法呢?</div><div class="line">		PersonDemo pd = new PersonDemo ();</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="19-05-异常-编译期异常和运行期异常的区别"><a href="#19-05-异常-编译期异常和运行期异常的区别" class="headerlink" title="19.05_异常(编译期异常和运行期异常的区别)"></a>19.05_异常(编译期异常和运行期异常的区别)</h3><ul>
+<li><p>A:编译期异常和运行期异常的区别</p>
+<ul>
+<li>Java中的异常被分为两大类：编译时异常和运行时异常。</li>
+<li><p>所有的RuntimeException类及其子类的实例被称为运行时异常，其他的异常就是编译时异常</p>
+</li>
+<li><p>编译时异常</p>
+<ul>
+<li>Java程序必须显示处理，否则程序就会发生错误，无法通过编译</li>
+</ul>
+</li>
+<li>运行时异常<ul>
+<li>无需显示处理，也可以和编译时异常一样处理</li>
+</ul>
 </li>
 </ul>
-<h3 id="10-16-面向对象-匿名内部类的面试题"><a href="#10-16-面向对象-匿名内部类的面试题" class="headerlink" title="10.16_面向对象(匿名内部类的面试题)"></a>10.16_面向对象(匿名内部类的面试题)</h3><ul>
-<li>A:面试题</li>
-<li><pre><code>按照要求，补齐代码
-interface Inter { void show(); }
-class Outer { //补齐代码 }
-class OuterDemo      {
-    public static void main(String[] args) {
-          Outer.method().show();
-      }
-}
-要求在控制台输出”HelloWorld”
-</code></pre>补齐代码答案:    public static Inter method(){<pre><code>return new Inter(){
-    public void show(){
-        System.out.println(&quot;HelloWorld&quot;);
-    }
-};
-</code></pre><h3 id="10-17-day10总结"><a href="#10-17-day10总结" class="headerlink" title="10.17_day10总结"></a>10.17_day10总结</h3></li>
-<li>把今天的知识点总结一遍。</li>
+</li>
+<li>B:案例演示<ul>
+<li>编译期异常和运行期异常的区别</li>
 </ul>
+</li>
+</ul>
+<h3 id="19-06-异常-Throwable的几个常见方法"><a href="#19-06-异常-Throwable的几个常见方法" class="headerlink" title="19.06_异常(Throwable的几个常见方法)"></a>19.06_异常(Throwable的几个常见方法)</h3><ul>
+<li>A:Throwable的几个常见方法<ul>
+<li>a:getMessage()<ul>
+<li>获取异常信息，返回字符串。</li>
+</ul>
+</li>
+<li>b:toString()<ul>
+<li>获取异常类名和异常信息，返回字符串。</li>
+</ul>
+</li>
+<li>c:printStackTrace()<ul>
+<li>获取异常类名和异常信息，以及异常出现在程序中的位置。返回值void。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>Throwable的几个常见方法的基本使用</li>
+</ul>
+</li>
+</ul>
+<h3 id="19-07-异常-throws的方式处理异常"><a href="#19-07-异常-throws的方式处理异常" class="headerlink" title="19.07_异常(throws的方式处理异常)"></a>19.07_异常(throws的方式处理异常)</h3><ul>
+<li>A:throws的方式处理异常<ul>
+<li>定义功能方法时，需要把出现的问题暴露出来让调用者去处理。</li>
+<li>那么就通过throws在方法上标识。</li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>举例分别演示编译时异常和运行时异常的抛出</li>
+</ul>
+</li>
+</ul>
+<h3 id="19-08-异常-throw的概述以及和throws的区别"><a href="#19-08-异常-throw的概述以及和throws的区别" class="headerlink" title="19.08_异常(throw的概述以及和throws的区别)"></a>19.08_异常(throw的概述以及和throws的区别)</h3><ul>
+<li>A:throw的概述<ul>
+<li>在功能方法内部出现某种情况，程序不能继续运行，需要进行跳转时，就用throw把异常对象抛出。</li>
+</ul>
+</li>
+<li>B:案例演示    <ul>
+<li>分别演示编译时异常对象和运行时异常对象的抛出</li>
+</ul>
+</li>
+<li>C:throws和throw的区别<ul>
+<li>a:throws<ul>
+<li>用在方法声明后面，跟的是异常类名</li>
+<li>可以跟多个异常类名，用逗号隔开</li>
+<li>表示抛出异常，由该方法的调用者来处理</li>
+</ul>
+</li>
+<li>b:throw<ul>
+<li>用在方法体内，跟的是异常对象名</li>
+<li>只能抛出一个异常对象名</li>
+<li>表示抛出异常，由方法体内的语句处理</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="19-09-异常-finally关键字的特点及作用"><a href="#19-09-异常-finally关键字的特点及作用" class="headerlink" title="19.09_异常(finally关键字的特点及作用)"></a>19.09_异常(finally关键字的特点及作用)</h3><ul>
+<li>A:finally的特点<ul>
+<li>被finally控制的语句体一定会执行</li>
+<li>特殊情况：在执行到finally之前jvm退出了(比如System.exit(0))</li>
+</ul>
+</li>
+<li>B:finally的作用<ul>
+<li>用于释放资源，在IO流操作和数据库操作中会见到</li>
+</ul>
+</li>
+<li>C:案例演示<ul>
+<li>finally关键字的特点及作用</li>
+</ul>
+</li>
+</ul>
+<h3 id="19-10-异常-finally关键字的面试题"><a href="#19-10-异常-finally关键字的面试题" class="headerlink" title="19.10_异常(finally关键字的面试题)"></a>19.10_异常(finally关键字的面试题)</h3><ul>
+<li>A:面试题1<ul>
+<li>final,finally和finalize的区别</li>
+</ul>
+</li>
+<li>B:面试题2<ul>
+<li>如果catch里面有return语句，请问finally的代码还会执行吗?如果会，请问是在return前还是return后。</li>
+</ul>
+</li>
+</ul>
+<h3 id="19-11-异常-自定义异常概述和基本使用"><a href="#19-11-异常-自定义异常概述和基本使用" class="headerlink" title="19.11_异常(自定义异常概述和基本使用)"></a>19.11_异常(自定义异常概述和基本使用)</h3><ul>
+<li>A:为什么需要自定义异常<ul>
+<li>举例：人的年龄</li>
+</ul>
+</li>
+<li>B:自定义异常概述<ul>
+<li>继承自Exception</li>
+<li>继承自RuntimeException</li>
+</ul>
+</li>
+<li>C:案例演示<ul>
+<li>自定义异常的基本使用</li>
+</ul>
+</li>
+</ul>
+<h3 id="19-12-异常-异常的注意事项及如何使用异常处理"><a href="#19-12-异常-异常的注意事项及如何使用异常处理" class="headerlink" title="19.12_异常(异常的注意事项及如何使用异常处理)"></a>19.12_异常(异常的注意事项及如何使用异常处理)</h3><ul>
+<li>A:异常注意事项<ul>
+<li>a:子类重写父类方法时，子类的方法必须抛出相同的异常或父类异常的子类。(父亲坏了,儿子不能比父亲更坏)</li>
+<li>b:如果父类抛出了多个异常,子类重写父类时,只能抛出相同的异常或者是他的子集,子类不能抛出父类没有的异常</li>
+<li>c:如果被重写的方法没有异常抛出,那么子类的方法绝对不可以抛出异常,如果子类方法内有异常发生,那么子类只能try,不能throws</li>
+</ul>
+</li>
+<li><p>B:如何使用异常处理</p>
+<ul>
+<li>原则:如果该功能内部可以将问题处理,用try,如果处理不了,交由调用者处理,这是用throws</li>
+<li><p>区别:</p>
+<ul>
+<li>后续程序需要继续运行就try</li>
+<li>后续程序不需要继续运行就throws</li>
+</ul>
+</li>
+<li><p>如果JDK没有提供对应的异常，需要自定义异常。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="19-13-异常-练习"><a href="#19-13-异常-练习" class="headerlink" title="19.13_异常(练习)"></a>19.13_异常(练习)</h3><ul>
+<li>键盘录入一个int类型的整数,对其求二进制表现形式<ul>
+<li>如果录入的整数过大,给予提示,录入的整数过大请重新录入一个整数BigInteger</li>
+<li>如果录入的是小数,给予提示,录入的是小数,请重新录入一个整数</li>
+<li>如果录入的是其他字符,给予提示,录入的是非法字符,请重新录入一个整数</li>
+</ul>
+</li>
+</ul>
+<h3 id="19-14-File类-File类的概述和构造方法"><a href="#19-14-File类-File类的概述和构造方法" class="headerlink" title="19.14_File类(File类的概述和构造方法)"></a>19.14_File类(File类的概述和构造方法)</h3><ul>
+<li>A:File类的概述<ul>
+<li>File更应该叫做一个路径<ul>
+<li>文件路径或者文件夹路径  </li>
+<li>路径分为绝对路径和相对路径</li>
+<li>绝对路径是一个固定的路径,从盘符开始</li>
+<li>相对路径相对于某个位置,在eclipse下是指当前项目下,在dos下</li>
+</ul>
+</li>
+<li>查看API指的是当前路径</li>
+<li>文件和目录路径名的抽象表示形式</li>
+</ul>
+</li>
+<li>B:构造方法<ul>
+<li>File(String pathname)：根据一个路径得到File对象</li>
+<li>File(String parent, String child):根据一个目录和一个子文件/目录得到File对象</li>
+<li>File(File parent, String child):根据一个父File对象和一个子文件/目录得到File对象</li>
+</ul>
+</li>
+<li>C:案例演示<ul>
+<li>File类的构造方法</li>
+</ul>
+</li>
+</ul>
+<h3 id="19-15-File类-File类的创建功能"><a href="#19-15-File类-File类的创建功能" class="headerlink" title="19.15_File类(File类的创建功能)"></a>19.15_File类(File类的创建功能)</h3><ul>
+<li>A:创建功能<ul>
+<li>public boolean createNewFile():创建文件 如果存在这样的文件，就不创建了</li>
+<li>public boolean mkdir():创建文件夹 如果存在这样的文件夹，就不创建了</li>
+<li>public boolean mkdirs():创建文件夹,如果父文件夹不存在，会帮你创建出来</li>
+</ul>
+</li>
+<li><p>B:案例演示</p>
+<ul>
+<li><p>File类的创建功能</p>
+</li>
+<li><p>注意事项：</p>
+<ul>
+<li>如果你创建文件或者文件夹忘了写盘符路径，那么，默认在项目路径下。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="19-16-File类-File类的重命名和删除功能"><a href="#19-16-File类-File类的重命名和删除功能" class="headerlink" title="19.16_File类(File类的重命名和删除功能)"></a>19.16_File类(File类的重命名和删除功能)</h3><ul>
+<li>A:重命名和删除功能<ul>
+<li>public boolean renameTo(File dest):把文件重命名为指定的文件路径</li>
+<li>public boolean delete():删除文件或者文件夹</li>
+</ul>
+</li>
+<li>B:重命名注意事项<ul>
+<li>如果路径名相同，就是改名。</li>
+<li>如果路径名不同，就是改名并剪切。</li>
+</ul>
+</li>
+<li>C:删除注意事项：<ul>
+<li>Java中的删除不走回收站。</li>
+<li>要删除一个文件夹，请注意该文件夹内不能包含文件或者文件夹</li>
+</ul>
+</li>
+</ul>
+<h3 id="19-17-File类-File类的判断功能"><a href="#19-17-File类-File类的判断功能" class="headerlink" title="19.17_File类(File类的判断功能)"></a>19.17_File类(File类的判断功能)</h3><ul>
+<li>A:判断功能<ul>
+<li>public boolean isDirectory():判断是否是目录</li>
+<li>public boolean isFile():判断是否是文件</li>
+<li>public boolean exists():判断是否存在</li>
+<li>public boolean canRead():判断是否可读</li>
+<li>public boolean canWrite():判断是否可写</li>
+<li>public boolean isHidden():判断是否隐藏</li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>File类的判断功能</li>
+</ul>
+</li>
+</ul>
+<h3 id="19-18-File类-File类的获取功能"><a href="#19-18-File类-File类的获取功能" class="headerlink" title="19.18_File类(File类的获取功能)"></a>19.18_File类(File类的获取功能)</h3><ul>
+<li>A:获取功能<ul>
+<li>public String getAbsolutePath()：获取绝对路径</li>
+<li>public String getPath():获取路径</li>
+<li>public String getName():获取名称</li>
+<li>public long length():获取长度。字节数</li>
+<li>public long lastModified():获取最后一次的修改时间，毫秒值</li>
+<li>public String[] list():获取指定目录下的所有文件或者文件夹的名称数组</li>
+<li>public File[] listFiles():获取指定目录下的所有文件或者文件夹的File数组 </li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>File类的获取功能</li>
+</ul>
+</li>
+</ul>
+<h3 id="19-19-File类-输出指定目录下指定后缀的文件名"><a href="#19-19-File类-输出指定目录下指定后缀的文件名" class="headerlink" title="19.19_File类(输出指定目录下指定后缀的文件名)"></a>19.19_File类(输出指定目录下指定后缀的文件名)</h3><ul>
+<li>A:案例演示<ul>
+<li>需求：判断E盘目录下是否有后缀名为.jpg的文件，如果有，就输出该文件名称</li>
+</ul>
+</li>
+</ul>
+<h3 id="19-20-File类-文件名称过滤器的概述及使用"><a href="#19-20-File类-文件名称过滤器的概述及使用" class="headerlink" title="19.20_File类(文件名称过滤器的概述及使用)"></a>19.20_File类(文件名称过滤器的概述及使用)</h3><ul>
+<li>A:文件名称过滤器的概述<ul>
+<li>public String[] list(FilenameFilter filter)</li>
+<li>public File[] listFiles(FileFilter filter)</li>
+</ul>
+</li>
+<li>B:文件名称过滤器的使用<ul>
+<li>需求：判断E盘目录下是否有后缀名为.jpg的文件，如果有，就输出该文件名称</li>
+</ul>
+</li>
+<li>C:源码分析<ul>
+<li>带文件名称过滤器的list()方法的源码</li>
+</ul>
+</li>
+</ul>
+<h3 id="19-21-File类-递归"><a href="#19-21-File类-递归" class="headerlink" title="19.21_File类(递归)"></a>19.21_File类(递归)</h3><ul>
+<li>5的阶乘        </li>
+</ul>
+<h3 id="19-22-day19总结"><a href="#19-22-day19总结" class="headerlink" title="19.22_day19总结"></a>19.22_day19总结</h3><p>把今天的知识点总结一遍。</p>
 
       
       
@@ -566,13 +640,13 @@ class OuterDemo      {
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/07/26/day10笔记/">Java语言基础</a></p>
+        <p><span>本文标题:</span><a href="/2017/08/24/day19笔记/"></a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Dai Wei 的个人博客">Dai Wei</a></p>
-        <p><span>发布时间:</span>2017年07月26日 - 00时00分</p>
-        <p><span>最后更新:</span>2017年08月20日 - 14时41分</p>
+        <p><span>发布时间:</span>2017年08月24日 - 16时06分</p>
+        <p><span>最后更新:</span>2017年08月24日 - 16时05分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/07/26/day10笔记/" title="Java语言基础">http://yoursite.com/2017/07/26/day10笔记/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/07/26/day10笔记/　　作者: Dai Wei" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/24/day19笔记/" title="">http://yoursite.com/2017/08/24/day19笔记/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/08/24/day19笔记/　　作者: Dai Wei" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -585,17 +659,8 @@ class OuterDemo      {
 
 <nav id="article-nav">
   
-    <a href="/2017/08/24/day19笔记/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/07/25/day09笔记/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/07/26/day10笔记/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Java语言基础</div>
       <strong class="article-nav-caption">></strong>
     </a>
@@ -607,7 +672,7 @@ class OuterDemo      {
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#10-01-面向对象-package关键字的概述及作用-了解"><span class="toc-number">1.</span> <span class="toc-text">10.01_面向对象(package关键字的概述及作用)(了解)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-02-面向对象-包的定义及注意事项-掌握"><span class="toc-number">2.</span> <span class="toc-text">10.02_面向对象(包的定义及注意事项)(掌握)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#package-包名"><span class="toc-number"></span> <span class="toc-text">#    * package 包名;</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10-03-面向对象-带包的类编译和运行-掌握"><span class="toc-number">1.</span> <span class="toc-text">10.03_面向对象(带包的类编译和运行)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-04-面向对象-不同包下类之间的访问-掌握"><span class="toc-number">2.</span> <span class="toc-text">10.04_面向对象(不同包下类之间的访问)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-05-面向对象-import关键字的概述和使用-掌握"><span class="toc-number">3.</span> <span class="toc-text">10.05_面向对象(import关键字的概述和使用)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-06-面向对象-四种权限修饰符的测试-掌握"><span class="toc-number">4.</span> <span class="toc-text">10.06_面向对象(四种权限修饰符的测试)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-07-面向对象-类及其组成所使用的常见修饰符-掌握"><span class="toc-number">5.</span> <span class="toc-text">10.07_面向对象(类及其组成所使用的常见修饰符)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-08-面向对象-内部类概述和访问特点-了解"><span class="toc-number">6.</span> <span class="toc-text">10.08_面向对象(内部类概述和访问特点)(了解)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-09-面向对象-成员内部类私有使用-了解"><span class="toc-number">7.</span> <span class="toc-text">10.09_面向对象(成员内部类私有使用)(了解)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-10-面向对象-静态成员内部类-了解"><span class="toc-number">8.</span> <span class="toc-text">10.10_面向对象(静态成员内部类)(了解)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-11-面向对象-成员内部类的面试题-掌握"><span class="toc-number">9.</span> <span class="toc-text">10.11_面向对象(成员内部类的面试题)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-12-面向对象-局部内部类访问局部变量的问题-掌握"><span class="toc-number">10.</span> <span class="toc-text">10.12_面向对象(局部内部类访问局部变量的问题)(掌握)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-13-面向对象-匿名内部类的格式和理解"><span class="toc-number">11.</span> <span class="toc-text">10.13_面向对象(匿名内部类的格式和理解)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-14-面向对象-匿名内部类重写多个方法调用"><span class="toc-number">12.</span> <span class="toc-text">10.14_面向对象(匿名内部类重写多个方法调用)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-15-面向对象-匿名内部类在开发中的应用"><span class="toc-number">13.</span> <span class="toc-text">10.15_面向对象(匿名内部类在开发中的应用)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-16-面向对象-匿名内部类的面试题"><span class="toc-number">14.</span> <span class="toc-text">10.16_面向对象(匿名内部类的面试题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-17-day10总结"><span class="toc-number">15.</span> <span class="toc-text">10.17_day10总结</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#19-01-异常-异常的概述和分类"><span class="toc-number">1.</span> <span class="toc-text">19.01_异常(异常的概述和分类)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-02-异常-JVM默认是如何处理异常的"><span class="toc-number">2.</span> <span class="toc-text">19.02_异常(JVM默认是如何处理异常的)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-03-异常-try…catch的方式处理异常1"><span class="toc-number">3.</span> <span class="toc-text">19.03_异常(try…catch的方式处理异常1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-04-异常-try…catch的方式处理异常2"><span class="toc-number">4.</span> <span class="toc-text">19.04_异常(try…catch的方式处理异常2)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-05-异常-编译期异常和运行期异常的区别"><span class="toc-number">5.</span> <span class="toc-text">19.05_异常(编译期异常和运行期异常的区别)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-06-异常-Throwable的几个常见方法"><span class="toc-number">6.</span> <span class="toc-text">19.06_异常(Throwable的几个常见方法)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-07-异常-throws的方式处理异常"><span class="toc-number">7.</span> <span class="toc-text">19.07_异常(throws的方式处理异常)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-08-异常-throw的概述以及和throws的区别"><span class="toc-number">8.</span> <span class="toc-text">19.08_异常(throw的概述以及和throws的区别)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-09-异常-finally关键字的特点及作用"><span class="toc-number">9.</span> <span class="toc-text">19.09_异常(finally关键字的特点及作用)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-10-异常-finally关键字的面试题"><span class="toc-number">10.</span> <span class="toc-text">19.10_异常(finally关键字的面试题)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-11-异常-自定义异常概述和基本使用"><span class="toc-number">11.</span> <span class="toc-text">19.11_异常(自定义异常概述和基本使用)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-12-异常-异常的注意事项及如何使用异常处理"><span class="toc-number">12.</span> <span class="toc-text">19.12_异常(异常的注意事项及如何使用异常处理)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-13-异常-练习"><span class="toc-number">13.</span> <span class="toc-text">19.13_异常(练习)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-14-File类-File类的概述和构造方法"><span class="toc-number">14.</span> <span class="toc-text">19.14_File类(File类的概述和构造方法)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-15-File类-File类的创建功能"><span class="toc-number">15.</span> <span class="toc-text">19.15_File类(File类的创建功能)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-16-File类-File类的重命名和删除功能"><span class="toc-number">16.</span> <span class="toc-text">19.16_File类(File类的重命名和删除功能)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-17-File类-File类的判断功能"><span class="toc-number">17.</span> <span class="toc-text">19.17_File类(File类的判断功能)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-18-File类-File类的获取功能"><span class="toc-number">18.</span> <span class="toc-text">19.18_File类(File类的获取功能)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-19-File类-输出指定目录下指定后缀的文件名"><span class="toc-number">19.</span> <span class="toc-text">19.19_File类(输出指定目录下指定后缀的文件名)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-20-File类-文件名称过滤器的概述及使用"><span class="toc-number">20.</span> <span class="toc-text">19.20_File类(文件名称过滤器的概述及使用)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-21-File类-递归"><span class="toc-number">21.</span> <span class="toc-text">19.21_File类(递归)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-22-day19总结"><span class="toc-number">22.</span> <span class="toc-text">19.22_day19总结</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -673,13 +738,11 @@ class OuterDemo      {
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/08/24/day19笔记/" title="上一篇: ">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2017/07/25/day09笔记/" title="下一篇: Java语言基础">
+            <a href="/2017/07/26/day10笔记/" title="下一篇: Java语言基础">
                 <i class="fa fa-angle-right"></i>
             </a>
         
