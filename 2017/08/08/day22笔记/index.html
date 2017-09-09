@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java语言基础 | Java</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="IO流（3）">
+<meta name="keywords" content="序列流,对象流,随机流,数据输入输出流,Properties">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java语言基础">
+<meta property="og:url" content="http://yoursite.com/2017/08/08/day22笔记/index.html">
+<meta property="og:site_name" content="Java">
+<meta property="og:description" content="IO流（3）">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2017-09-09T11:35:30.427Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java语言基础">
+<meta name="twitter:description" content="IO流（3）">
+  
+    <link rel="alternative" href="/atom.xml" title="Java" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Dai Wei</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="//daiwei.biz">博客首页</a></li>
+                        
+                            <li><a href="//github.com/TimesSilence">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                            <li><a href="/tags">静心阅读</a></li>
+                        
+                            <li><a href="/instagram">光影之路</a></li>
+                        
+                            <li><a href="/tags/随笔">随笔</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/815762187" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/TimesSlience" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="//www.zhihu.com/people/dai-wei-24-86" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="/weibo.com/3702195485" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="/daiwei20071203@qq.com" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="//twitter.com/david815762187 " title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/ArrayList/" style="font-size: 10px;">ArrayList</a> <a href="/tags/BigDecimal类/" style="font-size: 10px;">BigDecimal类</a> <a href="/tags/Calendar类/" style="font-size: 10px;">Calendar类</a> <a href="/tags/Collection/" style="font-size: 20px;">Collection</a> <a href="/tags/Collections/" style="font-size: 10px;">Collections</a> <a href="/tags/Date类/" style="font-size: 10px;">Date类</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/File类/" style="font-size: 10px;">File类</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a> <a href="/tags/JDK版本特性/" style="font-size: 10px;">JDK版本特性</a> <a href="/tags/Java环境配置/" style="font-size: 10px;">Java环境配置</a> <a href="/tags/Java语言基础/" style="font-size: 10px;">Java语言基础</a> <a href="/tags/Java语言概述/" style="font-size: 10px;">Java语言概述</a> <a href="/tags/LinkedList/" style="font-size: 10px;">LinkedList</a> <a href="/tags/List/" style="font-size: 20px;">List</a> <a href="/tags/Map/" style="font-size: 10px;">Map</a> <a href="/tags/Object类/" style="font-size: 10px;">Object类</a> <a href="/tags/Properties/" style="font-size: 10px;">Properties</a> <a href="/tags/Random类/" style="font-size: 10px;">Random类</a> <a href="/tags/Runtime/" style="font-size: 10px;">Runtime</a> <a href="/tags/Scanner/" style="font-size: 10px;">Scanner</a> <a href="/tags/Static关键词/" style="font-size: 10px;">Static关键词</a> <a href="/tags/StringBuffer/" style="font-size: 10px;">StringBuffer</a> <a href="/tags/StringBuilder/" style="font-size: 10px;">StringBuilder</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/System类/" style="font-size: 10px;">System类</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/final关键字/" style="font-size: 10px;">final关键字</a> <a href="/tags/二进制/" style="font-size: 10px;">二进制</a> <a href="/tags/代码块/" style="font-size: 10px;">代码块</a> <a href="/tags/休眠-守护-礼让/" style="font-size: 10px;">休眠,守护,礼让</a> <a href="/tags/修饰权限/" style="font-size: 10px;">修饰权限</a> <a href="/tags/内部类/" style="font-size: 10px;">内部类</a> <a href="/tags/包/" style="font-size: 10px;">包</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/单例设计模式/" style="font-size: 10px;">单例设计模式</a> <a href="/tags/反射/" style="font-size: 10px;">反射</a> <a href="/tags/变量/" style="font-size: 10px;">变量</a> <a href="/tags/同步代码块/" style="font-size: 10px;">同步代码块</a> <a href="/tags/多态/" style="font-size: 10px;">多态</a> <a href="/tags/多线程网络编程/" style="font-size: 10px;">多线程网络编程</a> <a href="/tags/字符流/" style="font-size: 10px;">字符流</a> <a href="/tags/字节流/" style="font-size: 10px;">字节流</a> <a href="/tags/实现方式/" style="font-size: 10px;">实现方式</a> <a href="/tags/对象数组/" style="font-size: 20px;">对象数组</a> <a href="/tags/对象流/" style="font-size: 10px;">对象流</a> <a href="/tags/常量/" style="font-size: 10px;">常量</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/序列流/" style="font-size: 10px;">序列流</a> <a href="/tags/异常/" style="font-size: 10px;">异常</a> <a href="/tags/循环/" style="font-size: 10px;">循环</a> <a href="/tags/成员方法与成员变量/" style="font-size: 10px;">成员方法与成员变量</a> <a href="/tags/接口/" style="font-size: 10px;">接口</a> <a href="/tags/数据输入输出流/" style="font-size: 10px;">数据输入输出流</a> <a href="/tags/数组/" style="font-size: 20px;">数组</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/泛型/" style="font-size: 10px;">泛型</a> <a href="/tags/类加载器/" style="font-size: 10px;">类加载器</a> <a href="/tags/线程优先级/" style="font-size: 10px;">线程优先级</a> <a href="/tags/线程安全与死锁/" style="font-size: 10px;">线程安全与死锁</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/线程状态/" style="font-size: 10px;">线程状态</a> <a href="/tags/线程通信/" style="font-size: 10px;">线程通信</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/网络编程三要素/" style="font-size: 10px;">网络编程三要素</a> <a href="/tags/计算机概述/" style="font-size: 10px;">计算机概述</a> <a href="/tags/递归联系/" style="font-size: 10px;">递归联系</a> <a href="/tags/随机流/" style="font-size: 10px;">随机流</a> <a href="/tags/静态导入/" style="font-size: 10px;">静态导入</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://123.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Talk is cheap, show me your code!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Dai Wei</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Dai Wei</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="//daiwei.biz">博客首页</a></li>
+                
+                    <li><a href="//github.com/TimesSilence">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                    <li><a href="/tags">静心阅读</a></li>
+                
+                    <li><a href="/instagram">光影之路</a></li>
+                
+                    <li><a href="/tags/随笔">随笔</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/815762187" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/TimesSlience" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="//www.zhihu.com/people/dai-wei-24-86" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="/weibo.com/3702195485" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="/daiwei20071203@qq.com" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="//twitter.com/david815762187 " title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-day22笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/08/day22笔记/" class="article-date">
+      <time datetime="2017-08-07T16:00:00.000Z" itemprop="datePublished">2017-08-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java语言基础
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Properties/">Properties</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/对象流/">对象流</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/序列流/">序列流</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据输入输出流/">数据输入输出流</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随机流/">随机流</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>IO流（3）<br><a id="more"></a></p>
+<p>###22.01_IO流(序列流)(了解)</p>
+<ul>
+<li>1.什么是序列流<ul>
+<li>序列流可以把多个字节输入流整合成一个, 从序列流中读取数据时, 将从被整合的第一个流开始读, 读完一个之后继续读第二个, 以此类推.</li>
+</ul>
+</li>
+<li><p>2.使用方式</p>
+<ul>
+<li>整合两个: SequenceInputStream(InputStream, InputStream)</li>
+<li><pre><code>FileInputStream fis1 = new FileInputStream(&quot;a.txt&quot;);            //创建输入流对象,关联a.txt
+FileInputStream fis2 = new FileInputStream(&quot;b.txt&quot;);            //创建输入流对象,关联b.txt
+SequenceInputStream sis = new SequenceInputStream(fis1, fis2);    //将两个流整合成一个流
+FileOutputStream fos = new FileOutputStream(&quot;c.txt&quot;);            //创建输出流对象,关联c.txt
+
+int b;
+while((b = sis.read()) != -1) {                                    //用整合后的读
+    fos.write(b);                                                //写到指定文件上
+}
+
+sis.close();
+fos.close(); 
+</code></pre><p>###22.02_IO流(序列流整合多个)(了解)</p>
+</li>
+</ul>
+</li>
+<li>整合多个: SequenceInputStream(Enumeration)</li>
+<li><pre><code>FileInputStream fis1 = new FileInputStream(&quot;a.txt&quot;);    //创建输入流对象,关联a.txt
+FileInputStream fis2 = new FileInputStream(&quot;b.txt&quot;);    //创建输入流对象,关联b.txt
+FileInputStream fis3 = new FileInputStream(&quot;c.txt&quot;);    //创建输入流对象,关联c.txt
+Vector&lt;InputStream&gt; v = new Vector&lt;&gt;();                    //创建vector集合对象
+v.add(fis1);                                            //将流对象添加
+v.add(fis2);
+v.add(fis3);
+Enumeration&lt;InputStream&gt; en = v.elements();                //获取枚举引用
+SequenceInputStream sis = new SequenceInputStream(en);    //传递给SequenceInputStream构造
+FileOutputStream fos = new FileOutputStream(&quot;d.txt&quot;);
+int b;
+while((b = sis.read()) != -1) {
+    fos.write(b);
+}
+
+sis.close();
+fos.close();
+</code></pre></li>
+</ul>
+<p>###22.03_IO流(内存输出流<strong>*</strong>)(掌握)</p>
+<ul>
+<li>1.什么是内存输出流<ul>
+<li>该输出流可以向内存中写数据, 把内存当作一个缓冲区, 写出之后可以一次性获取出所有数据</li>
+</ul>
+</li>
+<li><p>2.使用方式</p>
+<ul>
+<li>创建对象: new ByteArrayOutputStream()</li>
+<li>写出数据: write(int), write(byte[])</li>
+<li>获取数据: toByteArray()</li>
+<li><pre><code>FileInputStream fis = new FileInputStream(&quot;a.txt&quot;);
+ByteArrayOutputStream baos = new ByteArrayOutputStream();
+int b;
+while((b = fis.read()) != -1) {
+    baos.write(b);
+}
+
+//byte[] newArr = baos.toByteArray();                //将内存缓冲区中所有的字节存储在newArr中
+//System.out.println(new String(newArr));
+System.out.println(baos);
+fis.close();
+</code></pre><p>###22.04_IO流(内存输出流之黑马面试题)(掌握)</p>
+</li>
+</ul>
+</li>
+<li>定义一个文件输入流,调用read(byte[] b)方法,将a.txt文件中的内容打印出来(byte数组大小限制为5)</li>
+<li><pre><code>FileInputStream fis = new FileInputStream(&quot;a.txt&quot;);                //创建字节输入流,关联a.txt
+ByteArrayOutputStream baos = new ByteArrayOutputStream();        //创建内存输出流
+byte[] arr = new byte[5];                                        //创建字节数组,大小为5
+int len;
+while((len = fis.read(arr)) != -1) {                            //将文件上的数据读到字节数组中
+    baos.write(arr, 0, len);                                    //将字节数组的数据写到内存缓冲区中
+}
+System.out.println(baos);                                        //将内存缓冲区的内容转换为字符串打印
+fis.close();
+</code></pre></li>
+</ul>
+<p>###22.05_IO流(对象操作流ObjecOutputStream)(了解)</p>
+<ul>
+<li>1.什么是对象操作流<ul>
+<li>该流可以将一个对象写出, 或者读取一个对象到程序中. 也就是执行了序列化和反序列化的操作.</li>
+</ul>
+</li>
+<li><p>2.使用方式</p>
+<ul>
+<li><p>写出: new ObjectOutputStream(OutputStream), writeObject()</p>
+<pre><code>public class Demo3_ObjectOutputStream {
+
+    /**
+     * @param args
+     * @throws IOException 
+     * 将对象写出,序列化
+     */
+    public static void main(String[] args) throws IOException {
+        Person p1 = new Person(&quot;张三&quot;, 23);
+        Person p2 = new Person(&quot;李四&quot;, 24);
+//        FileOutputStream fos = new FileOutputStream(&quot;e.txt&quot;);
+//        fos.write(p1);
+//        FileWriter fw = new FileWriter(&quot;e.txt&quot;);
+//        fw.write(p1);
+        //无论是字节输出流,还是字符输出流都不能直接写出对象
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(&quot;e.txt&quot;));//创建对象输出流
+        oos.writeObject(p1);
+        oos.writeObject(p2);
+        oos.close();
+    }
+
+}
+</code></pre><p>###22.06_IO流(对象操作流ObjectInputStream)(了解)</p>
+</li>
+</ul>
+</li>
+<li><p>读取: new ObjectInputStream(InputStream), readObject()</p>
+<ul>
+<li><pre><code>public class Demo3_ObjectInputStream {
+
+    /**
+     * @param args
+     * @throws IOException 
+     * @throws ClassNotFoundException 
+     * @throws FileNotFoundException 
+     * 读取对象,反序列化
+     */
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(&quot;e.txt&quot;));
+        Person p1 = (Person) ois.readObject();
+        Person p2 = (Person) ois.readObject();
+        System.out.println(p1);
+        System.out.println(p2);
+        ois.close();
+    }
+
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>###22.07_IO流(对象操作流优化)(了解)<br>*　将对象存储在集合中写出</p>
+<pre><code>Person p1 = new Person(&quot;张三&quot;, 23);
+Person p2 = new Person(&quot;李四&quot;, 24);
+Person p3 = new Person(&quot;马哥&quot;, 18);
+Person p4 = new Person(&quot;辉哥&quot;, 20);
+
+ArrayList&lt;Person&gt; list = new ArrayList&lt;&gt;();
+list.add(p1);
+list.add(p2);
+list.add(p3);
+list.add(p4);
+
+ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(&quot;f.txt&quot;));
+oos.writeObject(list);                                    //写出集合对象
+
+oos.close();
+</code></pre><ul>
+<li><p>读取到的是一个集合对象</p>
+<pre><code>ObjectInputStream ois = new ObjectInputStream(new FileInputStream(&quot;f.txt&quot;));
+    ArrayList&lt;Person&gt; list = (ArrayList&lt;Person&gt;)ois.readObject();    //泛型在运行期会被擦除,索引运行期相当于没有泛型
+                                                                    //想去掉黄色可以加注解                    @SuppressWarnings(&quot;unchecked&quot;)
+    for (Person person : list) {
+        System.out.println(person);
+    }
+
+ois.close();
+</code></pre><p>###22.08_IO流(加上id号)(了解)</p>
+</li>
+<li>注意<ul>
+<li>要写出的对象必须实现Serializable接口才能被序列化</li>
+<li>不用必须加id号</li>
+</ul>
+</li>
+</ul>
+<p>###22.09_IO流(打印流的概述和特点)(掌握)</p>
+<ul>
+<li><p>1.什么是打印流</p>
+<ul>
+<li>该流可以很方便的将对象的toString()结果输出, 并且自动加上换行, 而且可以使用自动刷出的模式</li>
+<li><p>System.out就是一个PrintStream, 其默认向控制台输出信息</p>
+<pre><code>PrintStream ps = System.out;
+ps.println(97);                    //其实底层用的是Integer.toString(x),将x转换为数字字符串打印
+ps.println(&quot;xxx&quot;);
+ps.println(new Person(&quot;张三&quot;, 23));
+Person p = null;
+ps.println(p);                    //如果是null,就返回null,如果不是null,就调用对象的toString()
+</code></pre></li>
+</ul>
+</li>
+<li><p>2.使用方式</p>
+<ul>
+<li>打印: print(), println()</li>
+<li>自动刷出: PrintWriter(OutputStream out, boolean autoFlush, String encoding) </li>
+<li><p>打印流只操作数据目的</p>
+<pre><code>PrintWriter pw = new PrintWriter(new FileOutputStream(&quot;g.txt&quot;), true);
+pw.write(97);
+pw.print(&quot;大家好&quot;);
+pw.println(&quot;你好&quot;);                //自动刷出,只针对的是println方法
+pw.close();
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>###22.10_IO流(标准输入输出流概述和输出语句)</p>
+<ul>
+<li>1.什么是标准输入输出流(掌握)<ul>
+<li>System.in是InputStream, 标准输入流, 默认可以从键盘输入读取字节数据</li>
+<li>System.out是PrintStream, 标准输出流, 默认可以向Console中输出字符和字节数据</li>
+</ul>
+</li>
+<li><p>2.修改标准输入输出流(了解)</p>
+<ul>
+<li>修改输入流: System.setIn(InputStream)</li>
+<li>修改输出流: System.setOut(PrintStream)</li>
+<li><pre><code>System.setIn(new FileInputStream(&quot;a.txt&quot;));                //修改标准输入流
+System.setOut(new PrintStream(&quot;b.txt&quot;));                //修改标准输出流
+
+InputStream in = System.in;                                //获取标准输入流
+PrintStream ps = System.out;                            //获取标准输出流
+int b;
+while((b = in.read()) != -1) {                            //从a.txt上读取数据
+    ps.write(b);                                        //将数据写到b.txt上
+}
+
+in.close();
+ps.close();
+</code></pre><p>###22.11_IO流(修改标准输入输出流拷贝图片)(了解)<br>  System.setIn(new FileInputStream(“IO图片.png”));        //改变标准输入流<br>  System.setOut(new PrintStream(“copy.png”));         //改变标准输出流</p>
+<p>  InputStream is = System.in;                            //获取标准输入流<br>  PrintStream ps = System.out;                        //获取标准输出流</p>
+<p>  int len;<br>  byte[] arr = new byte[1024 * 8];</p>
+<p>  while((len = is.read(arr)) != -1) {</p>
+<pre><code>ps.write(arr, 0, len);
+</code></pre><p>  }</p>
+<p>  is.close();<br>  ps.close();<br>###22.11_IO流(两种方式实现键盘录入)(了解)</p>
+</li>
+</ul>
+</li>
+<li>A:BufferedReader的readLine方法。<ul>
+<li>BufferedReader br = new BufferedReader(new InputStreamReader(System.in));</li>
+</ul>
+</li>
+<li>B:Scanner</li>
+</ul>
+<p>###22.12_IO流(随机访问流概述和读写数据)(了解)</p>
+<ul>
+<li><p>A:随机访问流概述</p>
+<ul>
+<li>RandomAccessFile概述</li>
+<li>RandomAccessFile类不属于流，是Object类的子类。但它融合了InputStream和OutputStream的功能。</li>
+<li>支持对随机访问文件的读取和写入。</li>
+</ul>
+</li>
+<li><p>B:read(),write(),seek()</p>
+</li>
+</ul>
+<p>###22.13_IO流(数据输入输出流)(了解)</p>
+<ul>
+<li>1.什么是数据输入输出流<ul>
+<li>DataInputStream, DataOutputStream可以按照基本数据类型大小读写数据</li>
+<li>例如按Long大小写出一个数字, 写出时该数据占8字节. 读取的时候也可以按照Long类型读取, 一次读取8个字节.</li>
+</ul>
+</li>
+<li><p>2.使用方式</p>
+<ul>
+<li><p>DataOutputStream(OutputStream), writeInt(), writeLong() </p>
+<pre><code>DataOutputStream dos = new DataOutputStream(new FileOutputStream(&quot;b.txt&quot;));
+dos.writeInt(997);
+dos.writeInt(998);
+dos.writeInt(999);
+
+dos.close();
+</code></pre></li>
+<li><p>DataInputStream(InputStream), readInt(), readLong()</p>
+<pre><code>DataInputStream dis = new DataInputStream(new FileInputStream(&quot;b.txt&quot;));
+int x = dis.readInt();
+int y = dis.readInt();
+int z = dis.readInt();
+System.out.println(x);
+System.out.println(y);
+System.out.println(z);
+dis.close();
+</code></pre><p>###22.14_IO流(Properties的概述和作为Map集合的使用)(了解)</p>
+</li>
+</ul>
+</li>
+<li>A:Properties的概述<ul>
+<li>Properties 类表示了一个持久的属性集。</li>
+<li>Properties 可保存在流中或从流中加载。</li>
+<li>属性列表中每个键及其对应值都是一个字符串。 </li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>Properties作为Map集合的使用</li>
+</ul>
+</li>
+</ul>
+<p>###22.15_IO流(Properties的特殊功能使用)(了解)</p>
+<ul>
+<li>A:Properties的特殊功能<ul>
+<li>public Object setProperty(String key,String value)</li>
+<li>public String getProperty(String key)</li>
+<li>public Enumeration<string> stringPropertyNames()</string></li>
+</ul>
+</li>
+<li>B:案例演示<ul>
+<li>Properties的特殊功能</li>
+</ul>
+</li>
+</ul>
+<p>###22.16_IO流(Properties的load()和store()功能)(了解)</p>
+<ul>
+<li>A:Properties的load()和store()功能</li>
+<li>B:案例演示<ul>
+<li>Properties的load()和store()功能</li>
+</ul>
+</li>
+</ul>
+<p>###22.17_day22总结</p>
+<ul>
+<li>把今天的知识点总结一遍。</li>
+</ul>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/08/08/day22笔记/">Java语言基础</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Dai Wei 的个人博客">Dai Wei</a></p>
+        <p><span>发布时间:</span>2017年08月08日 - 00时00分</p>
+        <p><span>最后更新:</span>2017年09月09日 - 19时35分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/08/day22笔记/" title="Java语言基础">http://yoursite.com/2017/08/08/day22笔记/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/08/08/day22笔记/　　作者: Dai Wei" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2017/08/09/day23笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Java语言基础
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/07/day21笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java语言基础</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'daiwei',
+      repo: 'TimesSlience.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/08/09/day23笔记/" title="上一篇: Java语言基础">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/08/07/day21笔记/" title="下一篇: Java语言基础">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/day27笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/day26笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/11/day25笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/10/day24笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/day23笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/day22笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/day21笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/06/day20笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/05/day19笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/day18笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/03/day17笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/02/day16笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/01/day15笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/30/day14笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/29/day13笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/28/day12笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/day11笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/26/day10笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/25/day09笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/24/day08笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/23/day07笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/22/day06笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/day05笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/day04笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/day03笔记/">Day03_运算符的使用和if条件语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/18/day02笔记/">Day03_二进制的概述,常量与变量的介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/day01笔记/">Day01_计算机基础与Java语言概述</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Dai Wei
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

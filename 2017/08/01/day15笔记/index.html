@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java语言基础 | Java</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="集合框架（1）">
+<meta name="keywords" content="对象数组,Collection,List">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java语言基础">
+<meta property="og:url" content="http://yoursite.com/2017/08/01/day15笔记/index.html">
+<meta property="og:site_name" content="Java">
+<meta property="og:description" content="集合框架（1）">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2017-09-09T10:42:53.561Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java语言基础">
+<meta name="twitter:description" content="集合框架（1）">
+  
+    <link rel="alternative" href="/atom.xml" title="Java" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Dai Wei</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="//daiwei.biz">博客首页</a></li>
+                        
+                            <li><a href="//github.com/TimesSilence">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                            <li><a href="/tags">静心阅读</a></li>
+                        
+                            <li><a href="/instagram">光影之路</a></li>
+                        
+                            <li><a href="/tags/随笔">随笔</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/815762187" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/TimesSlience" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="//www.zhihu.com/people/dai-wei-24-86" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="/weibo.com/3702195485" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="/daiwei20071203@qq.com" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="//twitter.com/david815762187 " title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/ArrayList/" style="font-size: 10px;">ArrayList</a> <a href="/tags/BigDecimal类/" style="font-size: 10px;">BigDecimal类</a> <a href="/tags/Calendar类/" style="font-size: 10px;">Calendar类</a> <a href="/tags/Collection/" style="font-size: 20px;">Collection</a> <a href="/tags/Collections/" style="font-size: 10px;">Collections</a> <a href="/tags/Date类/" style="font-size: 10px;">Date类</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/File类/" style="font-size: 10px;">File类</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a> <a href="/tags/JDK版本特性/" style="font-size: 10px;">JDK版本特性</a> <a href="/tags/Java环境配置/" style="font-size: 10px;">Java环境配置</a> <a href="/tags/Java语言基础/" style="font-size: 10px;">Java语言基础</a> <a href="/tags/Java语言概述/" style="font-size: 10px;">Java语言概述</a> <a href="/tags/LinkedList/" style="font-size: 10px;">LinkedList</a> <a href="/tags/List/" style="font-size: 20px;">List</a> <a href="/tags/Map/" style="font-size: 10px;">Map</a> <a href="/tags/Object类/" style="font-size: 10px;">Object类</a> <a href="/tags/Properties/" style="font-size: 10px;">Properties</a> <a href="/tags/Random类/" style="font-size: 10px;">Random类</a> <a href="/tags/Runtime/" style="font-size: 10px;">Runtime</a> <a href="/tags/Scanner/" style="font-size: 10px;">Scanner</a> <a href="/tags/Static关键词/" style="font-size: 10px;">Static关键词</a> <a href="/tags/StringBuffer/" style="font-size: 10px;">StringBuffer</a> <a href="/tags/StringBuilder/" style="font-size: 10px;">StringBuilder</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/System类/" style="font-size: 10px;">System类</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/final关键字/" style="font-size: 10px;">final关键字</a> <a href="/tags/二进制/" style="font-size: 10px;">二进制</a> <a href="/tags/代码块/" style="font-size: 10px;">代码块</a> <a href="/tags/休眠-守护-礼让/" style="font-size: 10px;">休眠,守护,礼让</a> <a href="/tags/修饰权限/" style="font-size: 10px;">修饰权限</a> <a href="/tags/内部类/" style="font-size: 10px;">内部类</a> <a href="/tags/包/" style="font-size: 10px;">包</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/单例设计模式/" style="font-size: 10px;">单例设计模式</a> <a href="/tags/反射/" style="font-size: 10px;">反射</a> <a href="/tags/变量/" style="font-size: 10px;">变量</a> <a href="/tags/同步代码块/" style="font-size: 10px;">同步代码块</a> <a href="/tags/多态/" style="font-size: 10px;">多态</a> <a href="/tags/多线程网络编程/" style="font-size: 10px;">多线程网络编程</a> <a href="/tags/字符流/" style="font-size: 10px;">字符流</a> <a href="/tags/字节流/" style="font-size: 10px;">字节流</a> <a href="/tags/实现方式/" style="font-size: 10px;">实现方式</a> <a href="/tags/对象数组/" style="font-size: 20px;">对象数组</a> <a href="/tags/对象流/" style="font-size: 10px;">对象流</a> <a href="/tags/常量/" style="font-size: 10px;">常量</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/序列流/" style="font-size: 10px;">序列流</a> <a href="/tags/异常/" style="font-size: 10px;">异常</a> <a href="/tags/循环/" style="font-size: 10px;">循环</a> <a href="/tags/成员方法与成员变量/" style="font-size: 10px;">成员方法与成员变量</a> <a href="/tags/接口/" style="font-size: 10px;">接口</a> <a href="/tags/数据输入输出流/" style="font-size: 10px;">数据输入输出流</a> <a href="/tags/数组/" style="font-size: 20px;">数组</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/泛型/" style="font-size: 10px;">泛型</a> <a href="/tags/类加载器/" style="font-size: 10px;">类加载器</a> <a href="/tags/线程优先级/" style="font-size: 10px;">线程优先级</a> <a href="/tags/线程安全与死锁/" style="font-size: 10px;">线程安全与死锁</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/线程状态/" style="font-size: 10px;">线程状态</a> <a href="/tags/线程通信/" style="font-size: 10px;">线程通信</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/网络编程三要素/" style="font-size: 10px;">网络编程三要素</a> <a href="/tags/计算机概述/" style="font-size: 10px;">计算机概述</a> <a href="/tags/递归联系/" style="font-size: 10px;">递归联系</a> <a href="/tags/随机流/" style="font-size: 10px;">随机流</a> <a href="/tags/静态导入/" style="font-size: 10px;">静态导入</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://123.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Talk is cheap, show me your code!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Dai Wei</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Dai Wei</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="//daiwei.biz">博客首页</a></li>
+                
+                    <li><a href="//github.com/TimesSilence">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                    <li><a href="/tags">静心阅读</a></li>
+                
+                    <li><a href="/instagram">光影之路</a></li>
+                
+                    <li><a href="/tags/随笔">随笔</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/815762187" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/TimesSlience" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="//www.zhihu.com/people/dai-wei-24-86" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="/weibo.com/3702195485" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="/daiwei20071203@qq.com" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="//twitter.com/david815762187 " title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-day15笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/01/day15笔记/" class="article-date">
+      <time datetime="2017-07-31T16:00:00.000Z" itemprop="datePublished">2017-08-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java语言基础
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Collection/">Collection</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/List/">List</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/对象数组/">对象数组</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>集合框架（1）<br><a id="more"></a></p>
+<p>###15.01_集合框架(对象数组的概述和使用)</p>
+<ul>
+<li>A:案例演示<ul>
+<li>需求：我有5个学生，请把这个5个学生的信息存储到数组中，并遍历数组，获取得到每一个学生信息。</li>
+</ul>
+</li>
+<li><pre><code>Student[] arr = new Student[5];                    //存储学生对象
+arr[0] = new Student(&quot;张三&quot;, 23);
+arr[1] = new Student(&quot;李四&quot;, 24);
+arr[2] = new Student(&quot;王五&quot;, 25);
+arr[3] = new Student(&quot;赵六&quot;, 26);
+arr[4] = new Student(&quot;马哥&quot;, 20);
+
+for (int i = 0; i &lt; arr.length; i++) {
+    System.out.println(arr[i]);
+}
+</code></pre></li>
+<li><p>B:画图演示</p>
+<ul>
+<li>把学生数组的案例画图讲解</li>
+<li>数组和集合存储引用数据类型,存的都是地址值</li>
+</ul>
+</li>
+</ul>
+<p>###15.02_集合框架(集合的由来及集合继承体系图)</p>
+<ul>
+<li>A:集合的由来<ul>
+<li>数组长度是固定,当添加的元素超过了数组的长度时需要对数组重新定义,太麻烦,java内部给我们提供了集合类,能存储任意对象,长度是可以改变的,随着元素的增加而增加,随着元素的减少而减少 </li>
+</ul>
+</li>
+<li>B:数组和集合的区别<ul>
+<li>区别1 : <ul>
+<li>数组既可以存储基本数据类型,又可以存储引用数据类型,基本数据类型存储的是值,引用数据类型存储的是地址值</li>
+<li>集合只能存储引用数据类型(对象)集合中也可以存储基本数据类型,但是在存储的时候会自动装箱变成对象</li>
+</ul>
+</li>
+<li>区别2:<ul>
+<li>数组长度是固定的,不能自动增长</li>
+<li>集合的长度的是可变的,可以根据元素的增加而增长</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>C:数组和集合什么时候用<pre><code>* 1,如果元素个数是固定的推荐用数组
+* 2,如果元素个数不是固定的推荐用集合
+</code></pre></li>
+<li>D:集合继承体系图</li>
+</ul>
+<p>###15.03_集合框架(Collection集合的基本功能测试)</p>
+<ul>
+<li>A:案例演示    </li>
+<li><pre><code>基本功能演示
+
+boolean add(E e)
+boolean remove(Object o)
+void clear()
+boolean contains(Object o)
+boolean isEmpty()
+int size()
+</code></pre></li>
+<li><p>B:注意:</p>
+</li>
+<li><pre><code>collectionXxx.java使用了未经检查或不安全的操作.
+注意:要了解详细信息,请使用 -Xlint:unchecked重新编译.
+java编译器认为该程序存在安全隐患
+温馨提示:这不是编译失败,所以先不用理会,等学了泛型你就知道了
+</code></pre></li>
+</ul>
+<p>###15.04_集合框架(集合的遍历之集合转数组遍历)</p>
+<ul>
+<li>A:集合的遍历<ul>
+<li>其实就是依次获取集合中的每一个元素。</li>
+</ul>
+</li>
+<li><p>B:案例演示</p>
+<ul>
+<li>把集合转成数组，可以实现集合的遍历</li>
+<li><p>toArray()<br>*</p>
+<pre><code>Collection coll = new ArrayList();
+coll.add(new Student(&quot;张三&quot;,23));        //Object obj = new Student(&quot;张三&quot;,23);
+coll.add(new Student(&quot;李四&quot;,24));
+coll.add(new Student(&quot;王五&quot;,25));
+coll.add(new Student(&quot;赵六&quot;,26));
+
+Object[] arr = coll.toArray();                //将集合转换成数组
+for (int i = 0; i &lt; arr.length; i++) {
+    Student s = (Student)arr[i];            //强转成Student
+    System.out.println(s.getName() + &quot;,&quot; + s.getAge());
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>###15.05_集合框架(Collection集合的带All功能测试)</p>
+<ul>
+<li>A:案例演示</li>
+<li><pre><code>带All的功能演示
+
+boolean addAll(Collection c)
+boolean removeAll(Collection c)
+boolean containsAll(Collection c)
+boolean retainAll(Collection c)
+</code></pre></li>
+</ul>
+<p>###15.06_集合框架(集合的遍历之迭代器遍历)</p>
+<ul>
+<li>A:迭代器概述<ul>
+<li>集合是用来存储元素,存储的元素需要查看,那么就需要迭代(遍历) </li>
+</ul>
+</li>
+<li><p>B:案例演示</p>
+<ul>
+<li><p>迭代器的使用</p>
+<pre><code>Collection c = new ArrayList();
+c.add(&quot;a&quot;);
+c.add(&quot;b&quot;);
+c.add(&quot;c&quot;);
+c.add(&quot;d&quot;);
+
+Iterator it = c.iterator();                        //获取迭代器的引用
+while(it.hasNext()) {                            //集合中的迭代方法(遍历)
+    System.out.println(it.next());
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>###15.07_集合框架(Collection存储自定义对象并遍历)</p>
+<ul>
+<li><p>A:案例演示</p>
+<ul>
+<li>Collection存储自定义对象并用迭代器遍历</li>
+<li><pre><code>Collection c = new ArrayList();
+
+c.add(new Student(&quot;张三&quot;,23));
+c.add(new Student(&quot;李四&quot;,24));
+c.add(new Student(&quot;王五&quot;,25));
+c.add(new Student(&quot;赵六&quot;,26));
+c.add(new Student(&quot;赵六&quot;,26));
+
+for(Iterator it = c.iterator();it.hasNext();) {
+    Student s = (Student)it.next();                        //向下转型
+    System.out.println(s.getName() + &quot;,&quot; + s.getAge());    //获取对象中的姓名和年龄
+}
+System.out.println(&quot;------------------------------&quot;);
+Iterator it = c.iterator();                                //获取迭代器
+while(it.hasNext()) {                                    //判断集合中是否有元素
+    //System.out.println(((Student)(it.next())).getName() + &quot;,&quot; + ((Student)(it.next())).getAge());
+    Student s = (Student)it.next();                        //向下转型
+    System.out.println(s.getName() + &quot;,&quot; + s.getAge());    //获取对象中的姓名和年龄
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>###15.08_集合框架(迭代器的原理及源码解析)(了解)</p>
+<ul>
+<li>A:迭代器原理<ul>
+<li>迭代器原理:迭代器是对集合进行遍历,而每一个集合内部的存储结构都是不同的,所以每一个集合存和取都是不一样,那么就需要在每一个类中定义hasNext()和next()方法,这样做是可以的,但是会让整个集合体系过于臃肿,迭代器是将这样的方法向上抽取出接口,然后在每个类的内部,定义自己迭代方式,这样做的好处有二,第一规定了整个集合体系的遍历方式都是hasNext()和next()方法,第二,代码有底层内部实现,使用者不用管怎么实现的,会用即可 </li>
+</ul>
+</li>
+<li>B:迭代器源码解析<ul>
+<li>1,在eclipse中ctrl + shift + t找到ArrayList类</li>
+<li>2,ctrl+o查找iterator()方法</li>
+<li>3,查看返回值类型是new Itr(),说明Itr这个类实现Iterator接口</li>
+<li>4,查找Itr这个内部类,发现重写了Iterator中的所有抽象方法 </li>
+</ul>
+</li>
+</ul>
+<p>###15.09_集合框架(List集合的特有功能概述和测试)</p>
+<ul>
+<li>A:List集合的特有功能概述<ul>
+<li>void add(int index,E element)</li>
+<li>E remove(int index)</li>
+<li>E get(int index)</li>
+<li>E set(int index,E element)</li>
+</ul>
+</li>
+</ul>
+<p>###15.10_集合框架(List集合存储学生对象并遍历)</p>
+<ul>
+<li><p>A:案例演示</p>
+<ul>
+<li><p>通过size()和get()方法结合使用遍历。</p>
+<pre><code>List list = new ArrayList();
+list.add(new Student(&quot;张三&quot;, 18));
+list.add(new Student(&quot;李四&quot;, 18));
+list.add(new Student(&quot;王五&quot;, 18));
+list.add(new Student(&quot;赵六&quot;, 18));
+
+for(int i = 0; i &lt; list.size(); i++) {
+    Student s = (Student)list.get(i);
+    System.out.println(s.getName() + &quot;,&quot; + s.getAge());
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>###15.11_集合框架(并发修改异常产生的原因及解决方案)</p>
+<ul>
+<li><p>A:案例演示</p>
+<ul>
+<li><p>需求：我有一个集合，请问，我想判断里面有没有”world”这个元素，如果有，我就添加一个”javaee”元素，请写代码实现。</p>
+<pre><code>List list = new ArrayList();
+list.add(&quot;a&quot;);
+list.add(&quot;b&quot;);
+list.add(&quot;world&quot;);
+list.add(&quot;d&quot;);
+list.add(&quot;e&quot;);
+
+/*Iterator it = list.iterator();
+while(it.hasNext()) {
+    String str = (String)it.next();
+    if(str.equals(&quot;world&quot;)) {
+        list.add(&quot;javaee&quot;);            //这里会抛出ConcurrentModificationException并发修改异常
+    }
+}*/
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>B:ConcurrentModificationException出现<ul>
+<li>迭代器遍历，集合修改集合</li>
+</ul>
+</li>
+<li><p>C:解决方案</p>
+<ul>
+<li>a:迭代器迭代元素，迭代器修改元素(ListIterator的特有功能add)</li>
+<li><p>b:集合遍历元素，集合修改元素</p>
+<pre><code>ListIterator lit = list.listIterator();        //如果想在遍历的过程中添加元素,可以用ListIterator中的add方法
+while(lit.hasNext()) {
+    String str = (String)lit.next();
+    if(str.equals(&quot;world&quot;)) {
+        lit.add(&quot;javaee&quot;);    
+        //list.add(&quot;javaee&quot;);
+    }
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>###15.12_集合框架(ListIterator)(了解)</p>
+<ul>
+<li>boolean hasNext()是否有下一个</li>
+<li>boolean hasPrevious()是否有前一个</li>
+<li>Object next()返回下一个元素</li>
+<li>Object previous();返回上一个元素</li>
+</ul>
+<p>###15.13_集合框架(Vector的特有功能)</p>
+<ul>
+<li>A:Vector类概述</li>
+<li>B:Vector类特有功能<ul>
+<li>public void addElement(E obj)</li>
+<li>public E elementAt(int index)</li>
+<li>public Enumeration elements()</li>
+</ul>
+</li>
+<li><p>C:案例演示    </p>
+<ul>
+<li><p>Vector的迭代</p>
+<pre><code>Vector v = new Vector();                //创建集合对象,List的子类
+v.addElement(&quot;a&quot;);
+v.addElement(&quot;b&quot;);
+v.addElement(&quot;c&quot;);
+v.addElement(&quot;d&quot;);
+
+//Vector迭代
+Enumeration en = v.elements();            //获取枚举
+while(en.hasMoreElements()) {            //判断集合中是否有元素
+    System.out.println(en.nextElement());//获取集合中的元素
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>###15.14_集合框架(数据结构之数组和链表)</p>
+<ul>
+<li>A:数组<ul>
+<li>查询快修改也快</li>
+<li>增删慢</li>
+</ul>
+</li>
+<li>B:链表<ul>
+<li>查询慢,修改也慢</li>
+<li>增删快</li>
+</ul>
+</li>
+</ul>
+<p>###15.15_集合框架(List的三个子类的特点)</p>
+<ul>
+<li>A:List的三个子类的特点</li>
+<li><pre><code>ArrayList:
+    底层数据结构是数组，查询快，增删慢。
+    线程不安全，效率高。
+Vector:
+    底层数据结构是数组，查询快，增删慢。
+    线程安全，效率低。
+Vector相对ArrayList查询慢(线程安全的)
+Vector相对LinkedList增删慢(数组结构)
+LinkedList:
+    底层数据结构是链表，查询慢，增删快。
+    线程不安全，效率高。
+
+Vector和ArrayList的区别
+    Vector是线程安全的,效率低
+    ArrayList是线程不安全的,效率高
+共同点:都是数组实现的
+ArrayList和LinkedList的区别
+    ArrayList底层是数组结果,查询和修改快
+    LinkedList底层是链表结构的,增和删比较快,查询和修改比较慢
+共同点:都是线程不安全的
+</code></pre></li>
+<li>B:List有三个儿子，我们到底使用谁呢?<pre><code>查询多用ArrayList
+增删多用LinkedList
+如果都多ArrayList
+</code></pre>###15.16_day15总结<br>把今天的知识点总结一遍。</li>
+</ul>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/08/01/day15笔记/">Java语言基础</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Dai Wei 的个人博客">Dai Wei</a></p>
+        <p><span>发布时间:</span>2017年08月01日 - 00时00分</p>
+        <p><span>最后更新:</span>2017年09月09日 - 18时42分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/01/day15笔记/" title="Java语言基础">http://yoursite.com/2017/08/01/day15笔记/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/08/01/day15笔记/　　作者: Dai Wei" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2017/08/02/day16笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Java语言基础
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/30/day14笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java语言基础</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'daiwei',
+      repo: 'TimesSlience.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/08/02/day16笔记/" title="上一篇: Java语言基础">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/07/30/day14笔记/" title="下一篇: Java语言基础">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/day27笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/day26笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/11/day25笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/10/day24笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/day23笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/day22笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/day21笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/06/day20笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/05/day19笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/day18笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/03/day17笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/02/day16笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/01/day15笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/30/day14笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/29/day13笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/28/day12笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/day11笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/26/day10笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/25/day09笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/24/day08笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/23/day07笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/22/day06笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/day05笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/day04笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/day03笔记/">Day03_运算符的使用和if条件语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/18/day02笔记/">Day03_二进制的概述,常量与变量的介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/day01笔记/">Day01_计算机基础与Java语言概述</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Dai Wei
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

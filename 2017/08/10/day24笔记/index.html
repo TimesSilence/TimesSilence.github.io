@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java语言基础 | Java</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="多线程(1)">
+<meta name="keywords" content="并发,实现方式,休眠,守护,礼让,线程优先级,同步代码块,线程安全与死锁">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java语言基础">
+<meta property="og:url" content="http://yoursite.com/2017/08/10/day24笔记/index.html">
+<meta property="og:site_name" content="Java">
+<meta property="og:description" content="多线程(1)">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2017-09-09T11:35:58.973Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java语言基础">
+<meta name="twitter:description" content="多线程(1)">
+  
+    <link rel="alternative" href="/atom.xml" title="Java" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Dai Wei</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="//daiwei.biz">博客首页</a></li>
+                        
+                            <li><a href="//github.com/TimesSilence">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                            <li><a href="/tags">静心阅读</a></li>
+                        
+                            <li><a href="/instagram">光影之路</a></li>
+                        
+                            <li><a href="/tags/随笔">随笔</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/815762187" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/TimesSlience" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="//www.zhihu.com/people/dai-wei-24-86" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="/weibo.com/3702195485" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="/daiwei20071203@qq.com" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="//twitter.com/david815762187 " title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/ArrayList/" style="font-size: 10px;">ArrayList</a> <a href="/tags/BigDecimal类/" style="font-size: 10px;">BigDecimal类</a> <a href="/tags/Calendar类/" style="font-size: 10px;">Calendar类</a> <a href="/tags/Collection/" style="font-size: 20px;">Collection</a> <a href="/tags/Collections/" style="font-size: 10px;">Collections</a> <a href="/tags/Date类/" style="font-size: 10px;">Date类</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/File类/" style="font-size: 10px;">File类</a> <a href="/tags/GUI/" style="font-size: 10px;">GUI</a> <a href="/tags/HashMap/" style="font-size: 10px;">HashMap</a> <a href="/tags/JDK版本特性/" style="font-size: 10px;">JDK版本特性</a> <a href="/tags/Java环境配置/" style="font-size: 10px;">Java环境配置</a> <a href="/tags/Java语言基础/" style="font-size: 10px;">Java语言基础</a> <a href="/tags/Java语言概述/" style="font-size: 10px;">Java语言概述</a> <a href="/tags/LinkedList/" style="font-size: 10px;">LinkedList</a> <a href="/tags/List/" style="font-size: 20px;">List</a> <a href="/tags/Map/" style="font-size: 10px;">Map</a> <a href="/tags/Object类/" style="font-size: 10px;">Object类</a> <a href="/tags/Properties/" style="font-size: 10px;">Properties</a> <a href="/tags/Random类/" style="font-size: 10px;">Random类</a> <a href="/tags/Runtime/" style="font-size: 10px;">Runtime</a> <a href="/tags/Scanner/" style="font-size: 10px;">Scanner</a> <a href="/tags/Static关键词/" style="font-size: 10px;">Static关键词</a> <a href="/tags/StringBuffer/" style="font-size: 10px;">StringBuffer</a> <a href="/tags/StringBuilder/" style="font-size: 10px;">StringBuilder</a> <a href="/tags/String类/" style="font-size: 10px;">String类</a> <a href="/tags/System类/" style="font-size: 10px;">System类</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/UDP/" style="font-size: 10px;">UDP</a> <a href="/tags/final关键字/" style="font-size: 10px;">final关键字</a> <a href="/tags/二进制/" style="font-size: 10px;">二进制</a> <a href="/tags/代码块/" style="font-size: 10px;">代码块</a> <a href="/tags/休眠-守护-礼让/" style="font-size: 10px;">休眠,守护,礼让</a> <a href="/tags/修饰权限/" style="font-size: 10px;">修饰权限</a> <a href="/tags/内部类/" style="font-size: 10px;">内部类</a> <a href="/tags/包/" style="font-size: 10px;">包</a> <a href="/tags/包装类/" style="font-size: 10px;">包装类</a> <a href="/tags/单例设计模式/" style="font-size: 10px;">单例设计模式</a> <a href="/tags/反射/" style="font-size: 10px;">反射</a> <a href="/tags/变量/" style="font-size: 10px;">变量</a> <a href="/tags/同步代码块/" style="font-size: 10px;">同步代码块</a> <a href="/tags/多态/" style="font-size: 10px;">多态</a> <a href="/tags/多线程网络编程/" style="font-size: 10px;">多线程网络编程</a> <a href="/tags/字符流/" style="font-size: 10px;">字符流</a> <a href="/tags/字节流/" style="font-size: 10px;">字节流</a> <a href="/tags/实现方式/" style="font-size: 10px;">实现方式</a> <a href="/tags/对象数组/" style="font-size: 20px;">对象数组</a> <a href="/tags/对象流/" style="font-size: 10px;">对象流</a> <a href="/tags/常量/" style="font-size: 10px;">常量</a> <a href="/tags/并发/" style="font-size: 10px;">并发</a> <a href="/tags/序列流/" style="font-size: 10px;">序列流</a> <a href="/tags/异常/" style="font-size: 10px;">异常</a> <a href="/tags/循环/" style="font-size: 10px;">循环</a> <a href="/tags/成员方法与成员变量/" style="font-size: 10px;">成员方法与成员变量</a> <a href="/tags/接口/" style="font-size: 10px;">接口</a> <a href="/tags/数据输入输出流/" style="font-size: 10px;">数据输入输出流</a> <a href="/tags/数组/" style="font-size: 20px;">数组</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/泛型/" style="font-size: 10px;">泛型</a> <a href="/tags/类加载器/" style="font-size: 10px;">类加载器</a> <a href="/tags/线程优先级/" style="font-size: 10px;">线程优先级</a> <a href="/tags/线程安全与死锁/" style="font-size: 10px;">线程安全与死锁</a> <a href="/tags/线程池/" style="font-size: 10px;">线程池</a> <a href="/tags/线程状态/" style="font-size: 10px;">线程状态</a> <a href="/tags/线程通信/" style="font-size: 10px;">线程通信</a> <a href="/tags/继承/" style="font-size: 10px;">继承</a> <a href="/tags/网络编程三要素/" style="font-size: 10px;">网络编程三要素</a> <a href="/tags/计算机概述/" style="font-size: 10px;">计算机概述</a> <a href="/tags/递归联系/" style="font-size: 10px;">递归联系</a> <a href="/tags/随机流/" style="font-size: 10px;">随机流</a> <a href="/tags/静态导入/" style="font-size: 10px;">静态导入</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://123.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Talk is cheap, show me your code!</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Dai Wei</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Dai Wei</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="//daiwei.biz">博客首页</a></li>
+                
+                    <li><a href="//github.com/TimesSilence">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                    <li><a href="/tags">静心阅读</a></li>
+                
+                    <li><a href="/instagram">光影之路</a></li>
+                
+                    <li><a href="/tags/随笔">随笔</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/815762187" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/TimesSlience" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="//www.zhihu.com/people/dai-wei-24-86" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="/weibo.com/3702195485" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="/daiwei20071203@qq.com" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="//twitter.com/david815762187 " title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-day24笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/10/day24笔记/" class="article-date">
+      <time datetime="2017-08-09T16:00:00.000Z" itemprop="datePublished">2017-08-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java语言基础
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/休眠-守护-礼让/">休眠,守护,礼让</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/同步代码块/">同步代码块</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实现方式/">实现方式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程优先级/">线程优先级</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程安全与死锁/">线程安全与死锁</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>多线程(1)<br><a id="more"></a></p>
+<p>###24.01_多线程(多线程的引入)(了解)</p>
+<ul>
+<li>1.什么是线程<ul>
+<li>线程是程序执行的一条路径, 一个进程中可以包含多条线程</li>
+<li>多线程并发执行可以提高程序的效率, 可以同时完成多项工作</li>
+</ul>
+</li>
+<li>2.多线程的应用场景<ul>
+<li>红蜘蛛同时共享屏幕给多个电脑</li>
+<li>迅雷开启多条线程一起下载</li>
+<li>QQ同时和多个人一起视频</li>
+<li>服务器同时处理多个客户端请求</li>
+</ul>
+</li>
+</ul>
+<p>###24.02_多线程(多线程并行和并发的区别)(了解)</p>
+<ul>
+<li>并行就是两个任务同时运行，就是甲任务进行的同时，乙任务也在进行。(需要多核CPU)</li>
+<li>并发是指两个任务都请求运行，而处理器只能按受一个任务，就把这两个任务安排轮流进行，由于时间间隔较短，使人感觉两个任务都在运行。</li>
+<li>比如我跟两个网友聊天，左手操作一个电脑跟甲聊，同时右手用另一台电脑跟乙聊天，这就叫并行。</li>
+<li>如果用一台电脑我先给甲发个消息，然后立刻再给乙发消息，然后再跟甲聊，再跟乙聊。这就叫并发。</li>
+</ul>
+<p>###24.03_多线程(Java程序运行原理和JVM的启动是多线程的吗)(了解)</p>
+<ul>
+<li><p>A:Java程序运行原理</p>
+<ul>
+<li>Java命令会启动java虚拟机，启动JVM，等于启动了一个应用程序，也就是启动了一个进程。该进程会自动启动一个 “主线程” ，然后主线程去调用某个类的 main 方法。</li>
+</ul>
+</li>
+<li><p>B:JVM的启动是多线程的吗</p>
+<ul>
+<li>JVM启动至少启动了垃圾回收线程和主线程，所以是多线程的。</li>
+</ul>
+</li>
+</ul>
+<p>###24.04_多线程(多线程程序实现的方式1)(掌握)</p>
+<ul>
+<li><p>1.继承Thread</p>
+<ul>
+<li>定义类继承Thread</li>
+<li>重写run方法</li>
+<li>把新线程要做的事写在run方法中</li>
+<li>创建线程对象</li>
+<li>开启新线程, 内部会自动执行run方法</li>
+<li><pre><code>public class Demo2_Thread {
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        MyThread mt = new MyThread();                            //4,创建自定义类的对象
+        mt.start();                                                //5,开启线程
+
+        for(int i = 0; i &lt; 3000; i++) {
+            System.out.println(&quot;bb&quot;);
+        }
+    }
+
+}
+class MyThread extends Thread {                                    //1,定义类继承Thread
+    public void run() {                                            //2,重写run方法
+        for(int i = 0; i &lt; 3000; i++) {                            //3,将要执行的代码,写在run方法中
+            System.out.println(&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;);
+        }
+    }
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>###24.05_多线程(多线程程序实现的方式2)(掌握)</p>
+<ul>
+<li><p>2.实现Runnable</p>
+<ul>
+<li>定义类实现Runnable接口</li>
+<li>实现run方法</li>
+<li>把新线程要做的事写在run方法中</li>
+<li>创建自定义的Runnable的子类对象</li>
+<li>创建Thread对象, 传入Runnable</li>
+<li><p>调用start()开启新线程, 内部会自动调用Runnable的run()方法</p>
+<pre><code>public class Demo3_Runnable {
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        MyRunnable mr = new MyRunnable();                        //4,创建自定义类对象
+        //Runnable target = new MyRunnable();
+        Thread t = new Thread(mr);                                //5,将其当作参数传递给Thread的构造函数
+        t.start();                                                //6,开启线程
+
+        for(int i = 0; i &lt; 3000; i++) {
+            System.out.println(&quot;bb&quot;);
+        }
+    }
+}
+
+class MyRunnable implements Runnable {                            //1,自定义类实现Runnable接口
+    @Override
+    public void run() {                                            //2,重写run方法
+        for(int i = 0; i &lt; 3000; i++) {                            //3,将要执行的代码,写在run方法中
+            System.out.println(&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;);
+        }
+    }
+
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>###24.06_多线程(实现Runnable的原理)(了解)</p>
+<ul>
+<li>查看源码<ul>
+<li>1,看Thread类的构造函数,传递了Runnable接口的引用 </li>
+<li>2,通过init()方法找到传递的target给成员变量的target赋值</li>
+<li>3,查看run方法,发现run方法中有判断,如果target不为null就会调用Runnable接口子类对象的run方法</li>
+</ul>
+</li>
+</ul>
+<p>###24.07_多线程(两种方式的区别)(掌握)</p>
+<ul>
+<li><p>查看源码的区别:</p>
+<ul>
+<li>a.继承Thread : 由于子类重写了Thread类的run(), 当调用start()时, 直接找子类的run()方法</li>
+<li>b.实现Runnable : 构造函数中传入了Runnable的引用, 成员变量记住了它, start()调用run()方法时内部判断成员变量Runnable的引用是否为空, 不为空编译时看的是Runnable的run(),运行时执行的是子类的run()方法</li>
+</ul>
+</li>
+<li><p>继承Thread</p>
+<ul>
+<li>好处是:可以直接使用Thread类中的方法,代码简单</li>
+<li>弊端是:如果已经有了父类,就不能用这种方法</li>
+</ul>
+</li>
+<li>实现Runnable接口<ul>
+<li>好处是:即使自己定义的线程类有了父类也没关系,因为有了父类也可以实现接口,而且接口是可以多实现的</li>
+<li>弊端是:不能直接使用Thread中的方法需要先获取到线程对象后,才能得到Thread的方法,代码复杂<br>###24.08_多线程(匿名内部类实现线程的两种方式)(掌握)</li>
+</ul>
+</li>
+<li><p>继承Thread类</p>
+<pre><code>new Thread() {                                                    //1,new 类(){}继承这个类
+    public void run() {                                            //2,重写run方法
+        for(int i = 0; i &lt; 3000; i++) {                            //3,将要执行的代码,写在run方法中
+            System.out.println(&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;);
+        }
+    }
+}.start();
+</code></pre></li>
+<li><p>实现Runnable接口</p>
+<pre><code>new Thread(new Runnable(){                                        //1,new 接口(){}实现这个接口
+    public void run() {                                            //2,重写run方法
+        for(int i = 0; i &lt; 3000; i++) {                            //3,将要执行的代码,写在run方法中
+            System.out.println(&quot;bb&quot;);
+        }
+    }
+}).start(); 
+</code></pre></li>
+</ul>
+<p>###24.09_多线程(获取名字和设置名字)(掌握)</p>
+<ul>
+<li>1.获取名字<ul>
+<li>通过getName()方法获取线程对象的名字</li>
+</ul>
+</li>
+<li><p>2.设置名字</p>
+<ul>
+<li>通过构造函数可以传入String类型的名字</li>
+<li><pre><code>new Thread(&quot;xxx&quot;) {
+    public void run() {
+        for(int i = 0; i &lt; 1000; i++) {
+            System.out.println(this.getName() + &quot;....aaaaaaaaaaaaaaaaaaaaaaa&quot;);
+        }
+    }
+}.start();
+
+new Thread(&quot;yyy&quot;) {
+    public void run() {
+        for(int i = 0; i &lt; 1000; i++) {
+            System.out.println(this.getName() + &quot;....bb&quot;);
+        }
+    }
+}.start(); 
+</code></pre></li>
+<li>通过setName(String)方法可以设置线程对象的名字</li>
+<li><pre><code>Thread t1 = new Thread() {
+    public void run() {
+        for(int i = 0; i &lt; 1000; i++) {
+            System.out.println(this.getName() + &quot;....aaaaaaaaaaaaaaaaaaaaaaa&quot;);
+        }
+    }
+};
+
+Thread t2 = new Thread() {
+    public void run() {
+        for(int i = 0; i &lt; 1000; i++) {
+            System.out.println(this.getName() + &quot;....bb&quot;);
+        }
+    }
+};
+t1.setName(&quot;芙蓉姐姐&quot;);
+t2.setName(&quot;凤姐&quot;);
+
+t1.start();
+t2.start();
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>###24.10_多线程(获取当前线程的对象)(掌握)</p>
+<ul>
+<li><p>Thread.currentThread(), 主线程也可以获取</p>
+<ul>
+<li><pre><code>new Thread(new Runnable() {
+    public void run() {
+        for(int i = 0; i &lt; 1000; i++) {
+            System.out.println(Thread.currentThread().getName() + &quot;...aaaaaaaaaaaaaaaaaaaaa&quot;);
+        }
+    }
+}).start();
+
+new Thread(new Runnable() {
+    public void run() {
+        for(int i = 0; i &lt; 1000; i++) {
+            System.out.println(Thread.currentThread().getName() + &quot;...bb&quot;);
+        }
+    }
+}).start();
+Thread.currentThread().setName(&quot;我是主线程&quot;);                    //获取主函数线程的引用,并改名字
+System.out.println(Thread.currentThread().getName());        //获取主函数线程的引用,并获取名字
+</code></pre><p>###24.11_多线程(休眠线程)(掌握)</p>
+</li>
+</ul>
+</li>
+<li><p>Thread.sleep(毫秒,纳秒), 控制当前线程休眠若干毫秒1秒= 1000毫秒 1秒 = 1000 <em> 1000 </em> 1000纳秒 1000000000</p>
+<pre><code>new Thread() {
+    public void run() {
+        for(int i = 0; i &lt; 10; i++) {
+            System.out.println(getName() + &quot;...aaaaaaaaaaaaaaaaaaaaaa&quot;);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}.start();
+
+new Thread() {
+    public void run() {
+        for(int i = 0; i &lt; 10; i++) {
+            System.out.println(getName() + &quot;...bb&quot;);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}.start();
+</code></pre><p>###24.12_多线程(守护线程)(掌握)</p>
+</li>
+<li><p>setDaemon(), 设置一个线程为守护线程, 该线程不会单独执行, 当其他非守护线程都执行结束后, 自动退出</p>
+<ul>
+<li><pre><code>Thread t1 = new Thread() {
+    public void run() {
+        for(int i = 0; i &lt; 50; i++) {
+            System.out.println(getName() + &quot;...aaaaaaaaaaaaaaaaaaaaaa&quot;);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+};
+
+Thread t2 = new Thread() {
+    public void run() {
+        for(int i = 0; i &lt; 5; i++) {
+            System.out.println(getName() + &quot;...bb&quot;);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+};
+
+t1.setDaemon(true);                        //将t1设置为守护线程
+
+t1.start();
+t2.start();
+</code></pre><p>###24.13_多线程(加入线程)(掌握)</p>
+</li>
+</ul>
+</li>
+<li>join(), 当前线程暂停, 等待指定的线程执行结束后, 当前线程再继续</li>
+<li><p>join(int), 可以等待指定的毫秒之后继续</p>
+<ul>
+<li><pre><code>final Thread t1 = new Thread() {
+    public void run() {
+        for(int i = 0; i &lt; 50; i++) {
+            System.out.println(getName() + &quot;...aaaaaaaaaaaaaaaaaaaaaa&quot;);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+};
+
+Thread t2 = new Thread() {
+    public void run() {
+        for(int i = 0; i &lt; 50; i++) {
+            if(i == 2) {
+                try {
+                    //t1.join();                        //插队,加入
+                    t1.join(30);                        //加入,有固定的时间,过了固定时间,继续交替执行
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+
+                    e.printStackTrace();
+                }
+            }
+            System.out.println(getName() + &quot;...bb&quot;);
+
+        }
+    }
+};
+
+t1.start();
+t2.start();
+</code></pre><p>###24.14_多线程(礼让线程)(了解)</p>
+</li>
+</ul>
+</li>
+<li>yield让出cpu</li>
+</ul>
+<p>###24.15_多线程(设置线程的优先级)(了解)</p>
+<ul>
+<li>setPriority()设置线程的优先级</li>
+</ul>
+<p>###24.16_多线程(同步代码块)(掌握)</p>
+<ul>
+<li>1.什么情况下需要同步<ul>
+<li>当多线程并发, 有多段代码同时执行时, 我们希望某一段代码执行的过程中CPU不要切换到其他线程工作. 这时就需要同步.</li>
+<li>如果两段代码是同步的, 那么同一时间只能执行一段, 在一段代码没执行结束之前, 不会执行另外一段代码.</li>
+</ul>
+</li>
+<li><p>2.同步代码块</p>
+<ul>
+<li>使用synchronized关键字加上一个锁对象来定义一段代码, 这就叫同步代码块</li>
+<li><p>多个同步代码块如果使用相同的锁对象, 那么他们就是同步的</p>
+<pre><code>class Printer {
+    Demo d = new Demo();
+    public static void print1() {
+        synchronized(d){                //锁对象可以是任意对象,但是被锁的代码需要保证是同一把锁,不能用匿名对象
+            System.out.print(&quot;黑&quot;);
+            System.out.print(&quot;马&quot;);
+            System.out.print(&quot;程&quot;);
+            System.out.print(&quot;序&quot;);
+            System.out.print(&quot;员&quot;);
+            System.out.print(&quot;\r\n&quot;);
+        }
+    }
+
+    public static void print2() {    
+        synchronized(d){    
+            System.out.print(&quot;传&quot;);
+            System.out.print(&quot;智&quot;);
+            System.out.print(&quot;播&quot;);
+            System.out.print(&quot;客&quot;);
+            System.out.print(&quot;\r\n&quot;);
+        }
+    }
+}
+</code></pre><p>###24.17_多线程(同步方法)(掌握)</p>
+</li>
+</ul>
+</li>
+<li><p>使用synchronized关键字修饰一个方法, 该方法中所有的代码都是同步的</p>
+<pre><code>class Printer {
+    public static void print1() {
+        synchronized(Printer.class){                //锁对象可以是任意对象,但是被锁的代码需要保证是同一把锁,不能用匿名对象
+            System.out.print(&quot;黑&quot;);
+            System.out.print(&quot;马&quot;);
+            System.out.print(&quot;程&quot;);
+            System.out.print(&quot;序&quot;);
+            System.out.print(&quot;员&quot;);
+            System.out.print(&quot;\r\n&quot;);
+        }
+    }
+    /*
+     * 非静态同步函数的锁是:this
+     * 静态的同步函数的锁是:字节码对象
+     */
+    public static synchronized void print2() {    
+        System.out.print(&quot;传&quot;);
+        System.out.print(&quot;智&quot;);
+        System.out.print(&quot;播&quot;);
+        System.out.print(&quot;客&quot;);
+        System.out.print(&quot;\r\n&quot;);
+    }
+}
+</code></pre></li>
+</ul>
+<p>###24.18_多线程(线程安全问题)(掌握)</p>
+<ul>
+<li>多线程并发操作同一数据时, 就有可能出现线程安全问题</li>
+<li><p>使用同步技术可以解决这种问题, 把操作数据的代码进行同步, 不要多个线程一起操作</p>
+<pre><code>public class Demo2_Synchronized {
+
+    /**
+     * @param args
+     * 需求:铁路售票,一共100张,通过四个窗口卖完.
+     */
+    public static void main(String[] args) {
+        TicketsSeller t1 = new TicketsSeller();
+        TicketsSeller t2 = new TicketsSeller();
+        TicketsSeller t3 = new TicketsSeller();
+        TicketsSeller t4 = new TicketsSeller();
+
+        t1.setName(&quot;窗口1&quot;);
+        t2.setName(&quot;窗口2&quot;);
+        t3.setName(&quot;窗口3&quot;);
+        t4.setName(&quot;窗口4&quot;);
+        t1.start();
+        t2.start();
+        t3.start();
+        t4.start();
+    }
+
+}
+
+class TicketsSeller extends Thread {
+    private static int tickets = 100;
+    static Object obj = new Object();
+    public TicketsSeller() {
+        super();
+
+    }
+    public TicketsSeller(String name) {
+        super(name);
+    }
+    public void run() {
+        while(true) {
+            synchronized(obj) {
+                if(tickets &lt;= 0) 
+                    break;
+                try {
+                    Thread.sleep(10);//线程1睡,线程2睡,线程3睡,线程4睡
+                } catch (InterruptedException e) {
+
+                    e.printStackTrace();
+                }
+                System.out.println(getName() + &quot;...这是第&quot; + tickets-- + &quot;号票&quot;);
+            }
+        }
+    }
+}
+</code></pre></li>
+</ul>
+<p>###24.19_多线程(火车站卖票的例子用实现Runnable接口)(掌握)</p>
+<p>###24.20_多线程(死锁)(了解)</p>
+<ul>
+<li><p>多线程同步的时候, 如果同步代码嵌套, 使用相同锁, 就有可能出现死锁</p>
+<ul>
+<li><p>尽量不要嵌套使用</p>
+<pre><code>private static String s1 = &quot;筷子左&quot;;
+private static String s2 = &quot;筷子右&quot;;
+public static void main(String[] args) {
+    new Thread() {
+        public void run() {
+            while(true) {
+                synchronized(s1) {
+                    System.out.println(getName() + &quot;...拿到&quot; + s1 + &quot;等待&quot; + s2);
+                    synchronized(s2) {
+                        System.out.println(getName() + &quot;...拿到&quot; + s2 + &quot;开吃&quot;);
+                    }
+                }
+            }
+        }
+    }.start();
+
+    new Thread() {
+        public void run() {
+            while(true) {
+                synchronized(s2) {
+                    System.out.println(getName() + &quot;...拿到&quot; + s2 + &quot;等待&quot; + s1);
+                    synchronized(s1) {
+                        System.out.println(getName() + &quot;...拿到&quot; + s1 + &quot;开吃&quot;);
+                    }
+                }
+            }
+        }
+    }.start();
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>###24.21_多线程(以前的线程安全的类回顾)(掌握)</p>
+<ul>
+<li>A:回顾以前说过的线程安全问题<ul>
+<li>看源码：Vector,StringBuffer,Hashtable,Collections.synchroinzed(xxx)</li>
+<li>Vector是线程安全的,ArrayList是线程不安全的</li>
+<li>StringBuffer是线程安全的,StringBuilder是线程不安全的</li>
+<li>Hashtable是线程安全的,HashMap是线程不安全的<br>###24.22_多线程(总结)    </li>
+</ul>
+</li>
+</ul>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/08/10/day24笔记/">Java语言基础</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Dai Wei 的个人博客">Dai Wei</a></p>
+        <p><span>发布时间:</span>2017年08月10日 - 00时00分</p>
+        <p><span>最后更新:</span>2017年09月09日 - 19时35分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/10/day24笔记/" title="Java语言基础">http://yoursite.com/2017/08/10/day24笔记/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/08/10/day24笔记/　　作者: Dai Wei" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2017/08/11/day25笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Java语言基础
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/09/day23笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java语言基础</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'daiwei',
+      repo: 'TimesSlience.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2017/08/11/day25笔记/" title="上一篇: Java语言基础">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/08/09/day23笔记/" title="下一篇: Java语言基础">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/13/day27笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/12/day26笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/11/day25笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/10/day24笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/09/day23笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/08/day22笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/day21笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/06/day20笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/05/day19笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/04/day18笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/03/day17笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/02/day16笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/01/day15笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/30/day14笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/29/day13笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/28/day12笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/day11笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/26/day10笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/25/day09笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/24/day08笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/23/day07笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/22/day06笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/day05笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/21/day04笔记/">Java语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/19/day03笔记/">Day03_运算符的使用和if条件语句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/18/day02笔记/">Day03_二进制的概述,常量与变量的介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/17/day01笔记/">Day01_计算机基础与Java语言概述</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Dai Wei
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
