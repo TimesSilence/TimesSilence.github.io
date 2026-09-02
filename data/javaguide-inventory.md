@@ -1,0 +1,141 @@
+# JavaGuide 来源清单
+
+- 固定版本：`aa4dc796ac87cc8611b326f4fb2b2ce166ffa35c`
+- 扫描 Markdown：452
+- 纳入技术文章：350
+- 排除：102
+
+## 纳入模块
+
+- AI 编程: 28
+- Java: 76
+- 人工智能: 39
+- 分布式系统: 26
+- 学习路线: 5
+- 开发工具: 11
+- 数据库: 42
+- 系统设计: 26
+- 计算机基础: 68
+- 面试与职业: 7
+- 高可用: 9
+- 高性能: 13
+
+## 日期分布
+
+基础主题靠前，实现与进阶靠后；人工智能与 AI 编程集中在 2024–2026；学习路线全部放在 2026。
+
+- 2026: 47
+- 2024: 20
+- 2025: 25
+- 2017: 17
+- 2019: 42
+- 2018: 46
+- 2021: 39
+- 2020: 40
+- 2023: 37
+- 2022: 37
+
+## 排除记录
+
+- `docs/README.md` — site navigation
+- `docs/about-the-author/README.md` — personal or author content
+- `docs/about-the-author/deprecated-java-technologies.md` — personal or author content
+- `docs/about-the-author/dog-that-copies-other-people-essay.md` — personal or author content
+- `docs/about-the-author/feelings-after-one-month-of-induction-training.md` — personal or author content
+- `docs/about-the-author/feelings-of-half-a-year-from-graduation-to-entry.md` — personal or author content
+- `docs/about-the-author/internet-addiction-teenager.md` — personal or author content
+- `docs/about-the-author/javaguide-100k-star.md` — personal or author content
+- `docs/about-the-author/my-article-was-stolen-and-made-into-video-and-it-became-popular.md` — personal or author content
+- `docs/about-the-author/my-college-life.md` — personal or author content
+- `docs/about-the-author/writing-technology-blog-six-years.md` — personal or author content
+- `docs/about-the-author/zhishixingqiu-two-years.md` — personal or author content
+- `docs/books/README.md` — book recommendations
+- `docs/books/cs-basics.md` — book recommendations
+- `docs/books/database.md` — book recommendations
+- `docs/books/distributed-system.md` — book recommendations
+- `docs/books/java.md` — book recommendations
+- `docs/books/search-engine.md` — book recommendations
+- `docs/books/software-quality.md` — book recommendations
+- `docs/database/elasticsearch/elasticsearch-questions-01.md` — paid or promotional content
+- `docs/database/mysql/mysql-questions-01.md` — paid or promotional content
+- `docs/database/redis/redis-cluster.md` — paid or promotional content
+- `docs/database/redis/redis-questions-02.md` — paid or promotional content
+- `docs/distributed-system/protocol/gossip-protocol.md` — paid or promotional content
+- `docs/distributed-system/rpc/rpc-intro.md` — paid or promotional content
+- `docs/high-performance/cdn.md` — paid or promotional content
+- `docs/high-performance/message-queue/message-queue.md` — paid or promotional content
+- `docs/high-quality-technical-articles/README.md` — external article index
+- `docs/high-quality-technical-articles/advanced-programmer/20-bad-habits-of-bad-programmers.md` — external article index
+- `docs/high-quality-technical-articles/advanced-programmer/meituan-three-year-summary-lesson-10.md` — external article index
+- `docs/high-quality-technical-articles/advanced-programmer/programmer-quickly-learn-new-technology.md` — external article index
+- `docs/high-quality-technical-articles/advanced-programmer/seven-tips-for-becoming-an-advanced-programmer.md` — external article index
+- `docs/high-quality-technical-articles/advanced-programmer/ten-years-of-dachang-growth-road.md` — external article index
+- `docs/high-quality-technical-articles/advanced-programmer/the-growth-strategy-of-the-technological-giant.md` — external article index
+- `docs/high-quality-technical-articles/advanced-programmer/thinking-about-technology-and-business-after-five-years-of-work.md` — external article index
+- `docs/high-quality-technical-articles/interview/how-to-examine-the-technical-ability-of-programmers-in-the-first-test-of-technology.md` — external article index
+- `docs/high-quality-technical-articles/interview/my-personal-experience-in-2021.md` — external article index
+- `docs/high-quality-technical-articles/interview/screen-candidates-for-packaging.md` — external article index
+- `docs/high-quality-technical-articles/interview/some-secrets-about-alibaba-interview.md` — external article index
+- `docs/high-quality-technical-articles/interview/summary-of-spring-recruitment.md` — external article index
+- `docs/high-quality-technical-articles/interview/technical-preliminary-preparation.md` — external article index
+- `docs/high-quality-technical-articles/interview/the-experience-and-thinking-of-an-interview-experienced-by-an-older-programmer.md` — external article index
+- `docs/high-quality-technical-articles/interview/the-experience-of-get-offer-from-over-20-big-companies.md` — external article index
+- `docs/high-quality-technical-articles/personal-experience/8-years-programmer-work-summary.md` — external article index
+- `docs/high-quality-technical-articles/personal-experience/four-year-work-in-tencent-summary.md` — external article index
+- `docs/high-quality-technical-articles/personal-experience/huawei-od-275-days.md` — external article index
+- `docs/high-quality-technical-articles/personal-experience/two-years-of-back-end-develop--experience-in-didi-and-toutiao.md` — external article index
+- `docs/high-quality-technical-articles/programmer/efficient-book-publishing-and-practice-guide.md` — external article index
+- `docs/high-quality-technical-articles/programmer/high-value-certifications-for-programmers.md` — external article index
+- `docs/high-quality-technical-articles/programmer/how-do-programmers-publish-a-technical-book.md` — external article index
+- `docs/high-quality-technical-articles/programmer/programmer-career-directions.md` — external article index
+- `docs/high-quality-technical-articles/work/32-tips-improving-career.md` — external article index
+- `docs/high-quality-technical-articles/work/employee-performance.md` — external article index
+- `docs/high-quality-technical-articles/work/get-into-work-mode-quickly-when-you-join-a-company.md` — external article index
+- `docs/home.md` — site navigation
+- `docs/interview-preparation/internship-experience.md` — paid or promotional content
+- `docs/interview-preparation/interview-experience.md` — paid or promotional content
+- `docs/interview-preparation/project-experience-guide.md` — paid or promotional content
+- `docs/interview-preparation/resume-guide.md` — paid or promotional content
+- `docs/interview-preparation/self-test-of-common-interview-questions.md` — paid or promotional content
+- `docs/interview-preparation/teach-you-how-to-prepare-for-the-interview-hand-in-hand.md` — paid or promotional content
+- `docs/java/basis/java-basic-questions-01.md` — paid or promotional content
+- `docs/java/collection/README.md` — paid or promotional content
+- `docs/java/collection/priorityqueue-source-code.md` — paid or promotional content
+- `docs/java/concurrent/reentrantlock.md` — third-party repost or translation
+- `docs/javaguide/contribution-guideline.md` — project documentation
+- `docs/javaguide/faq.md` — project documentation
+- `docs/javaguide/history.md` — project documentation
+- `docs/javaguide/intro.md` — project documentation
+- `docs/javaguide/use-suggestion.md` — project documentation
+- `docs/open-source-project/README.md` — project promotion or index
+- `docs/open-source-project/big-data.md` — project promotion or index
+- `docs/open-source-project/machine-learning.md` — project promotion or index
+- `docs/open-source-project/practical-project.md` — project promotion or index
+- `docs/open-source-project/system-design.md` — project promotion or index
+- `docs/open-source-project/tool-library.md` — project promotion or index
+- `docs/open-source-project/tools.md` — project promotion or index
+- `docs/open-source-project/tutorial.md` — project promotion or index
+- `docs/roadmap/java-roadmap.md` — paid or promotional content
+- `docs/snippets/article-footer.snippet.md` — paid or promotional content
+- `docs/snippets/article-header.snippet.md` — empty or navigation-only page
+- `docs/snippets/planet.snippet.md` — paid or promotional content
+- `docs/snippets/planet2.snippet.md` — paid or promotional content
+- `docs/snippets/rag-project.snippet.md` — paid or promotional content
+- `docs/snippets/small-advertisement.snippet.md` — paid or promotional content
+- `docs/snippets/yuanma.snippet.md` — paid or promotional content
+- `docs/system-design/framework/netty.md` — paid or promotional content
+- `docs/system-design/framework/spring/Async.md` — case-insensitive duplicate of docs/system-design/framework/spring/async.md
+- `docs/system-design/framework/spring/spring-common-annotations.md` — third-party repost or translation
+- `docs/system-design/framework/spring/spring-transaction.md` — paid or promotional content
+- `docs/system-design/framework/spring/springboot-knowledge-and-questions-summary.md` — paid or promotional content
+- `docs/system-design/framework/spring/springboot-source-code.md` — paid or promotional content
+- `docs/system-design/schedule-task.md` — paid or promotional content
+- `docs/system-design/security/data-desensitization.md` — paid or promotional content
+- `docs/system-design/security/sso-intro.md` — third-party repost or translation
+- `docs/system-design/system-design-questions.md` — paid or promotional content
+- `docs/zhuanlan/README.md` — paid or promotional column
+- `docs/zhuanlan/back-end-interview-high-frequency-system-design-and-scenario-questions.md` — paid or promotional column
+- `docs/zhuanlan/handwritten-rpc-framework.md` — paid or promotional column
+- `docs/zhuanlan/interview-guide.md` — paid or promotional column
+- `docs/zhuanlan/java-mian-shi-zhi-bei.md` — paid or promotional column
+- `docs/zhuanlan/source-code-reading.md` — paid or promotional column
