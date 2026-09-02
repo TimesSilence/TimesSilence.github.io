@@ -43,3 +43,13 @@ npm run validate:javaguide   # 检查元数据和内容兼容性
 ## 部署
 
 仓库已加 GitHub Actions（`.github/workflows/pages.yml`）。在仓库 Settings → Pages 里把 Source 设为 **GitHub Actions**。自定义域仍是 `www.daiwei.biz`（`source/CNAME`）。
+
+## 留言板（Giscus）
+
+站点用 [Giscus](https://giscus.app/zh-CN) 做留言板，评论存在本仓库的 GitHub Discussions 里。配置生效前需要：
+
+1. 仓库 Settings → General → Features，打开 **Discussions**。
+2. 打开 [giscus 应用](https://github.com/apps/giscus)，安装到 `TimesSilence/TimesSilence.github.io`。
+3. 打开 [giscus.app](https://giscus.app/zh-CN)，仓库填 `TimesSilence/TimesSilence.github.io`，分类建议选 **Announcements**，把生成的 `data-category-id` 填进 `_config.butterfly.yml` 的 `giscus.category_id`。
+
+文章页默认显示评论区；独立页面（关于、标签、分类等）默认关闭。若某篇或某页不需要评论，在 front matter 里加 `comments: false`。
