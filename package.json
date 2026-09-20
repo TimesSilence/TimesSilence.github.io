@@ -13,7 +13,8 @@
     "optimize": "node tools/optimize-posts.mjs",
     "inventory:javaguide": "node tools/import-javaguide.mjs",
     "normalize:javaguide": "node tools/normalize-javaguide-posts.mjs",
-    "validate:javaguide": "node tools/validate-javaguide.mjs"
+    "validate:javaguide": "node tools/validate-javaguide.mjs",
+    "topics": "node tools/list-existing-topics.mjs"
   },
   "hexo": {
     "version": "8.1.2"
