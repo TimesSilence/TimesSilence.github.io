@@ -9,37 +9,90 @@ tags:
   - ZAB
   - ZooKeeper
   - 原子广播
-description: "ZAB 协议的两阶段模式、epoch 与 zxid 及崩溃恢复与广播流程。"
+description: "ZAB 是为 ZooKeeper 定制的原子广播协议：正常时按消息广播模式做全序提案与过半提交，Leader 崩溃时进入崩溃恢复完成选举与数据同步；与 Raft 思路相通，但只保证顺序一致性。"
 ---
 
-ZAB 是 ZooKeeper 的共识内核，与 Raft 目标相近但用 epoch+zxid 描述进度。理解 ZAB 有助于读懂 ZK 运维指标和客户端 sync 语义。
+ZAB（ZooKeeper Atomic Broadcast，ZooKeeper 原子广播协议）常被误当成 Paxos 的别名，其实它是为 ZooKeeper 量身设计的崩溃可恢复原子广播协议。它的运行可以概括成两种模式的交替：正常时由 Leader 发起全序提案、过半确认后提交；Leader 失联时集群暂停服务，先选举出数据最新的新主，再做数据同步，之后才恢复广播。
 
 <!-- more -->
 
-## 要解决什么问题
+## 为什么 ZooKeeper 需要自己的协议
 
-ZK 需全序广播写请求，Leader 切换后已提交事务不丢，Follower 必须追平到一致点才能对外服务读（若要求 strong read）。崩溃恢复与广播两阶段切换若理解错误，会误判"ZK 挂了"其实是 election。
+ZooKeeper 的职责是替业务保管协调状态：配置、选主结果、分布式锁、命名信息。这类数据体量小、写入频率不高，但对顺序和可靠性极其敏感——两个客户端先后拿到"同一把锁"，后果是灾难性的。
 
-## 核心原理
+因此 ZK 需要一个协议同时满足三点：
 
-崩溃恢复：选举 max(zxid) 的 Leader，Follower DIFF/TRUNC/SNAP 同步。广播：Leader 提案，Follower ACK 过半 commit。zxid 高 32 epoch 低 32 counter。与 Raft 类似，ZK 4.x 文档也强调与 Raft 的对比阅读。写必须经 Leader；顺序保证来自 ZAB quorum commit。
+1. **全序广播**：所有写请求在集群范围内排出唯一顺序，各副本按同一顺序应用；
+2. **崩溃可恢复**：Leader 宕机后，已提交的事务不能丢，未提交的半成品不能污染新纪元；
+3. **主备架构**：单一 Leader 串行化写入，Follower 分担读流量。
 
-## 方案权衡
+Paxos 是通用共识理论，直接套用到"原子广播+主备复制"的具体场景并不顺手，于是 ZK 团队设计了 ZAB 这个专用协议。
 
-ZAB 面向协调小数据，不适合 Kafka 级吞吐 log。与 Multi-Paxos 目标相近实现不同。读 sync() 可绑 strong consistency，默认 read 可能 lag。Observer 扩展读但不投票。
+## ZXID：任期与计数器拼出的全序编号
 
-## 落地要点
+ZAB 用 64 位的 ZXID 给每个事务编序：高 32 位是 epoch（纪元），标识 Leader 任期，新主上位就加一；低 32 位是任期内的事务计数器，每来一个写请求递增一次，换主时清零。
 
-监控 fsync latency 和 outstanding requests；客户端写后读关键路径 sync；对比阅读 Raft §5.4 safety。升级 ZK 版本阅读 release note 中 ZAB 变更。避免超大 transaction 阻塞 pipeline。
+这个结构让"新旧"可以直接比较：epoch 大的任期更新；epoch 相同则计数器大的数据更全。选举和恢复全靠它做裁决依据。
 
-## 常见误区
+## 模式一：消息广播
 
-误区：ZAB=Paxos 完全等同；忽视 DIFF vs SNAP 选择；Follower 未同步完对外写；把 zxid 当业务序列号使用导致误解进度。
+Leader 健康且过半节点已同步时，集群处于广播模式，流程像一个简化版两阶段提交：
+
+```text
+Client 写请求
+    -> Leader 生成带 ZXID 的提案(Proposal)
+    -> 按 FIFO 队列顺序发给各 Follower
+    -> Follower 追加事务日志并 fsync 落盘，回 ACK
+    -> Leader 收到过半 ACK，判定提案已提交
+    -> 广播 Commit，各节点应用到内存状态机
+```
+
+两个细节值得记住：
+
+- **过半即提交，不是全员**：这与 Raft 的多数派思路一致，3 台容忍 1 台故障、5 台容忍 2 台，所以 ZK 集群推荐奇数台部署。
+- **fsync 是生命线**：Follower 必须等事务日志真正落盘才回 ACK，刷盘延迟直接决定写延迟，生产上要给事务日志单独配低争抢的磁盘。
+
+## 模式二：崩溃恢复
+
+系统启动或 Leader 与过半节点失联时，集群进入恢复模式，分两步走。
+
+### 第一步：选举——数据最新者优先
+
+节点进入 LOOKING 状态，互相交换选票 `(epoch, zxid, myid)`，比较顺序是：epoch 大者优先；epoch 相同比 ZXID，大者数据更新；再相同比 myid 大者。拿到过半选票者当选。
+
+让"数据最全"的节点当主不是巧合，而是安全性的关键：新 Leader 天然包含所有已提交事务，恢复时只需别人向它看齐，杜绝了已提交数据被回滚的可能。
+
+### 第二步：数据同步——补齐、截断或快照
+
+新主把 epoch 加一开启新纪元，然后根据每个 Follower 上报的最新 ZXID 选择同步策略：
+
+- **DIFF（差异同步）**：Follower 只差一点，直接补发缺失提案；
+- **TRUNC（截断回滚）**：Follower 残留了旧 Leader 提过但从未提交的"幽灵提案"，必须截掉，防止脏数据混入新纪元；
+- **SNAP（全量快照）**：落后太多，直接传快照重建。
+
+epoch 加过半机制还顺带免疫了脑裂：旧 Leader 哪怕只是 Full GC 假死、苏醒后还想发旧 epoch 的提案，也会因为纪元过低被多数派拒绝。过半节点完成同步后，集群退出恢复模式，重新开广播。
+
+## 与 Raft 对照着看
+
+两者的骨架几乎同构：唯一 Leader、任期概念（epoch 对 term）、多数派提交、选举时偏向日志更新者。差异主要在目标与气质上：
+
+| 维度 | ZAB | Raft |
+| --- | --- | --- |
+| 设计目标 | ZK 专用的原子广播 | 通用、易理解的共识算法 |
+| 主流程划分 | 广播 / 崩溃恢复两模式 | 选举、日志复制、安全性分述 |
+| 任期标识 | epoch 内嵌于 ZXID 高位 | term 独立字段 |
+| 生态 | 绑定 ZooKeeper | etcd、Consul、TiKV、Kafka KRaft |
+
+## 一致性边界：顺序一致，而非线性一致
+
+这是使用 ZK 时最容易踩的坑：ZAB 保证所有写按全序被各副本应用（顺序一致性），但**不保证你在任意 Follower 上读到最新值**。读请求由本地节点直接应答，若它尚未同步到 Leader 的最新位置，客户端拿到的就是旧数据。
+
+需要"写后立刻读到"的场景（如分布式锁的状态校验），必须先调用 `sync()` 强制当前节点追平 Leader，再执行读。网络分区时连上少数派的客户端也是同理：写会失败，读却可能返回过期数据。把 ZK 当线性一致存储用，是架构层面的误判。
 
 ## 小结
 
-ZAB 与 Raft 对照学习效率最高：epoch≈term，quorum commit 思路一致。运维 ZK 时关注 election 次数、fsync 延迟和 outstanding requests，比死记协议阶段更能解决实际问题。客户端强读需求应显式 sync，而不是假设所有读都 linearizable。 阅读 ZK 源码或 admin 文档时，把 zxid 解析成 epoch+counter 的习惯能加速故障定位。建议在测试环境模拟 Leader 进程 hang 而非 kill，观察会话与选举的差异。与业务团队对齐：哪些读路径必须 sync，哪些允许 stale，避免把 ZK 一致性能力用错场景。
-
-一句话总结：ZAB 为协调场景优化，小事务、强顺序、快选举，是 ZooKeeper 稳定运行的根基。
-
-运维 ZK 时把 election 告警与客户端重试策略联动配置，可以显著缩短感知故障到恢复服务的时间窗口。
+- ZAB 是为 ZooKeeper 定制的原子广播协议，运行分消息广播与崩溃恢复两种模式。
+- ZXID 高 32 位 epoch、低 32 位计数器，是选举和同步的裁决依据。
+- 广播阶段过半 ACK 即提交；恢复阶段先选数据最新者为新主，再按 DIFF/TRUNC/SNAP 对齐。
+- 与 Raft 同构：epoch 对 term、quorum 提交、新主偏向数据更全者。
+- ZK 提供顺序一致性而非线性一致性，强读需显式 `sync()`。

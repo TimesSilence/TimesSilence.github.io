@@ -8,35 +8,66 @@ categories:
 tags:
   - Java新特性
   - Java24
-description: "Java 24 语言与 API 预览项的学习追踪笔记。"
+description: "JDK 24 重点：Stream Gatherers 转正、紧凑源文件与实例 main 第四次预览、虚拟线程在 synchronized 中不再固定平台线程、安全管理器永久禁用。"
 ---
 
-## 跟踪方法
-
-非 LTS 版本以 OpenJDK Release Notes + JEP 列表为准。关注 Language/VM/Library 三类。
+JDK 24（2025 年 3 月）是 JDK 25 之前的最后一个非 LTS 版本，角色很明确：把一批酝酿已久的特性转正或推到转正前的最后阶段。Stream Gatherers 结束预览是最大亮点，虚拟线程的 pinning 问题也在这个版本得到解决。
 
 <!-- more -->
 
-## 常见方向
+## 版本定位
 
-模式匹配完善、灵活构造函数 body、性能与 GC 持续改进、Foreign API 成熟。具体 JEP 编号随发布调整，笔记只记录**验证过的环境**行为。
+非 LTS 版本，官方支持期六个月，紧接着就是长期支持版 JDK 25。因此 JDK 24 的意义不在于"值得部署"，而在于"提前看清 JDK 25 的样子"——在这里转正的特性，大概率就是你下一个生产基线里的标准能力。
 
-## 实践
+## Stream Gatherers 转正
 
-使用 sdkman 安装 24-ea，单独模块开 --enable-preview 做实验，与生产 LTS 隔离。
+经过 JDK 22、23 两轮预览，`Stream.gather(Gatherer)` 在 JDK 24 正式成为标准 API。它补上了 Stream 生态长期缺失的一块：自定义**中间**操作。`filter`、`map` 是无状态的，`collect` 只能收尾，而滑动窗口、按规则去重、固定批量切分这类"带着状态往后传"的转换，过去很难优雅表达，现在可以自己实现 `Gatherer` 接口串进管道：
 
-## 课堂外的思考
+```java
+var result = Stream.of("a", "bb", "cc", "ddd")
+                   .gather(Gatherer.ofSequential(
+                       HashSet::new,
+                       (seen, s, downstream) -> {
+                           if (seen.add(s.length())) {
+                               return downstream.push(s);
+                           }
+                           return true;
+                       }))
+                   .toList();
+// [a, bb, ddd]：按字符串长度去重
+```
 
-学习「Java 24 新特性概览」时，我把自己放在线上值班的情境里：如果告警与这一主题相关，我能否在较短时间内建立假设并用数据验证？这种提问方式逼迫我从「看过」变成「讲得清楚、做得到」，也避免笔记沦为标题摘抄。
+转正意味着签名冻结、可以放心用于生产，这是 JDK 24 里最值得评估引入的特性。
 
-## 与同事的讨论方式
+## 紧凑源文件与实例 main 方法（第四次预览）
 
-我会用白板画出状态机、内存布局或调用链，请同事挑错。若被追问「更高并发或更老 JDK 版本会怎样」，答不上来就回到文首原文链接查 primary source，而不是凭记忆硬编。讨论后把新认识补进笔记末尾。
+这个特性从 JDK 21 开始一路预览，目标是让"Hello World"回到一行能写完的水平：`main` 不再需要 `public static` 和 `String[] args`，类声明都可以省略：
 
-## 可复现实验
+```java
+void main() {
+    System.out.println("Hello, World!");
+}
+```
 
-为每个主题保留最小复现：一段可运行的 Java 片段、一条 jcmd/jstack 命令，或一组压测对比。记录环境（JDK 小版本、CPU 核数、容器限制），结论才可靠。实验细节不必全部公开，但索引要能找到。
+JDK 24 是它的第四次预览，名称也从"未命名类"演进为"紧凑源文件与实例 main 方法"，语义更贴合实际形态。它降低的是入门和脚本化场景的门槛，对大型工程没有影响；仍是预览特性，教学、原型、JShell 之外慎用。
 
-## 补充复习
+## 虚拟线程：synchronized 中不再固定平台线程
 
-把本篇三个关键词写入间隔重复卡片，并各关联一个真实项目场景；暂时用不到的概念标记「待实践」，避免笔记只增不用。
+这是 JDK 24 对并发模型最重要的一次修补。此前虚拟线程一旦进入 `synchronized` 块并发生阻塞，会"固定（pinning）"在承载它的平台线程上，平台线程被占住，其他虚拟线程只能排队，高并发下可能直接拖垮吞吐量。JDK 24 改进了调度机制，虚拟线程在 `synchronized` 中阻塞时通常可以释放平台线程。
+
+存量代码无需修改即可受益，意味着大量基于 `synchronized` 的老库（而非 `ReentrantLock`）终于能安全地跑在虚拟线程上——此前这是迁移虚拟线程时最需要规避的坑。
+
+## 并发新 API 继续打磨，安全管理器谢幕
+
+结构化并发与作用域值在 JDK 24 进入第四次预览，设计已经多轮收敛，转正临近，建议此时开始跟进学习。同时 JDK 24 永久禁用了 Security Manager：即使显式传 `-Djava.security.manager` 也无法启用，这个复杂度极高、使用率极低的旧机制正式进入移除流程，还在依赖它的老系统需要尽早规划替代方案。
+
+## 升级建议
+
+生产环境继续留在 LTS 上，但建议在 CI 中用 JDK 24 跑一遍测试集：一来 Stream Gatherers 转正后可以开始试点，二来 `synchronized`  pinning 的修复值得用真实负载验证虚拟线程的表现，为升级到 JDK 25 积累数据。
+
+## 小结
+
+- Stream Gatherers 转正，Stream 支持自定义有状态中间操作。
+- 紧凑源文件与实例 main 第四次预览，入门门槛继续降低。
+- 虚拟线程在 `synchronized` 中阻塞不再固定平台线程，老代码可安全迁移。
+- 结构化并发、作用域值第四次预览；Security Manager 永久禁用。

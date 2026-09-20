@@ -9,35 +9,79 @@ tags:
   - Paxos
   - 共识算法
   - Multi-Paxos
-description: "Basic Paxos 与 Multi-Paxos 的角色、两阶段流程及与 Raft 的差异。"
+description: "为什么共识难：异步网络与故障模型；Basic Paxos 两阶段流程、活锁问题、Multi-Paxos 选主优化与工程落地距离。"
 ---
 
-Paxos 是共识算法的理论基石，术语密集但思想精炼。本文用 Proposer/Acceptor/Learner 流程视角重新组织，便于与 Raft 对照。
+Paxos 是共识问题的第一个严格解法：在消息可能延迟、丢失，节点可能宕机的异步网络里，让一组节点就同一个值达成不可撤销的一致。本文按"为什么难、Basic Paxos 两阶段、活锁、Multi-Paxos"的顺序推演，并解释它为何以难懂著称、与工程实现之间隔着什么。
 
 <!-- more -->
 
-## 要解决什么问题
+## 它解决什么问题
 
-多节点对同一槽位提案，在异步网络、丢包、节点故障下仍要达成一致，且已 chosen 的值不可被覆盖。无共识则 replicated log 顺序分裂，状态机应用 diverge。Paxos 给出在 crash 模型下的可行性，但工程落地曾长期被认为困难。
+复制状态机要求所有节点按相同顺序执行相同命令，这等价于对一条条日志的取值达成共识。难点在异步网络模型：消息延迟没有上界，节点可能随时崩溃重启，你无法区分"节点死了"和"消息还在路上"。在这种环境下，两个节点可能各自以为自己是协调者，向不同副本写入不同的值。共识算法要保证两类性质：安全性（safety）——一旦被多数派选定的值永远不会被后来的决定推翻；活性（liveness）——只要多数派存活且网络恢复，系统最终能选出一个值。Paxos 证明了在崩溃故障模型（无恶意节点）下这件事做得到，并给出了最简机制。
 
 ## 核心原理
 
-Basic Paxos：Prepare 阶段 Acceptor 承诺不接受更小 proposal number；Accept 阶段多数派 accept 则 value chosen。Learner 学习结果。Multi-Paxos 选 stable Leader 串行 propose，减少活锁。角色可合并；实际系统常用简化 Multi-Paxos。与 Raft 相比，Paxos 更泛化，Raft 用 strong Leader 约束换取可理解性。
+### 三种角色与提案
 
-## 方案权衡
+Basic Paxos 只就单个值达成共识，涉及三类角色：Proposer 接收客户端请求并发起提案，提案由编号 n 和值 v 组成，n 全局唯一且单调递增；Acceptor 对提案投票，并持久记录自己应答过的最大编号和已接受的最大编号提案；Learner 被动学习最终结果。工程上三种角色常由同一进程兼任。多数派（quorum）是 Paxos 的地基：任意两个多数派必有交集，交集中的 Acceptor 让"后来者一定能看到先前已被接受的值"。
 
-Paxos 论文 elegant 但 corner case 多，工程实现历史上少；Raft 为 teaching 设计，etcd/Consul 广泛采用。面试讲清两阶段和 proposal number 单调即可；生产勿自研。Chubby/Google 内部大量 Paxos 变体，一般开发者了解定位足够。
+### 两阶段协议
 
-## 落地要点
+阶段一 Prepare/Promise：Proposer 向多数派发送 Prepare(n)。Acceptor 若发现 n 大于自己应答过的所有编号，就承诺不再应答编号小于 n 的请求，并顺带返回自己已接受过的编号最大的提案（若有）。
 
-配合可视化动画理解；对比 Raft log matching；阅读 etcd 为何选 Raft 的设计 doc。若读论文，先 Multi-Paxos 再看 Basic。用"值一旦 chosen 不可变"解释为何需要 highest proposal 规则。
+阶段二 Accept/Accepted：集齐多数派 Promise 后，Proposer 敲定值：若回报中有任何已接受的提案，必须沿用其中编号最大者的值，不能自提新值；若全部为空才可自由提议。随后发送 Accept(n, v)，Acceptor 若在此期间没有应答过更大编号的 Prepare，就接受该提案。多数派 Accept 之后，v 被选定（chosen），结果通知 Learner。
 
-## 常见误区
+## 深入机制
 
-误区：Paxos=Paxos Made Simple 全文背诵；忽略 livelock 可能；把 ZAB 叫 Paxos；认为任一节点随时 propose 无代价。混淆 instance 和 sequence 也会答非所问。
+### 为什么"必须沿用已接受过的最高编号的值"
+
+这是 Paxos 安全性证明的心脏。设想 Proposer A 用编号 5 让多数派接受了值 X。随后 Proposer B 发起编号 8 的 Prepare，它的多数派与 A 的多数派必有交集，交集中的 Acceptor 会如实上报"我接受过 (5, X)"，于是 B 被迫沿用 X 而非自己的值 Y。编号更大的提案只能"继承"而不能"覆盖"，已选定的值因此不可逆。若违反这条规则，两个不同的值就可能先后被不同多数派接受，一致性立刻崩坏。
+
+### 活锁：保证不错，但可能永远没结果
+
+Paxos 保证安全，但不保证进展。两个 Proposer 交替抬高编号会形成活锁：
+
+```text
+P1: Prepare(1) -> 多数派承诺
+P2: Prepare(2) -> 多数派承诺（编号 1 作废）
+P1: Accept(1, X) -> 被拒（多数派已承诺 2）
+P1: Prepare(3) -> 2 作废;  P2: Prepare(4) -> 3 作废 ... 循环不止
+```
+
+缓解办法是失败的 Proposer 随机退避后重试，让编号竞争在时间上错开；根治办法是 Multi-Paxos 引入的稳定 Leader。需要注意活锁只影响活性、不破坏安全性：无论竞争多久，任何时刻被选定的值仍然唯一，只是系统迟迟给不出答案。FLP 不可能定理已经指出，纯异步模型下不存在既安全又能保证终止的确定性共识算法，Paxos 选择保住安全，把"何时能出结果"交给随机化与工程手段去逼近。
+
+### Multi-Paxos：从单个值到日志序列
+
+真实系统要对一串日志条目取值。朴素做法是每条日志跑一次完整 Basic Paxos，每条两个网络往返。Multi-Paxos 的优化是先用 Basic Paxos 选出稳定 Leader，由它一次性为后续一批日志槽完成 Prepare，此后每条日志只跑 Accept 阶段，延迟从 2-RTT 降到 1-RTT，也顺带消灭了多 Proposer 竞争引发的活锁。新 Leader 上任时，要对每个槽位重新执行阶段一收集已接受的值：槽位中已有值必须复用，空槽可用 no-op 占位填平，保证日志序列不出现分叉。
+
+## 工程实践
+
+Lamport 于 1990 年前后提出该算法，论文 1998 年才以《The Part-Time Parliament》发表，2001 年又补写了正文仅十几页的《Paxos Made Simple》。难懂的根源在于论文只给出算法骨架并证明其正确，却几乎不谈工程细节：编号如何分配、状态如何落盘、成员如何变更、落后副本如何追赶、日志如何压缩。Google Chubby 团队在《Paxos Made Live》中记录了把论文变成生产系统时踩过的坑，理论与实现之间的距离远超预期。因此业界共识是不要手写 Paxos：需要共识能力时优先选用久经考验的实现，如 etcd（Raft）、ZooKeeper（ZAB，与 Paxos 同族但并非同一算法）；Google 内部的 Chubby 与 Spanner 则是基于 Paxos 构建的代表作。
+
+## 对比与权衡
+
+| 维度 | Multi-Paxos | Raft |
+| --- | --- | --- |
+| 设计目标 | 证明共识可解，骨架极简 | 以可理解性为第一目标 |
+| Leader 地位 | 弱 Leader，仅是性能优化 | 强 Leader，日志只从 Leader 流出 |
+| 日志约束 | 各槽位独立，允许乱序、允许空洞 | 强制连续追加，不允许空洞 |
+| 提交流程 | 每槽位独立 chosen，可乱序完成 | 按序 commit，状态机顺序回放 |
+| 工程资料 | 论文留白多，实现各凭本事 | 论文给出完整状态机与成员变更细节 |
+
+## 面试视角
+
+**Paxos 为什么要两个阶段的 RPC？** 阶段一既是"抢锁"（让 Acceptor 拒绝更小编号）也是"读历史"（收集已被接受的值），阶段二才能把值写进多数派。没有阶段一，新 Proposer 无法得知是否已有值被多数派接受，就可能覆盖已选定的结果。
+
+**为什么要求提案编号全局唯一且递增？** 编号是提案的全序依据：Acceptor 用它拒绝过期请求，Proposer 用它判定"最高编号的已接受值"。若编号可重复或回退，提案之间就无从比较新旧，安全性证明的链条断裂。
+
+**Basic Paxos 会死锁吗？** 不会死锁，但可能活锁：多个 Proposer 交替用更大编号抢占承诺，谁都无法走到阶段二。工程上用随机退避错开竞争，用 Multi-Paxos 的稳定 Leader 根除竞争。
+
+**Paxos 为什么难落地？** 论文只描述单个实例的共识骨架，成员变更、日志压缩、副本追赶、崩溃恢复全部留白；把 Basic 扩展成 Multi 时每个细节都有多种分叉方案，各家实现互不兼容，这正是后来 Raft 以"给出完整可实现描述"为卖点的原因。
 
 ## 小结
 
-Paxos 学习的合理目标是理解 proposal number 与 quorum 如何保证 safety，而非手写实现。与 Raft 对比时，强调 Paxos 更泛化、Raft 更利于工程 teaching。面试中用两阶段 prepare/accept 举例即可，深入 liveness 证明留给专项研究。 若感到 Paxos 抽象，可先完整学完 Raft 再回来看 Paxos 的 prepare/accept，会有"原来是在解决同一类 safety"的顿悟。论文阅读不必一次通关，分三次：动机、safety、liveness。工程上记住 Chubby/etcd 的分工即可指导绝大多数技术选型讨论。
-
-最后记住：Paxos 的价值在 safety 证明，Raft 的价值在 teachability，二者指向同一工程目标——复制日志一致。
+- Paxos 用"多数派交集、递增编号、继承已接受值"三条规则，在异步网络里保证了已选定值不可推翻。
+- 活锁是 Paxos 的活性代价：随机退避缓解，稳定 Leader 根治。
+- Multi-Paxos 通过复用 Leader 把每条日志的共识开销压到一个网络往返。
+- 学习目标是理解两阶段与编号规则如何保证安全性，而不是手写实现；工程选型交给 Raft、etcd、ZooKeeper 这些久经考验的系统。

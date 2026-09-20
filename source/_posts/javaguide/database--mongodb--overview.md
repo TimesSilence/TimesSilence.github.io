@@ -9,55 +9,58 @@ tags:
   - MongoDB
   - 文档数据库
   - 副本集
-description: "概览 MongoDB 文档模型、索引、副本集、分片与事务等核心主题。"
+description: "MongoDB 概览：文档模型与关系模型的本质差异、BSON 的取舍、适用与不适用场景，以及副本集与分片的定位。"
 ---
 
-MongoDB 以 BSON 文档为中心，适合 schema 演进快的业务。学习时要把「灵活」与「可控」平衡好。
+MongoDB 是最流行的文档数据库，但「能存 JSON 的数据库」这个理解会误导选型。本文讲清文档模型与关系模型的本质差异、BSON 的取舍、MongoDB 该用与不该用的边界。
 
 <!-- more -->
 
-## 文档模型要点
+## 文档模型 vs 关系模型：差异不在语法，在聚合边界
 
-集合里存 JSON/BSON 文档，字段可嵌套数组与对象。同一集合内文档结构可以不同，但生产仍建议约定 schema 版本，避免字段爆炸。
-
-## 核心机制
-
-- **索引**：单字段、复合、多键（数组）、文本、地理空间；注意 ES 与 Mongo 文本索引差异。
-- **副本集**：一主多从+仲裁，选举 failover；写关注 `writeConcern`，读关注 `readPreference`。
-- **分片**：按 shard key 水平切分；选好键避免热点与 jumbo chunk。
-- **事务**：4.0 副本集、4.2 分片支持多文档事务，但有性能与大小限制。
-
-## 实践建议
+关系模型把业务对象拆散到多张表里：一个订单对象拆成订单行、订单明细行、收货地址行，靠 JOIN 在查询时拼回去。文档模型反过来，把一个业务对象完整存成一条文档：
 
 ```javascript
-db.orders.createIndex({ userId: 1, createdAt: -1 })
-db.orders.find({ userId: 123 }).sort({ createdAt: -1 }).limit(20)
+{
+  _id: ObjectId("..."),
+  orderNo: "A20260101",
+  buyer: { userId: 123, name: "张三" },
+  items: [ { sku: "S1", qty: 2 }, { sku: "S2", qty: 1 } ],
+  address: { city: "杭州", detail: "..." },
+  status: "PAID"
+}
 ```
 
-大文档拆子文档；高频更新字段与冷数据分离；监控 workingSet 与慢查询 profiler。
+术语对照很简单：表→集合，行→文档，列→字段。真正的差异在**聚合边界**：文档模型默认「一次读取取回一个完整业务对象」，单文档读写天然原子，不需要 JOIN；关系模型默认「实体归一化存放」，靠 JOIN 保证任意组合查询的灵活性。前者的软肋是跨集合关联——MongoDB 没有真正的 JOIN，`$lookup` 只是聚合管道里成本不低的补丁。
 
-## 容量与性能规划
+## BSON：为效率付一点空间税
 
-working set 应 mostly 在 RAM；超过则 page fault 激增。写关注与读偏好组合决定延迟与一致性。压测时观察 wiredTiger cache usage、queue length、opcounters。
+文档在磁盘和内存里的形态是 BSON（Binary JSON）。相比 JSON 文本，它做了三件事：扩充类型系统（ObjectId、Date、64 位整数、Decimal128、二进制等）；给每个元素加长度前缀，解析器可以跳过无关字段直接定位；二进制编码省去文本解析开销。代价是同样的数据 BSON 通常比 JSON 略占空间，单文档还有 16MB 上限——这是用空间换扫描效率的明确取舍。
 
-## 与关系型协作
+## 建模的两个基本决策
 
-Mongo 管文档型业务对象，账单流水仍可能落 MySQL。跨库 ID 用 UUID 或雪花，避免依赖单库自增。
+文档模型的核心问题是**内嵌还是引用**：一起读写的数据内嵌进同一文档（订单与明细），独立演进或被多处复用的数据用 ID 引用（订单与用户）。其次是控制数组规模——评论、操作记录这类无限增长的数组要拆成独立集合，否则文档会撞上 16MB 上限并让更新越来越重。「schema 灵活」指的是写入前不用 DDL，不代表可以不设计；生产上通常配合 schema validation 约束字段，避免结构漂移。
 
-## 实践复习清单
+## 什么时候选 MongoDB
 
-文档 schema 版本化；大数组拆表；副本集 writeConcern 与 readPreference 组合表；分片键评审模板；事务使用边界；change stream 消费幂等；profiler 慢查询阈值。
+适合的信号很明显：
 
-## 常见坑
+- **schema 演进快**：内容、商品、表单类业务，字段随需求频繁增减，关系库加列改表痛苦，文档模型直接写新结构。
+- **日志与事件流**：写入量大、结构松散、按时间衰减，配合 TTL 索引自动过期。
+- **内容管理与用户画像**：嵌套结构内聚，一次查询取回完整对象。
+- **需要水平扩展**：数据量超单机容量时，原生分片比关系库的分库分表中间件顺滑。
 
-- shard key 选单调递增 `_id`，导致单分片热点。
-- 无索引的全表扫描拖垮集群。
-- 把 Mongo 当 MySQL 用，复杂 JOIN 在应用层 N+1 查询。
+不该用的信号同样明显：
 
-## 总结与自测
+- **强跨实体事务**：转账、账务这类必须多实体强一致的场景，MongoDB 虽在 4.0/4.2 后支持副本集与分片上的多文档事务，但性能代价大、限制多，主力交易链路仍应放关系库。
+- **复杂关联与即席分析**：大量 JOIN、自由组合的多维报表，是关系模型与 OLAP 引擎的主场。
 
-文档模型相对关系型的优劣？副本集读偏好有哪些？分片与副本集关系？多文档事务限制？change stream 典型用途？建议用一个小项目完成 CRUD+索引+聚合+副本集 failover 观察。
+## 副本集与分片：一句话定位
 
-## 原理延伸
+**副本集**解决高可用：一主多从加选举，主宕机自动切换；**分片**解决扩展性：按分片键把数据水平切到多个分片，每个分片自己还是副本集。前者管「宕机不死」，后者管「数据装不下、写入扛不住」，二者正交组合。
 
-MongoDB 把文档原子性、副本集复制与可选分片组合成横向扩展方案。schema 灵活不等于无需设计：嵌入与引用、索引与 working set、writeConcern 与 readPreference 共同决定延迟与一致性。聚合管道是分析利器，但 $lookup 与无索引 $match 容易把负载放大到集群级。生产环境必须启用 auth、TLS 与 least-privilege 角色，并把备份恢复与 failover 演练写进 runbook。
+## 继续深入
+
+- 基础概念、WiredTiger、副本集与事务的面试向解析：[MongoDB 常见面试题总结（上）](/knowledge/database/mongodb/mongodb-questions-01/)。
+- 索引体系、分片键设计与 chunk 均衡：[MongoDB 常见面试题总结（下）](/knowledge/database/mongodb/mongodb-questions-02/)。
+- MongoDB 在整个 NoSQL 版图中的位置：[NoSQL 基础常见面试题总结](/knowledge/database/nosql/)。

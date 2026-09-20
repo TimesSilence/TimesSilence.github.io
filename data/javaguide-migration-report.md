@@ -4,7 +4,7 @@
 - 计划纳入：350
 - 已生成：350
 - 阻塞问题：0
-- 人工复核：0
+- 人工复核：4
 
 ## 日期分布
 
@@ -25,4 +25,7 @@
 
 ## 人工复核
 
-- 无
+- source/_posts/javaguide/database--sql--sql-questions-03.md: 存在较长的原文连续片段，需人工复核
+- source/_posts/javaguide/java--collection--arraylist-source-code.md: 存在较长的原文连续片段，需人工复核
+- source/_posts/javaguide/java--collection--concurrent-hash-map-source-code.md: 存在较长的原文连续片段，需人工复核
+- source/_posts/javaguide/java-concurrent-cas.md: 存在较长的原文连续片段，需人工复核

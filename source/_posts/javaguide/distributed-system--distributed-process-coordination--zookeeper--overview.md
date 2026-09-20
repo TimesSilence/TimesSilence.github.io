@@ -9,33 +9,46 @@ tags:
   - ZooKeeper
   - 协调服务
   - ZAB
-description: "ZooKeeper 专题导读：从 ZNode、Watcher 到 ZAB、集群部署与 Curator 实战路径。"
+description: "ZooKeeper 模块学习地图：三篇文章分别覆盖概念模型、集群机制与动手实战，给出推荐学习顺序与自检问题清单。"
 ---
 
-ZooKeeper 是经典分布式协调组件，Dubbo、Kafka 早期版本都重度依赖它。本文梳理专题结构及推荐学习顺序，便于分阶段掌握概念、协议与实战。
+ZooKeeper 是分布式协调领域的经典组件，Dubbo、HBase、HDFS、旧版 Kafka 都建立在它之上。本模块用三篇文章把它拆成"模型—机制—实战"三步，本文说明每篇的定位、推荐学习顺序，以及学完后应当能回答的问题。
 
 <!-- more -->
 
-## 要解决什么问题
+## 模块构成
 
-分布式系统需要选主、配置同步、命名服务和分布式锁，自研协调逻辑成本高且易错。ZK 提供类文件系统的数据模型和顺序一致写入，但 Watcher、session、ZAB 等概念叠加，初学者容易在 API 层面会用却不理解失效行为。
+- [ZooKeeper 入门指南](/knowledge/distributed-system/distributed-process-coordination/zookeeper/zookeeper-intro/)：数据模型（znode 树与四种节点类型）、Watcher 的一次性语义、会话与心跳、ZAB 提供的顺序一致性，以及配置中心、注册中心、分布式锁、选主四类典型应用。这是整个模块的地基。
+- [ZooKeeper 进阶详解](/knowledge/distributed-system/distributed-process-coordination/zookeeper/zookeeper-plus/)：集群角色（Leader/Follower/Observer）、写走 Leader 读走本地的请求流程、会话管理细节，以及"ZK 不适合做什么"——重点讨论注册中心场景下的 CP 之争，与 Eureka、Nacos 对比。
+- [ZooKeeper 实战教程](/knowledge/distributed-system/distributed-process-coordination/zookeeper/zookeeper-in-action/)：Docker 起环境，用 Curator 写出三个可运行示例——临时顺序节点分布式锁、NodeCache 配置管理、LeaderLatch 选主，并给出运行与观察方法。
 
-## 核心原理
+## 推荐学习顺序
 
-ZK 核心是层次化 ZNode、一次性 Watcher 通知、ACL 和 ZAB 协议。典型用途：服务注册（临时节点）、配置（持久节点+watch）、Leader 选举（顺序临时节点）、分布式锁。专题分三篇：intro 讲模型与场景，plus 讲 ZAB 与选举，in-action 讲部署与 Curator。Curator Recipes 封装了常见协调模式，生产应优先使用。
+1. **先读入门篇，建立模型直觉**。重点是理解三件事：znode 为什么分成持久/临时/顺序；Watcher 触发一次即失效意味着什么；会话为什么是临时节点和一切活性判断的载体。读到能徒手画出"服务注册—下线—消费者感知"的完整时序，才算过关。
+2. **再读进阶篇，理解集群机制**。带着"写为什么要过半确认""读为什么可能偏旧"两个问题去读，顺带想清楚 ZK 作为 CP 系统在选举期间的不可用窗口对上层业务意味着什么。
+3. **最后动手实战**。把三个示例跑起来只是起点，关键是做故障演练：kill 持锁进程、停掉 Leader 节点、制造网络抖动，观察临时节点回收和重新选举的实际时序。只看不动手，面试和排障都会卡壳。
 
-## 方案权衡
+## 自检问题清单
 
-ZK 偏 CP，写吞吐有限，单节点数据应 KB 级，不适合当业务数据库。etcd 在 K8s 生态更主流，但 ZK 面试与 legacy 系统仍多。与 Redis 协调比，ZK 强在顺序和 ephemeral 语义，弱在 OPS 复杂度和写性能。学习成本高于直接用 Nacos，但理解 ZK 有助于理解共识类组件共性。
+学完后应能顺畅回答：
 
-## 落地要点
+- 临时节点和临时顺序节点分别解决了什么问题？为什么不能给临时节点挂子节点？
+- Watcher 为什么设计成一次性？两次注册窗口之间丢了变更怎么办？
+- ZK 的一致性到底保证到哪一步？为什么刚写完读另一台机器可能是旧值？`sync` 做了什么？
+- 集群为什么推荐奇数台？加 Observer 为什么不影响写性能？
+- 分布式锁里"只监听前驱节点"如何避免惊群？持锁进程崩溃会发生什么？
+- 为什么越来越多的注册中心选型绕开 ZK？Eureka 的 AP 路线放弃了什么、换来了什么？
 
-生产集群奇数节点 3/5，独立磁盘，JVM 堆适中防长 GC；路径命名规范 /app/service/instance；用 Curator 管理连接与重试；监控 zxid lag、election 次数、latency。升级滚动时观察 session 迁移对临时节点的影响。与 Dubbo/Kafka 版本矩阵对照，避免客户端协议不兼容。
+答不上的条目，就是回读对应篇章的路标。
 
-## 常见误区
+## 实践建议
 
-误区：用 ZK 存业务大对象；Watcher 风暴不做合并；单节点开发环境行为与集群不一致；忽视 sessionTimeout 导致临时节点误删引发错误 failover 感知。
+- 学习期间用 Docker 单节点即可，验证选举行为再起三节点集群；生产部署记住"奇数台、独立磁盘、堆别太大"三条底线。
+- 编码统一用 Curator，裸 ZK 客户端的 Watcher 重注册和异常处理极易写错。
+- 把"会话过期后业务如何重建状态"写成一条明确的测试用例，这是 ZK 类应用线上事故的高发区。
 
 ## 小结
 
-ZooKeeper 专题的价值在于把协调问题拆成"模型—协议—实战"三步。先建立 ZNode/Watcher 直觉，再理解 ZAB 如何保证写入顺序，最后用 Curator 验证锁和选举。掌握这条线之后，再读 etcd 或 Nacos 协调功能会轻松很多，因为底层问题域高度相似。
+- 三篇文章对应"模型 → 机制 → 实战"，按顺序读收益最大。
+- 入门篇是词汇表，进阶篇回答"集群内部发生了什么"，实战篇把概念变成可复现的实验。
+- 自检问题清单答不顺的，回到对应篇章补上缺口。
