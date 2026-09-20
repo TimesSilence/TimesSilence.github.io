@@ -21,6 +21,63 @@ function quote(value) {
   return JSON.stringify(value);
 }
 
+const TAG_MAP = new Map([
+  ['high-performance', '高性能'],
+  ['high-availability', '高可用'],
+  ['interview-preparation', '面试与职业'],
+  ['tools', '开发工具'],
+  ['roadmap', '学习路线'],
+  ['overview', '概览'],
+  ['interview', '面试'],
+  ['面试题', '面试'],
+  ['aop', 'AOP'],
+  ['jwt', 'JWT'],
+  ['Java 集合', 'Java集合'],
+  ['Java 并发', 'Java并发'],
+  ['Java 基础', 'Java基础'],
+  ['algorithms', '算法'],
+  ['async', '异步'],
+  ['certification', '认证'],
+  ['engineering', '软件工程'],
+  ['filter', '敏感词'],
+  ['intro', '入门'],
+  ['j2ee', 'J2EE'],
+  ['naming', '命名'],
+  ['pattern', '设计模式'],
+  ['principles', '实现原理'],
+  ['push', '消息推送'],
+  ['refactoring', '重构'],
+  ['restfulapi', 'RESTful API'],
+  ['retrieval', '密码'],
+  ['summary', '总结'],
+  ['system', '权限'],
+  ['test', '单元测试'],
+  ['validation', '数据校验'],
+]);
+
+function formatTag(value) {
+  return /[:#{}[\],&*?|!<>=!%@`'"\\]/.test(value) || value === ''
+    ? JSON.stringify(value)
+    : value;
+}
+
+function normalizeTags(frontMatter) {
+  return frontMatter.replace(/^tags:\n((?:[ \t]+-[ \t]+.+\n?)+)/m, (_match, block) => {
+    const seen = new Set();
+    const tags = [];
+    for (const line of block.split('\n')) {
+      const item = line.match(/^[ \t]+-[ \t]+(.+?)\s*$/);
+      if (!item) continue;
+      const raw = item[1].replace(/^["']|["']$/g, '');
+      const mapped = TAG_MAP.get(raw) ?? raw;
+      if (seen.has(mapped)) continue;
+      seen.add(mapped);
+      tags.push(mapped);
+    }
+    return `tags:\n${tags.map((tag) => `  - ${formatTag(tag)}`).join('\n')}\n`;
+  });
+}
+
 function placeExcerpt(text) {
   const marker = '<!-- more -->';
   const parts = text.split(marker);
@@ -122,6 +179,8 @@ async function main() {
         frontMatter += `\ndescription: ${quote(descriptionFrom(title, body))}`;
       }
     }
+
+    frontMatter = normalizeTags(frontMatter);
 
     const output = `---\n${frontMatter}\n---\n\n${body.replace(/^\n+/, '')}`;
     if (output !== source) {

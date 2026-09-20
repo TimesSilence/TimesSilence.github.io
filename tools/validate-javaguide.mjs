@@ -91,7 +91,7 @@ async function main() {
     if (/^:::\s|<Badge|<ClientOnly|@include/m.test(parsed.body)) {
       failures.push(`${relative}: 存在 VuePress 专有语法`);
     }
-    if (new Date(parsed.fields.date) > new Date('2026-09-02T23:59:59+08:00')) {
+    if (new Date(parsed.fields.date) > new Date()) {
       failures.push(`${relative}: 日期晚于当前日期`);
     }
     const previous = permalinks.get(parsed.fields.permalink);
