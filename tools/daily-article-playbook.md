@@ -30,6 +30,7 @@
 ---
 title: "中文标题：主题讲清楚"
 date: YYYY-MM-DD HH:mm:ss
+updated: YYYY-MM-DD HH:mm:ss
 permalink: daily/<英文-slug>/
 categories:
   - 技术动态
@@ -62,5 +63,6 @@ description: "一句话摘要，单行 YAML 字符串"
 
 ## 完成后
 
-1. 运行 `npm run build` 确认构建通过
-2. **不做任何 git 操作**（不 commit、不 push）——把文件路径和选题理由报告给维护者，由人工审核后提交
+1. 运行 `npm run validate:daily` 确认硬约束全部通过（CI 也会执行同一校验，不通过会阻断部署）
+2. 运行 `npm run build` 确认构建通过
+3. **不做任何 git 操作**（不 commit、不 push）——把文件路径和选题理由报告给维护者，由人工审核后提交

@@ -40,6 +40,15 @@ npm run validate:javaguide   # 检查元数据和内容兼容性
 
 来源清单和迁移报告位于 `data/`。许可证副本位于 `LICENSES/JavaGuide-Apache-2.0.txt`。
 
+## 每日技术文章
+
+`daily/` 文章线的写作规范见 `tools/daily-article-playbook.md`。硬约束（front matter 字段、permalink 格式、字数区间、标题层级、代码块语言标注、禁用词）由脚本强制执行：
+
+```bash
+npm run validate:daily   # 校验 daily 文章
+npm run validate         # javaguide + daily 全部校验（CI 在构建前执行，失败会阻断部署）
+```
+
 ## 部署
 
 仓库已加 GitHub Actions（`.github/workflows/pages.yml`）。在仓库 Settings → Pages 里把 Source 设为 **GitHub Actions**。自定义域仍是 `www.daiwei.biz`（`source/CNAME`）。

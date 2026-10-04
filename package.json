@@ -14,6 +14,8 @@
     "inventory:javaguide": "node tools/import-javaguide.mjs",
     "normalize:javaguide": "node tools/normalize-javaguide-posts.mjs",
     "validate:javaguide": "node tools/validate-javaguide.mjs",
+    "validate:daily": "node tools/validate-daily.mjs",
+    "validate": "npm run validate:javaguide && npm run validate:daily",
     "topics": "node tools/list-existing-topics.mjs"
   },
   "hexo": {
