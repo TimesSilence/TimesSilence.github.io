@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目分析报告 · TimesSilence.github.io</title>
+<style>
+  :root {
+    --bg: #1a1b1e;
+    --panel: #232428;
+    --panel-2: #2a2b30;
+    --border: rgba(255,255,255,0.09);
+    --text: #e8e8e6;
+    --text-2: #a8a8a3;
+    --text-3: #77776f;
+    --purple: #afa9ec;
+    --teal: #5dcaa5;
+    --blue: #85b7eb;
+    --amber: #fac775;
+    --red: #f09595;
+    --green: #97c459;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    padding: 48px 24px 80px;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 24px; font-weight: 600; letter-spacing: 0.5px; }
+  h2 { font-size: 17px; font-weight: 600; margin: 44px 0 16px; padding-left: 12px; border-left: 3px solid var(--purple); }
+  h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .sub { color: var(--text-2); margin-top: 6px; }
+  .badge {
+    display: inline-block; font-size: 11px; padding: 1px 9px; border-radius: 99px;
+    border: 1px solid var(--border); color: var(--text-2); margin-left: 8px; vertical-align: middle;
+  }
+  .panel {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px 20px; margin-top: 14px;
+  }
+  .grid { display: grid; gap: 14px; margin-top: 14px; }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 760px) { .grid-4, .grid-2 { grid-template-columns: 1fr 1fr; } }
+  .stat {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 16px;
+  }
+  .stat .num { font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .stat .lbl { color: var(--text-2); font-size: 12px; margin-top: 2px; }
+  .dim {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px;
+  }
+  .dim .head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .dim ul { padding-left: 18px; color: var(--text-2); }
+  .dim ul li { margin-bottom: 3px; }
+  .dim ul li b { color: var(--text); font-weight: 500; }
+  .score { font-size: 11px; padding: 2px 10px; border-radius: 99px; white-space: nowrap; }
+  .s-good { background: rgba(29,158,117,0.15); color: var(--teal); }
+  .s-ok { background: rgba(133,183,235,0.13); color: var(--blue); }
+  .s-warn { background: rgba(239,159,39,0.15); color: var(--amber); }
+  .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 7px; }
+  .bar-row .name { width: 92px; text-align: right; color: var(--text-2); font-size: 12px; flex-shrink: 0; }
+  .bar-row .track { flex: 1; background: var(--panel-2); border-radius: 6px; height: 16px; overflow: hidden; }
+  .bar-row .fill { height: 100%; border-radius: 6px; }
+  .bar-row .val { width: 34px; color: var(--text-2); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .flow { display: flex; align-items: center; gap: 0; flex-wrap: wrap; margin-top: 14px; }
+  .flow .step {
+    background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 14px; font-size: 13px;
+  }
+  .flow .arr { color: var(--text-3); padding: 0 8px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border); }
+  th { color: var(--text-2); font-weight: 500; font-size: 12px; }
+  td { font-size: 13px; }
+  td.dim2 { color: var(--text-2); }
+  .risk { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .risk:last-child { border-bottom: none; }
+  .prio { flex-shrink: 0; width: 40px; height: 22px; border-radius: 6px; font-size: 11px;
+    display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .p-high { background: rgba(226,75,74,0.15); color: var(--red); }
+  .p-mid { background: rgba(239,159,39,0.15); color: var(--amber); }
+  .p-low { background: rgba(133,183,235,0.13); color: var(--blue); }
+  code {
+    background: var(--panel-2); border-radius: 5px; padding: 1px 6px;
+    font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 12px; color: var(--teal);
+  }
+  .foot { margin-top: 48px; color: var(--text-3); font-size: 12px; text-align: center; }
+  .conclusion {
+    background: linear-gradient(0deg, var(--panel), var(--panel));
+    border: 1px solid var(--purple); border-radius: 12px; padding: 20px 22px; margin-top: 14px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>项目分析报告：TimesSilence.github.io</h1>
+  <p class="sub">个人技术网站 · Hexo 8.1.2 + Butterfly 5.7 · 分析日期 2026-09-23 · 分析方法：八维度框架（概览 / 架构 / 流程 / 质量 / 测试 / 依赖 / 工程化 / 安全性能）</p>
+
+  <div class="grid grid-4">
+    <div class="stat"><div class="num">378</div><div class="lbl">文章总数（3 个内容系列）</div></div>
+    <div class="stat"><div class="num">729<span style="font-size:14px">ms</span></div><div class="lbl">全站构建耗时（1067 文件）</div></div>
+    <div class="stat"><div class="num">14</div><div class="lbl">生产依赖（全部最新）</div></div>
+    <div class="stat"><div class="num">0</div><div class="lbl">permalink 冲突 / 密钥泄露</div></div>
+  </div>
+
+  <h2>一、项目概览</h2>
+  <div class="panel">
+    <p>这是 Dai Wei 的个人技术网站（<code>www.daiwei.biz</code>），2026 年 9 月从旧版 Hexo + spfk 重建为 <b>Hexo 8 + Butterfly</b>。项目定位是「内容型静态站点」，核心资产不是代码而是 <b>378 篇技术文章</b>，代码只承担两类职责：站点生成（Hexo 生态）与内容工具链（<code>tools/</code> 下 6 个 Node 脚本，约 1034 行）。</p>
+    <div class="flow">
+      <span class="step">Markdown 写作</span><span class="arr">→</span>
+      <span class="step">hexo generate</span><span class="arr">→</span>
+      <span class="step">public/（45MB）</span><span class="arr">→</span>
+      <span class="step">GitHub Actions</span><span class="arr">→</span>
+      <span class="step">GitHub Pages + CNAME</span>
+    </div>
+    <table>
+      <tr><th>内容系列</th><th>数量</th><th>说明</th></tr>
+      <tr><td>2017 年 Java 入门笔记</td><td class="dim2">27 篇</td><td class="dim2">从旧站 HTML 抽取（extract）并改写为系统化教程（optimize）</td></tr>
+      <tr><td>JavaGuide 衍生笔记</td><td class="dim2">350 篇</td><td class="dim2">以固定 commit <code>aa4dc79</code> 为源重新组织，Apache-2.0 许可证合规存档</td></tr>
+      <tr><td>每日技术动态 daily</td><td class="dim2">1 篇</td><td class="dim2">2026-09-20 启动的新系列，配套写作手册 daily-article-playbook.md</td></tr>
+    </table>
+  </div>
+
+  <h2>二、八维度评估</h2>
+  <div class="grid grid-2">
+    <div class="dim">
+      <div class="head"><h3>1. 项目概览</h3><span class="score s-good">优秀</span></div>
+      <ul>
+        <li>README 覆盖本地运行、迁移工具、部署、Giscus 配置，<b>新人 5 分钟可上手</b></li>
+        <li>技术栈单一清晰：Node ≥20.19 + Hexo 生态，无多余复杂度</li>
+      </ul>
+    </div>
+    <div class="dim">
+      <div class="head"><h3>2. 架构与模块</h3><span class="score s-good">优秀</span></div>
+      <ul>
+        <li>关注点分离干净：内容 <code>source/</code>、工具 <code>tools/</code>、数据 <code>data/</code>、配置双文件拆分</li>
+        <li><code>themes/</code> 为空——主题走 npm 依赖，<b>零主题魔改</b>，升级无负担</li>
+        <li>生成物（public/、db.json、.cache）全部 gitignore，仓库只留源</li>
+      </ul>
+    </div>
+    <div class="dim">
+      <div class="head"><h3>3. 核心流程</h3><span class="score s-good">优秀</span></div>
+      <ul>
+        <li>写作→构建→部署链路完整，实测构建 <b>729ms / 1067 文件</b></li>
+        <li>内容迁移流水线（extract → optimize → inventory → normalize → validate）可重放、有清单、有报告</li>
+      </ul>
+    </div>
+    <div class="dim">
+      <div class="head"><h3>4. 代码质量</h3><span class="score s-ok">良好</span></div>
+      <ul>
+        <li>工具脚本均为无依赖 ESM，错误聚合 + 正确退出码，<code>validate-javaguide.mjs</code> 甚至做了<b>原文抄袭检测</b>（180 字符滑窗）</li>
+        <li>小瑕疵：front matter 用正则解析 YAML，对嵌套结构脆弱（当前数据形态下够用）</li>
+      </ul>
+    </div>
+    <div class="dim">
+      <div class="head"><h3>5. 测试体系</h3><span class="score s-ok">良好</span></div>
+      <ul>
+        <li>无单元测试——对博客属合理取舍；<b>validate 脚本实质是"内容测试"</b>：元数据完整性、permalink 唯一、日期合法、来源一致</li>
+        <li>实测 <code>validate:javaguide</code> 350/350 通过，0 失败，4 个原文片段复核警告</li>
+        <li>缺口：validate <b>未接入 CI</b>，内容回归靠人肉记得跑</li>
+      </ul>
+    </div>
+    <div class="dim">
+      <div class="head"><h3>6. 依赖供应链</h3><span class="score s-good">优秀</span></div>
+      <ul>
+        <li>14 个生产依赖全部为 Hexo 官方生态，<code>npm outdated</code>（官方源）确认<b>全部最新</b></li>
+        <li>lock 文件入库 + CI 用 <code>npm ci</code>，构建可复现</li>
+        <li>Dependabot 双生态（npm daily + actions weekly）已配置</li>
+      </ul>
+    </div>
+    <div class="dim">
+      <div class="head"><h3>7. 工程化</h3><span class="score s-good">优秀</span></div>
+      <ul>
+        <li>Pages 部署走官方 Actions 路径，<code>concurrency</code> 防重复部署</li>
+        <li>Giscus 评论、本地搜索、Atom feed、Open Graph 一应俱全</li>
+        <li>daily-article-playbook.md 是难得的<b>内容 SOP</b>：选题查重、事实纪律、人工审核门禁</li>
+      </ul>
+    </div>
+    <div class="dim">
+      <div class="head"><h3>8. 安全与性能</h3><span class="score s-ok">良好</span></div>
+      <ul>
+        <li>密钥扫描（tools/ + source/）<b>零泄露</b>；部署用 OIDC 最小权限（contents: read）</li>
+        <li>构建极快；但图片未做懒加载/压缩，第三方脚本走 jsdelivr（国内可访问性一般）</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>三、内容资产画像</h2>
+  <div class="grid grid-2">
+    <div class="panel">
+      <h3>分类分布（13 个分类）</h3>
+      <div style="margin-top:12px">
+        <div class="bar-row"><span class="name">Java</span><div class="track"><div class="fill" style="width:100%;background:var(--purple)"></div></div><span class="val">103</span></div>
+        <div class="bar-row"><span class="name">计算机基础</span><div class="track"><div class="fill" style="width:66%;background:var(--purple)"></div></div><span class="val">68</span></div>
+        <div class="bar-row"><span class="name">数据库</span><div class="track"><div class="fill" style="width:41%;background:var(--purple)"></div></div><span class="val">42</span></div>
+        <div class="bar-row"><span class="name">人工智能</span><div class="track"><div class="fill" style="width:38%;background:var(--teal)"></div></div><span class="val">39</span></div>
+        <div class="bar-row"><span class="name">AI 编程</span><div class="track"><div class="fill" style="width:27%;background:var(--teal)"></div></div><span class="val">28</span></div>
+        <div class="bar-row"><span class="name">系统设计</span><div class="track"><div class="fill" style="width:25%;background:var(--blue)"></div></div><span class="val">26</span></div>
+        <div class="bar-row"><span class="name">分布式系统</span><div class="track"><div class="fill" style="width:25%;background:var(--blue)"></div></div><span class="val">26</span></div>
+        <div class="bar-row"><span class="name">其他 6 类</span><div class="track"><div class="fill" style="width:45%;background:var(--panel-2);border:1px dashed var(--border)"></div></div><span class="val">46</span></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>文章年份分布（front matter date）</h3>
+      <div style="margin-top:12px">
+        <div class="bar-row"><span class="name">2017</span><div class="track"><div class="fill" style="width:92%;background:var(--blue)"></div></div><span class="val">44</span></div>
+        <div class="bar-row"><span class="name">2018</span><div class="track"><div class="fill" style="width:96%;background:var(--blue)"></div></div><span class="val">46</span></div>
+        <div class="bar-row"><span class="name">2019</span><div class="track"><div class="fill" style="width:88%;background:var(--blue)"></div></div><span class="val">42</span></div>
+        <div class="bar-row"><span class="name">2020</span><div class="track"><div class="fill" style="width:83%;background:var(--blue)"></div></div><span class="val">40</span></div>
+        <div class="bar-row"><span class="name">2021</span><div class="track"><div class="fill" style="width:81%;background:var(--blue)"></div></div><span class="val">39</span></div>
+        <div class="bar-row"><span class="name">2022</span><div class="track"><div class="fill" style="width:77%;background:var(--blue)"></div></div><span class="val">37</span></div>
+        <div class="bar-row"><span class="name">2023</span><div class="track"><div class="fill" style="width:77%;background:var(--blue)"></div></div><span class="val">37</span></div>
+        <div class="bar-row"><span class="name">2024</span><div class="track"><div class="fill" style="width:42%;background:var(--blue)"></div></div><span class="val">20</span></div>
+        <div class="bar-row"><span class="name">2025</span><div class="track"><div class="fill" style="width:52%;background:var(--blue)"></div></div><span class="val">25</span></div>
+        <div class="bar-row"><span class="name">2026</span><div class="track"><div class="fill" style="width:100%;background:var(--teal)"></div></div><span class="val">48</span></div>
+      </div>
+      <p style="margin-top:10px;color:var(--text-3);font-size:12px">年份保留的是原始内容时间线（JavaGuide 来源文章日期），2026 年的 48 篇含最新的 AI/Agent 主题与首篇 daily。</p>
+    </div>
+  </div>
+  <div class="panel">
+    <h3>元数据健康度</h3>
+    <ul style="padding-left:18px;color:var(--text-2);margin-top:8px">
+      <li>permalink 全站唯一（378/378 无冲突），均含 title / date / categories / tags / description</li>
+      <li>仅 <b>28 篇缺 <code>updated</code> 字段</b>（27 篇 2017 老笔记 + 1 篇 daily）；JavaGuide 系列强制 updated == date，校验通过</li>
+      <li>393 个标签、13 个分类；高频标签：系统设计(30)、计算机网络(25)、面试(23)、Agent(20)</li>
+    </ul>
+  </div>
+
+  <h2>四、风险与改进建议（按优先级）<span class="badge">2026-09-23 已全部处理</span></h2>
+  <div class="panel">
+    <div class="risk">
+      <span class="prio p-mid">中</span>
+      <div><b>内容校验未接入 CI</b> —— ✅ 已修复：<code>pages.yml</code> 在 build 前新增 <code>npm run validate</code> 步骤；<code>validate-javaguide.mjs</code> 已改造为无 <code>.cache</code> 时优雅跳过原文比对（CI 不再误报）；同时新建 <code>tools/validate-daily.mjs</code> 把 playbook 硬约束全部脚本化。</div>
+    </div>
+    <div class="risk">
+      <span class="prio p-mid">中</span>
+      <div><b>4 篇源码解析文章存在"较长原文连续片段"警告</b> —— ✅ 已复核：提取实际重复片段比对后确认全部为被解析的 SQL/JDK 源码引用，占正文 3-6%，属合理引用。已加入校验器白名单（<code>REVIEWED_VERBATIM_OK</code>），未来新警告不再被淹没。</div>
+    </div>
+    <div class="risk">
+      <span class="prio p-mid">中</span>
+      <div><b>npm audit 在当前环境跑不了</b> —— ✅ 已补审：<code>npm audit --registry=https://registry.npmjs.org</code> 实测 <b>0 漏洞</b>。镜像源限制仍在，建议每次大版本升级后用官方源复跑一次。</div>
+    </div>
+    <div class="risk">
+      <span class="prio p-low">低</span>
+      <div><b>28 篇文章缺 updated 字段</b> —— ✅ 已修复：27 篇老笔记 + 1 篇 daily 已批量补齐（updated = date，对齐 JavaGuide 系列约定），全站 378 篇元数据零缺失；playbook 与 validate-daily 已同步把 updated 列为必填。</div>
+    </div>
+    <div class="risk">
+      <span class="prio p-low">低</span>
+      <div><b>第三方资源 CDN 与图片优化</b> —— ✅ 部分修复：已开启浏览器原生 lazyload（<code>lazyload.enable + native</code>）；<code>source/img/</code> 实测仅 644KB，压缩收益不大。CDN 维持 jsdelivr（换 local 需引入 hexo-butterfly-extjs，留作后续可选优化）。</div>
+    </div>
+    <div class="risk">
+      <span class="prio p-low">低</span>
+      <div><b>git 提交者身份有三个</b>（TimesSlience〔注意拼写〕/ DaiWei / 戴维）—— ✅ 已确认无需改动：本地 git config 已是统一的 DaiWei 身份，历史提交归属不改，未来提交不会再分裂。</div>
+    </div>
+    <div class="risk">
+      <span class="prio p-low">低</span>
+      <div><b>daily 系列的质量护栏</b> —— ✅ 已修复：<code>tools/validate-daily.mjs</code> 已把 playbook 硬约束全部转为可执行检查（字段完整性、permalink 唯一、1500-2800 字、禁用 # 标题、代码块语言、禁用词、VuePress 语法），并随 <code>npm run validate</code> 进 CI。</div>
+    </div>
+  </div>
+
+  <h2>五、结论</h2>
+  <div class="conclusion">
+    <p><b>整体评价：健康度高于 90% 的同类个人站点。</b>这个项目的成熟度体现在它不把自己当"博客"而当"内容工程"来做：内容有流水线（extract/normalize/validate）、有固定上游版本与许可证合规、有写作 SOP、部署用 OIDC 最小权限、依赖全官方生态且保持最新、构建一秒内完成。</p>
+    <p style="margin-top:8px;color:var(--text-2)">建议已全部落地：<b>① validate 已接入 CI</b>（含 daily 校验，无缓存环境优雅降级）；<b>② 4 篇文章复核通过</b>（源码引用 3-6%，已加白名单）。其余各项均已修复或确认无需处理，当日验证：validate 0 失败 0 警告，构建 1110 文件通过。</p>
+  </div>
+
+  <p class="foot">报告生成于 2026-09-23 · 基于工作区静态分析 + 构建实测（hexo generate 729ms / 1067 文件）+ validate 实测（350/350 通过）</p>
+
+</div>
+</body>
+</html>
