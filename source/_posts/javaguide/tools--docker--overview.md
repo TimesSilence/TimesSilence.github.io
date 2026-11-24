@@ -56,4 +56,4 @@ Docker 是后端开发绕不开的容器化工具：本地起 MySQL、Redis 等�
 ## 相关专题
 
 - [Git 专题](/knowledge/tools/git/overview/)
-- [开发工具知识体系](/knowledge/tools/)
+- [开发工具知识体系](/knowledge/tools/overview/)

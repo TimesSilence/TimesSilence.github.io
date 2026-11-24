@@ -56,4 +56,4 @@ Git 是每个开发者的基本功，但只背命令会在冲突和误操作时�
 ## 相关专题
 
 - [Docker 专题](/knowledge/tools/docker/overview/)
-- [开发工具知识体系](/knowledge/tools/)
+- [开发工具知识体系](/knowledge/tools/overview/)
