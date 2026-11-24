@@ -1,7 +1,7 @@
 ---
 title: 关于我
 date: 2017-09-09 00:00:00
-updated: 2026-11-13 22:00:00
+updated: 2026-11-24 21:30:00
 comments: false
 ---
 
@@ -25,3 +25,10 @@ comments: false
 
 - GitHub：[TimesSilence](https://github.com/TimesSilence)
 - 本站仓库：[TimesSilence.github.io](https://github.com/TimesSilence/TimesSilence.github.io)
+
+## 内容与许可
+
+- 本站原创文章采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可。
+- 「知识库」中的 JavaGuide 衍生文章基于 [JavaGuide](https://github.com/Snailclimb/JavaGuide)（Apache-2.0）改写，遵循其许可要求；许可证副本见 [JavaGuide Apache-2.0](/licenses/JavaGuide-Apache-2.0.txt)。
+
+如需转载或引用，请保留作者与来源信息，并遵守对应许可。
