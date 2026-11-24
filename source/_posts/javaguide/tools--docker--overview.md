@@ -32,14 +32,14 @@ Docker 是后端开发绕不开的容器化工具：本地起 MySQL、Redis 等�
 
 ## 建议阅读顺序
 
-1. [Docker 核心概念总结](./docker-intro.md)：先建立容器、镜像、仓库的模型，搞清容器与虚拟机的本质区别、镜像分层与 Dockerfile 最佳实践。
-2. [Docker 实战](./docker-in-action.md)：跟着场景敲命令——起服务、排查、清理，再用 compose 编排多服务，最后容器化一个 Java 应用。
+1. [Docker 核心概念总结](/knowledge/tools/docker/docker-intro/)：先建立容器、镜像、仓库的模型，搞清容器与虚拟机的本质区别、镜像分层与 Dockerfile 最佳实践。
+2. [Docker 实战](/knowledge/tools/docker/docker-in-action/)：跟着场景敲命令——起服务、排查、清理，再用 compose 编排多服务，最后容器化一个 Java 应用。
 3. 找一个真实项目练手：把它依赖的 MySQL、Redis 用 compose 拉起，观察日志、数据卷与端口映射，把流程固化成项目自带的 `docker-compose.yml`。
 
 ## 核心文章
 
-- [Docker 核心概念总结](./docker-intro.md)：容器 vs 虚拟机的本质（namespace + cgroup 共享内核）、镜像分层与联合文件系统、Dockerfile 最佳实践、编排的引出。
-- [Docker 实战](./docker-in-action.md)：场景化的常用命令、docker compose 多服务编排、Java 应用容器化完整示例。
+- [Docker 核心概念总结](/knowledge/tools/docker/docker-intro/)：容器 vs 虚拟机的本质（namespace + cgroup 共享内核）、镜像分层与联合文件系统、Dockerfile 最佳实践、编排的引出。
+- [Docker 实战](/knowledge/tools/docker/docker-in-action/)：场景化的常用命令、docker compose 多服务编排、Java 应用容器化完整示例。
 
 ## 高频问题
 
@@ -55,5 +55,5 @@ Docker 是后端开发绕不开的容器化工具：本地起 MySQL、Redis 等�
 
 ## 相关专题
 
-- [Git 专题](../git/overview/)
-- [开发工具知识体系](../)
+- [Git 专题](/knowledge/tools/git/overview/)
+- [开发工具知识体系](/knowledge/tools/)

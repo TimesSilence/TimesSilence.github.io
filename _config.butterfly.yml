@@ -269,7 +269,7 @@ footer:
   copyright:
     enable: true
     version: true
-  custom_text:
+  custom_text: 知识库 · 技术动态 · 入门笔记
 
 # --------------------------------------
 # Aside Settings
@@ -297,7 +297,7 @@ aside:
       link: https://github.com/TimesSilence
   card_announcement:
     enable: true
-    content: 分享软件开发、工程实践与持续学习中的思考。
+    content: 知识库系统学 · 技术动态跟前沿 · 入门笔记打基础。从「知识库」开始浏览。
   card_recent_post:
     enable: true
     # If set 0 will show all
@@ -315,23 +315,23 @@ aside:
   card_categories:
     enable: true
     # If set 0 will show all
-    limit: 8
+    limit: 10
     # Choose: none / true / false
     expand: none
     sort_order:
   card_tags:
     enable: true
     # If set 0 will show all
-    limit: 40
+    limit: 20
     color: false
     custom_colors:
     # Order of tags, random/name/length
-    orderby: random
+    orderby: length
     # Sort of order. 1, asc for ascending; -1, desc for descending
-    order: 1
+    order: -1
     sort_order:
   card_archives:
-    enable: true
+    enable: false
     # Type: monthly / yearly
     type: monthly
     # Eg: YYYY年MM月
@@ -490,7 +490,8 @@ search:
   # Local Search
   local_search:
     # Preload the search data when the page loads.
-    preload: false
+    # 标题索引体积小，适合预加载以降低首次搜索延迟
+    preload: true
     # Show top n results per article, show all results by setting to -1
     top_n_per_article: 1
     # Unescape html strings to the readable one.
@@ -1000,7 +1001,7 @@ note:
 
 # https://github.com/MoOx/pjax
 pjax:
-  enable: false
+  enable: true
   # Exclude the specified pages from pjax, such as '/music/'
   exclude:
     # - /xxxxxx/
@@ -1017,7 +1018,7 @@ snackbar:
 
 # Instant.page
 # https://instant.page/
-instantpage: false
+instantpage: true
 
 # Lazyload
 # https://github.com/verlok/vanilla-lazyload

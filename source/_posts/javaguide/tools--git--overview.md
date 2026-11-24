@@ -32,14 +32,14 @@ Git 是每个开发者的基本功，但只背命令会在冲突和误操作时�
 
 ## 建议阅读顺序
 
-1. [Git 核心概念总结](./git-intro.md)：先建立三区模型和对象模型直觉，理解分支即指针、merge 与 rebase 的取舍、撤销操作的决策树。
+1. [Git 核心概念总结](/knowledge/tools/git/git-intro/)：先建立三区模型和对象模型直觉，理解分支即指针、merge 与 rebase 的取舍、撤销操作的决策树。
 2. 在本地项目完整走一遍：clone → 建分支 → 提交 → 合并 → 解决冲突 → 推送，把概念对应到命令。
-3. [GitHub 实用小技巧总结](./github-tips.md)：补上搜索限定符、Actions 入门、PR 礼仪和 Web 编辑器等效率技巧。
+3. [GitHub 实用小技巧总结](/knowledge/tools/git/github-tips/)：补上搜索限定符、Actions 入门、PR 礼仪和 Web 编辑器等效率技巧。
 
 ## 核心文章
 
-- [Git 核心概念总结](./git-intro.md)：分布式版本控制的来龙去脉、三区与对象模型、分支指针、merge vs rebase、reset/revert/checkout 辨析与撤销决策树。
-- [GitHub 实用小技巧总结](./github-tips.md)：搜索限定符、GitHub Actions 入门、PR 协作礼仪、按 `.` 开 Web 编辑器等隐藏功能。
+- [Git 核心概念总结](/knowledge/tools/git/git-intro/)：分布式版本控制的来龙去脉、三区与对象模型、分支指针、merge vs rebase、reset/revert/checkout 辨析与撤销决策树。
+- [GitHub 实用小技巧总结](/knowledge/tools/git/github-tips/)：搜索限定符、GitHub Actions 入门、PR 协作礼仪、按 `.` 开 Web 编辑器等隐藏功能。
 
 ## 高频问题
 
@@ -55,5 +55,5 @@ Git 是每个开发者的基本功，但只背命令会在冲突和误操作时�
 
 ## 相关专题
 
-- [Docker 专题](../docker/overview/)
-- [开发工具知识体系](../)
+- [Docker 专题](/knowledge/tools/docker/overview/)
+- [开发工具知识体系](/knowledge/tools/)

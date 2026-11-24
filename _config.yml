@@ -77,16 +77,24 @@ ignore:
 theme: butterfly
 
 # Local search (hexo-generator-searchdb)
+# content: false 只索引标题/链接，显著缩小 search.xml（全量正文约数 MB）
 search:
   path: search.xml
   field: post
-  content: true
+  content: false
   format: html
 
 feed:
   type: atom
   path: atom.xml
-  limit: 20
+  limit: 50
+
+# Sitemap (hexo-generator-sitemap)
+sitemap:
+  path: sitemap.xml
+  rel: false
+  tags: true
+  categories: true
 
 # Deployment
 ## GitHub Pages: use the workflow in .github/workflows/pages.yml

@@ -49,6 +49,14 @@ npm run validate:daily   # 校验 daily 文章
 npm run validate         # javaguide + daily 全部校验（CI 在构建前执行，失败会阻断部署）
 ```
 
+## 站点结构
+
+- **知识库**（`source/_posts/javaguide/`）：主题教程，入口见 [/knowledge/](https://www.daiwei.biz/knowledge/)
+- **技术动态**（`source/_posts/daily/`）：深度解析文，分类 [/categories/技术动态/](https://www.daiwei.biz/categories/%E6%8A%80%E6%9C%AF%E5%8A%A8%E6%80%81/)
+- **入门笔记**（`source/_posts/2017-*.md`）：Java 基础系列
+
+站内搜索默认只索引标题（缩小 `search.xml`）；`robots.txt` + `sitemap.xml` 用于收录。项目分析草稿放在 `docs/`，不参与站点构建。
+
 ## 部署
 
 仓库已加 GitHub Actions（`.github/workflows/pages.yml`）。在仓库 Settings → Pages 里把 Source 设为 **GitHub Actions**。自定义域仍是 `www.daiwei.biz`（`source/CNAME`）。
